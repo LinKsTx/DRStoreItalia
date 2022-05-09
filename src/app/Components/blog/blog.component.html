@@ -1,0 +1,34 @@
+<a class="nav-link pointer-cursor" href="#" data-bs-toggle="modal" data-bs-target="#crear-blog" *ngIf="usuarioactivo.tipo == 2">CREAR BLOG</a>
+<!--MODAL CREACIÓN DE BLOG-->
+<div class="modal fade" id="crear-blog">
+  <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+      <div id="modal-completo" class="modal-content">
+          <!-- MODAL HEADER -->
+          <div id="modal-head" class="modal-header">
+              <h4 id="titulo-modal" class="modal-title">Crear blog</h4>
+              <h4><i id="close-modal" class="bi bi-x-circle-fill" data-bs-dismiss="modal"></i></h4>
+          </div>
+          <!-- MODAL BODY -->
+          <div id="body-modal" class="modal-body">
+            <form (ngSubmit)="crearBlog()">
+              <!-- TITULO -->
+              <div class="mb-3">
+                <input type="text" class="form-control" id="nick" placeholder="Título" name="titulo" [(ngModel)]="blog.titulo">
+              </div>
+              <!-- CONTENIDO -->
+              <div class="mb-3">
+                <textarea class="form-control" id="nombre" placeholder="Contenido" name="contenido" [(ngModel)]="blog.contenido"></textarea>
+              </div>
+              <!-- IMAGEN -->
+              <div class="mb-3">
+                <input type="text" accept="image/png, image/jpeg" class="form-control" id="imagen"name="imagen" [(ngModel)]="blog.imagen">
+              </div>
+              <!-- SUBMIT BUTTON -->
+              <div class="d-grid">
+                <button id="modal-button" type="submit" class="btn btn-success" data-bs-dismiss="modal">Crear blog</button>
+            </div>
+            </form>
+          </div>
+      </div>
+  </div>
+</div>
