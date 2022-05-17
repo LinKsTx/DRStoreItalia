@@ -25,16 +25,24 @@
   //Comprobar en la base de datos el login
   $sql = "SELECT * FROM usuarios WHERE correo=? AND contrasenya=?";
 
+        //Le pasamos la linea 26 como consulta
         $sentencia = $pdoObject->prepare($sql);
+        //Le pasamos valores ->
+        //1 ? es correo
         $sentencia->bindParam(1, $correo);
+        //2 ? es contraseña
         $sentencia->bindParam(2, $contrasenya);
+        //Ejecutamos sentencia
         $sentencia->execute();
+        //Convierte resultado a array_assoc
         $result = $sentencia->fetch(PDO::FETCH_ASSOC);
+
+            //Si hay cosas dentro, te devuelve los datos
             if ($result) {
               echo json_encode([$result]);
 
             } else {
-              echo json_encode(["success"=>0]);
+              echo json_encode("X");
             }
 
   ?>

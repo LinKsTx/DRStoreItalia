@@ -11,6 +11,8 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class NavbarComponent implements OnInit {
 
+  errorLogIn: String = "";
+
   usuario : IUsuario = {
     nick: "",
     nombre: "",
@@ -88,6 +90,8 @@ export class NavbarComponent implements OnInit {
     // console.log(this.usuarioactivo);
     //--------------------------------
     //-- Forma Cookies ---------------
+    console.log(resp);
+    if (resp != "X") {
       let expires = (new Date(Date.now()+ 86400*30000)).toUTCString();
       document.cookie =  "user="+JSON.stringify(resp[0])+";expires="+expires;
       //sacar valor de la cookie que acabamos de crear
@@ -105,6 +109,12 @@ export class NavbarComponent implements OnInit {
         }
       }
       this.usuarioactivo = JSON.parse(valor);
+    } else {
+
+      this.errorLogIn = "Correo y contraseña no coinciden";
+
+    }
+
     //--------------------------------
     });
   }

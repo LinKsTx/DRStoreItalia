@@ -18,6 +18,8 @@ export class BlogComponent implements OnInit {
     fecha: new Date(Date.now()),
   }
 
+  blogs: IBlog[];
+
   usuarioactivo : IUsuario = {
     nick: "",
     nombre: "",
@@ -45,13 +47,14 @@ export class BlogComponent implements OnInit {
         igual = micookie.indexOf("=");
         valor = micookie.substring(igual+1);
       }
-
     }
     if(valor) {
       this.usuarioactivo = JSON.parse(valor);
     } else{
       console.log ("No hay usuario activo");
     }
+    //leer Blog
+    this.obtenerBlogs();
   }
 
   crearBlog() {
@@ -63,6 +66,13 @@ export class BlogComponent implements OnInit {
         imagen: "",
         fecha: new Date(Date.now()),
       }
+    });
+  }
+
+  obtenerBlogs(){
+      this.blogService.readBlog().subscribe((data: any) =>{
+      console.log(data);
+      this.blogs = data;
     });
   }
 

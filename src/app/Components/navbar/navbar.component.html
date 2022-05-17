@@ -164,6 +164,7 @@
                   <input type="password" class="form-control" id="contrasenya" placeholder="Contraseña" name="contrasenya" [(ngModel)]="usuario.contrasenya">
                   <p class="d-flex flex-row-reverse m-2"><a href="" data-bs-toggle="modal" data-bs-target="#crear-usuario">Crear cuenta</a>¿Necesitas una cuenta? ‏‏‎‎</p>
                 </div>
+                <div><span>{{errorLogIn}}</span></div>
                 <!-- SUBMIT BUTTON -->
                 <div class="d-grid">
                     <button id="modal-button" type="submit" class="btn btn-success" data-bs-dismiss="modal">Iniciar sesión</button>
