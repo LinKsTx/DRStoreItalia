@@ -40,24 +40,20 @@
                   <ul class="navbar-nav">
                       <li class="nav-item">
                           <!-- enlace hacia modal #iniciar-sesión/logout -->
-                          <a class="nav-link pointer-cursor" href="#" data-bs-toggle="modal" data-bs-target="#iniciar-sesion" *ngIf="usuarioactivo.nombre.length === 0">INICIAR SESIÓN</a>
+                          <a class="nav-link pointer-cursor nowrap" href="#" data-bs-toggle="modal" data-bs-target="#iniciar-sesion" *ngIf="usuarioactivo.nombre.length === 0">INICIAR SESIÓN</a>
                       </li>
                       <!-- sesion iniciada -->
-                      <li class="nav-item dropdown m-2 hoveruscar" *ngIf="usuarioactivo.nombre.length > 0">
+                      <li class="nav-item dropdown m-2 estilohover" *ngIf="usuarioactivo.nombre.length > 0">
                         <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><span><i class="bi bi-person"></i>&nbsp;{{usuarioactivo.nombre}}</span></a>
-                        <ul class="dropdown-menu text-center bg-light border-bot border-left border-right">
+                        <ul class="dropdown-menu text-center bg-light ">
                           <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown" href="#">CUENTA</a></li>
                           <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown" *ngIf="usuarioactivo.tipo == 1" href="#">PEDIDOS</a></li>
                           <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown" href="#" (click)="logOut()">CERRAR SESIÓN</a></li>
                         </ul>
                       </li>
-                      <!-- carrito de compra -->
-                      <li class="nav-item dropdown m-2 hoveruscar" *ngIf="usuarioactivo.nombre.length > 0 && usuarioactivo.tipo == 1">
-                        <a class="nav-link dropdown-toggle dropdown-toggle " role="button" data-bs-toggle="dropdown"><span><i class="bi bi-cart"></i></span></a>
-                        <ul class="dropdown-menu text-center bg-light">
-                            <!-- elementos de carrito -->
-                            <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown" href="#">PRODUCTOS</a></li>
-                        </ul>
+                      <!-- carrito de compra (manda a productos o click para verlos ¿? arreglar)-->
+                      <li class="nav-item m-2 estilohover" *ngIf="usuarioactivo.nombre.length > 0 && usuarioactivo.tipo == 1">
+                        <a class="nav-link" role="button"><span><i class="bi bi-cart"></i></span></a>
                       </li>
                       <!-- configuración admin -->
                       <li class="nav-item" *ngIf="usuarioactivo.tipo == 2">
@@ -113,10 +109,10 @@
                     <!-- sesión sin iniciar -->
                       <li class="nav-item" >
                           <!-- modal inicio de sesión / creación de usuario -->
-                          <a class="nav-link pointer-cursor" href="#" data-bs-toggle="modal" data-bs-target="#iniciar-sesion" *ngIf="usuarioactivo.nombre.length === 0">INICIAR SESIÓN</a>
+                          <a class="nav-link pointer-cursor nowrap" href="#" data-bs-toggle="modal" data-bs-target="#iniciar-sesion" *ngIf="usuarioactivo.nombre.length === 0">INICIAR SESIÓN</a>
                       </li>
                       <!-- sesion iniciada -->
-                      <li class="nav-item dropdown m-2 hoveruscar" *ngIf="usuarioactivo.nombre.length > 0">
+                      <li class="nav-item dropdown m-2 estilo-hover escritorio-hover" *ngIf="usuarioactivo.nombre.length > 0">
                         <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><span><i class="bi bi-person"></i>&nbsp;{{usuarioactivo.nombre}}</span></a>
                         <ul class="dropdown-menu text-center bg-light border-bot border-left border-right">
                           <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown" href="#">CUENTA</a></li>
@@ -125,8 +121,8 @@
                         </ul>
                       </li>
                       <!-- carrito de compra -->
-                      <li class="nav-item dropdown m-2 hoveruscar" *ngIf="usuarioactivo.nombre.length > 0 && usuarioactivo.tipo == 1">
-                        <a class="nav-link dropdown-toggle dropdown-toggle " role="button" data-bs-toggle="dropdown"><span><i class="bi bi-cart"></i></span></a>
+                      <li class="nav-item dropdown m-2 estilo-hover escritorio-hover" *ngIf="usuarioactivo.nombre.length > 0 && usuarioactivo.tipo == 1">
+                        <a class="nav-link dropdown-toggle dropdown-toggle w-100" role="button" data-bs-toggle="dropdown"><span><i class="bi bi-cart"></i></span></a>
                         <ul class="dropdown-menu text-center bg-light">
                             <!-- elementos de carrito -->
                             <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown" href="#">PRODUCTOS</a></li>
@@ -134,7 +130,6 @@
                       </li>
                       <!-- configuración admin -->
                       <li class="nav-item" *ngIf="usuarioactivo.tipo == 2">
-                          <!-- modal inicio de sesión / creación de usuario -->
                         <a class="nav-link m-2" href="#"><i class="bi bi-gear"></i></a>
                     </li>
                   </ul>

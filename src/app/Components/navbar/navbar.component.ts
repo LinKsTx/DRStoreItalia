@@ -11,8 +11,10 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class NavbarComponent implements OnInit {
 
+  //Para no crear cookie si inicias sesión mal
   errorLogIn: String = "";
 
+  //Recoge usuario
   usuario : IUsuario = {
     nick: "",
     nombre: "",
@@ -21,6 +23,7 @@ export class NavbarComponent implements OnInit {
     contrasenya2: ""
   }
 
+  //Recoge el usuario activo
   usuarioactivo : IUsuario = {
     nick: "",
     nombre: "",
@@ -29,12 +32,14 @@ export class NavbarComponent implements OnInit {
     contrasenya2: ""
   }
 
+  //Constructor
   constructor(
     private usuarioService: UsuarioService,
     private router: Router,
     private cookieService: CookieService
   ) { }
 
+  //Se inicia automáticamente
   ngOnInit(): void {
     //-- Forma sessionStorage --------
     // if(sessionStorage.length>0){
@@ -64,7 +69,6 @@ export class NavbarComponent implements OnInit {
     //--------------------------------
   }
 /*----------------------- CREAR USUARIO -----------------------*/
-/*-------------------------------------------------------------*/
   crearUsuario(){
     //hacemos el insert
     console.log(this.usuario);

@@ -13,4 +13,8 @@
   font-family: CitrusGhotic-Regular;
   src: url(assets/fonts/Monolisk-Black.ttf);
 }
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+}
 /*# sourceMappingURL=styles.css.map */

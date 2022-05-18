@@ -1,4 +1,26 @@
 #navegador {
   font-family: monolisk-black;
 }
+
+.estilo-hover:hover, .dropdown-menu {
+  border-style: none;
+  border-radius: 0%;
+}
+
+.animate__animated.animate__fadeInDown {
+  --animate-duration: 0.5s;
+}
+
+.dropdown-toggle::after {
+  content: none;
+}
+
+.escritorio-hover.dropdown:hover .dropdown-menu {
+  display: block;
+  margin-top: 0;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
 /*# sourceMappingURL=navbar.component.css.map */

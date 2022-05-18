@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IBlog } from 'src/app/interfaces/i-blog';
 import { IUsuario } from 'src/app/interfaces/i-usuario';
@@ -55,7 +55,7 @@ export class BlogComponent implements OnInit {
     }
     //leer Blog
     this.obtenerBlogs();
-  }
+     }
 
   crearBlog() {
     this.blogService.addBlog(this.blog).subscribe(()=>{

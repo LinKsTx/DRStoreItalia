@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AACA,AAAA,CAAC,AAAA,cAAc,AAAA,MAAM,CAAC;EACpB,gBAAgB,EAAE,OAAO;EACzB,OAAO,EAAE,IAAI;CACd;;AAED,AAAA,CAAC,AAAA,cAAc,AAAA,MAAM,CAAC;EACpB,gBAAgB,EAAE,OAAO;EACzB,OAAO,EAAE,IAAI;CACd;;AAED,AAAA,CAAC,AAAA,cAAc,AAAA,OAAO,CAAC;EACrB,gBAAgB,EAAE,OAAO;EACzB,OAAO,EAAE,IAAI;CACd;;AAED,AAAA,CAAC,AAAA,cAAc,CAAC;EACd,OAAO,EAAE,GAAG;CACb",
+    "sources": [
+        "nav-options.component.scss"
+    ],
+    "names": [],
+    "file": "nav-options.component.css"
+}

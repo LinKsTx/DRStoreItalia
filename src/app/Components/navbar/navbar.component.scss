@@ -2,22 +2,30 @@
 #navegador {
   font-family: monolisk-black;
 }
-.hoveruscar:hover, .dropdown-menu {
+
+//DROPDOWNS
+//Quita el estilo por defecto de bootstrap sobre los dropdown
+.estilo-hover:hover, .dropdown-menu {
   border-style: none;
   border-radius: 0%;
-
 }
 
+//Control sobre la animación de los dropdowns
+.animate__animated.animate__fadeInDown {
+  --animate-duration: 0.5s;
+}
+
+//Quita la flecha de los dropdowns
 .dropdown-toggle::after {
   content: none;
 }
-.animate__animated.animate__fadeInDown {
-  --animate-duration: 0.7s;
+
+ //dropdown por hover solo en la versión de escritorio
+ .escritorio-hover.dropdown:hover .dropdown-menu {
+  display: block;
+  margin-top: 0; // remove the gap so it doesn't close
 }
 
-//  //dropdown por hover
-//  .dropdown:hover .dropdown-menu {
-//   display: block;
-//   margin-top: 0; // remove the gap so it doesn't close
-// }
-
+.nowrap {
+  white-space:nowrap ;
+}
