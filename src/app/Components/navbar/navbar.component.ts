@@ -1,9 +1,10 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { IUsuario } from 'src/app/interfaces/i-usuario';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-navbar',
@@ -11,6 +12,15 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+
+  //Boolean para sacar código de correo ya existente
+  boolean1: boolean = false;
+
+  //Boolean para sacar código de nick ya existente
+  boolean2: boolean = false;
+
+  //Boolean para sacar código de error en inicio de sesión
+  boolean3: boolean = false
 
   //Para no crear cookie si inicias sesión mal
   errorLogIn: String = "";
@@ -71,17 +81,33 @@ export class NavbarComponent implements OnInit {
   }
 
 /*----------------------- CREAR USUARIO -----------------------*/
-  crearUsuario(){
+  crearUsuario(form: NgForm){
     //hacemos el insert
     console.log(this.usuario);
-    this.usuarioService.addUsuario(this.usuario).subscribe(()=>{
-      //vaciamos array
-      this.usuario = {
-        nick: "",
-        nombre: "",
-        correo: "",
-        contrasenya: "",
-        contrasenya2: ""
+    this.usuarioService.addUsuario(this.usuario).subscribe((respuesta)=>{
+      console.log(respuesta);
+
+      this.boolean1 = false;
+      this.boolean2 = false;
+
+      if(respuesta == 3) {
+        this.boolean1 = true;
+      } else if (respuesta == 4) {
+        this.boolean2 = true;
+      } else if (respuesta == 5) {
+        this.boolean1 = true;
+        this.boolean2 = true;
+      } else {
+        this.usuario = {
+          nick: "",
+          nombre: "",
+          correo: "",
+          contrasenya: "",
+          contrasenya2: ""
+        }
+        form.reset();
+        this.cerrarModal("#crear-usuario");
+        this.router.navigate(['/home']);
       }
     });
   }
@@ -96,6 +122,7 @@ export class NavbarComponent implements OnInit {
     //--------------------------------
     //-- Forma Cookies ---------------
     console.log(resp);
+    this.boolean3 = false;
     if (resp != "X") {
       let expires = (new Date(Date.now()+ 86400*30000)).toUTCString();
       document.cookie =  "user="+JSON.stringify(resp[0])+";expires="+expires;
@@ -114,13 +141,12 @@ export class NavbarComponent implements OnInit {
         }
       }
       this.usuarioactivo = JSON.parse(valor);
+      this.cerrarModal("#iniciar-sesion");
       this.router.navigate(['/home']);
     } else {
-
       this.errorLogIn = "Correo y contraseña no coinciden";
-
+      this.boolean3 = true;
     }
-
     //--------------------------------
     });
   }
@@ -145,4 +171,11 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 /*-------------------------------------------------------*/
+/*----------------------- CERRAR MODAL -----------------------*/
+cerrarModal(modal: string) {
+  $(modal).toggle();//ocultamos el modal
+  $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
+  $('.modal-backdrop').remove();//eliminamos el backdrop del modal
+}
+/*------------------------------------------------------------*/
 }

@@ -26,20 +26,52 @@
   $tipodeusuario = 1;
   $encriptado = md5($contrasenya);
 
+  $sql = "SELECT * FROM usuarios WHERE correo=?";
+  $sentencia = $pdoObject->prepare($sql);
+  $sentencia->bindParam(1, $correo);
+  $sentencia->execute();
+
+  $sql = "SELECT * FROM usuarios WHERE nick=?";
+  $sentencia2 = $pdoObject->prepare($sql);
+  $sentencia2->bindParam(1, $nick);
+
+  $sentencia2->execute();
+  $boolean1 = false;
+  $boolean2 = false;
+
+  if ($sentencia->rowCount() > 0 && $sentencia2->rowCount() > 0) {
+    $boolean1 = true;
+    $boolean2 = true;
+    echo json_encode("5");
+  } else {
+    if ($sentencia->rowCount() > 0) {
+      echo json_encode("3");
+        $boolean1 = true;
+    }
+    if ($sentencia2->rowCount() > 0) {
+      echo json_encode("4");
+        $boolean2 = true;
+    }
+  }
+
+
+
+
+if ($boolean1 == false && $boolean2 == false) {
   //Meter en la base de datos el registro
   $sql = "INSERT INTO usuarios (nombre, nick, correo, contrasenya ,tipo) VALUES (?, ?, ?, ?, ?)";
+  $sentencia = $pdoObject->prepare($sql);
+  $sentencia->bindParam(1, $nombre);
+  $sentencia->bindParam(2, $nick);
+  $sentencia->bindParam(3, $correo);
+  $sentencia->bindParam(4, $encriptado);
+  $sentencia->bindParam(5, $tipodeusuario);
+  //La ejecutamos
+  if ($sentencia->execute()) {
+    echo json_encode(["success"=>1]);
+  } else {
+    echo json_encode(["success"=>0]);
+  }
+}
 
-            $sentencia = $pdoObject->prepare($sql);
-            $sentencia->bindParam(1, $nick);
-            $sentencia->bindParam(2, $nombre);
-            $sentencia->bindParam(3, $correo);
-            $sentencia->bindParam(4, $encriptado);
-            $sentencia->bindParam(5, $tipodeusuario);
-
-            //La ejecutamos
-            if (@$sentencia->execute()) {
-              echo json_encode(["success"=>1]);
-          } else {
-              echo json_encode(["success"=>0]);
-          }
 ?>

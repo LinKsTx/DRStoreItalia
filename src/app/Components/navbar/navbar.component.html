@@ -44,7 +44,7 @@
                       </li>
                       <!-- sesion iniciada -->
                       <li class="nav-item dropdown m-2 estilohover" *ngIf="usuarioactivo.nombre.length > 0">
-                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><span><i class="bi bi-person"></i>&nbsp;{{usuarioactivo.nombre}}</span></a>
+                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><span><i class="bi bi-person"></i>&nbsp;{{usuarioactivo.nick}}</span></a>
                         <ul class="dropdown-menu text-center bg-light ">
                           <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown" href="#">CUENTA</a></li>
                           <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown" *ngIf="usuarioactivo.tipo == 1" href="#">PEDIDOS</a></li>
@@ -113,7 +113,7 @@
                       </li>
                       <!-- sesion iniciada -->
                       <li class="nav-item dropdown m-2 estilo-hover escritorio-hover" *ngIf="usuarioactivo.nombre.length > 0">
-                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><span><i class="bi bi-person"></i>&nbsp;{{usuarioactivo.nombre}}</span></a>
+                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><span><i class="bi bi-person"></i>&nbsp;{{usuarioactivo.nick}}</span></a>
                         <ul class="dropdown-menu text-center bg-light border-bot border-left border-right">
                           <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown" href="#">CUENTA</a></li>
                           <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown" *ngIf="usuarioactivo.tipo == 1" href="#">PEDIDOS</a></li>
@@ -149,20 +149,38 @@
           </div>
           <!-- Modal body -->
           <div id="body-modal" class="modal-body">
-              <form (ngSubmit)="logIn()">
+              <form (ngSubmit)="logIn()" #iniciarSesion="ngForm">
                 <!-- Correo -->
                 <div class="mb-3">
-                  <input type="email" class="form-control" placeholder="Email" name="email" [(ngModel)]="usuario.correo">
+                  <input type="email" class="form-control" placeholder="Email" name="email" [(ngModel)]="usuario.correo" required pattern="[a-zA-Z0-9!#$%&'*_+-]([\.]?[a-zA-Z0-9!#$%&'*_+-])+@[a-zA-Z0-9]([^@&%$\/()=?¿!.,:;]|\d)+[a-zA-Z0-9][\.][a-zA-Z]{2,4}([\.][a-zA-Z]{2})?" #correo="ngModel" [ngClass]="{'is-valid': !correo.invalid, 'is-invalid': correo.dirty && correo.invalid}">
+                  <!-- Validación correo -->
+                  <div *ngIf="correo.invalid && (correo.dirty)" class="alert p-0 m-0 val-error">
+                    <div *ngIf="correo.errors?.['required']">
+                      Introduce un correo.
+                    </div>
+                    <div *ngIf="correo.errors?.['pattern']">
+                      El correo introducido no es válido.
+                    </div>
+                  </div>
                 </div>
                 <!-- Contraseña +  crear cuenta ¿? -->
                 <div class="mb-3 mt-3">
-                  <input type="password" class="form-control" placeholder="Contraseña" name="contrasenya" [(ngModel)]="usuario.contrasenya">
+                  <input type="password" class="form-control" placeholder="Contraseña" name="contrasenya" [(ngModel)]="usuario.contrasenya" required pattern="^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$" #contrasenya="ngModel" [ngClass]="{'is-valid': !contrasenya.invalid, 'is-invalid': contrasenya.dirty && contrasenya.invalid}">
+                  <!-- Validación contraseña -->
+                <div *ngIf="contrasenya.invalid && (contrasenya.dirty)" class="alert p-0 m-0 val-error">
+                  <div *ngIf="contrasenya.errors?.['required']">
+                    Introduce una contraseña.
+                  </div>
+                  <div *ngIf="contrasenya.errors?.['pattern']">
+                    Contraseña no válida.
+                  </div>
+                </div>
+                  <p *ngIf="boolean3" class="val-error">El correo y la contraseña no coinciden.</p>
                   <p class="d-flex flex-row-reverse m-2"><a href="" data-bs-toggle="modal" data-bs-target="#crear-usuario">Crear cuenta</a>¿Necesitas una cuenta? ‏‏‎‎</p>
                 </div>
-                <div><span>{{errorLogIn}}</span></div>
                 <!-- Submit -->
                 <div class="d-grid">
-                    <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Iniciar sesión</button>
+                    <button type="submit" class="btn btn-success" [disabled]="!iniciarSesion.form.valid">Iniciar sesión</button>
                 </div>
               </form>
           </div>
@@ -181,12 +199,12 @@
           <!-- Modal body -->
           <div id="body-modal" class="modal-body">
             <!-- Formulario -->
-            <form (ngSubmit)="crearUsuario()" class="was-validated" #creacionUsuario="ngForm">
+            <form (ngSubmit)="crearUsuario(creacionUsuario);" class="needs-validation" #creacionUsuario="ngForm">
               <!-- Nick -->
               <div class="mb-3">
-                <input type="text" class="form-control" placeholder="Nick" name="Nick" [(ngModel)]="usuario.nick" required minlength="4" #nick="ngModel">
+                <input type="text" class="form-control" placeholder="Nick" name="Nick" [(ngModel)]="usuario.nick" required minlength="4" #nick="ngModel" [ngClass]="{'is-valid': !nick.invalid, 'is-invalid': nick.dirty && nick.invalid}">
                 <!-- Validación nick-->
-                <div *ngIf="nick.invalid && (nick.dirty || nick.touched)" class="alert p-0 m-0 val-error">
+                <div *ngIf="nick.invalid && (nick.dirty)" class="alert p-0 m-0 val-error">
                   <div *ngIf="nick.errors?.['required']">
                     Introduce un nick.
                   </div>
@@ -197,22 +215,25 @@
               </div>
               <!-- Nombre -->
               <div class="mb-3">
-                <input type="text" class="form-control" placeholder="Nombre y apellidos" name="Nombre" [(ngModel)]="usuario.nombre" required minlength="5" #nombre="ngModel">
+                <input type="text" class="form-control" placeholder="Nombre y apellidos" name="Nombre" [(ngModel)]="usuario.nombre" required minlength="5" pattern="^([a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{2,}\s[a-zA-zàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{1,}'?-?[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{2,}\s?([a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{1,})?)"  #nombre="ngModel" [ngClass]="{'is-valid': !nombre.invalid, 'is-invalid': nombre.dirty && nombre.invalid}">
                 <!-- Validación nombre-->
-                <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="alert p-0 m-0 val-error">
+                <div *ngIf="nombre.invalid && (nombre.dirty)" class="alert p-0 m-0 val-error">
                   <div *ngIf="nombre.errors?.['required']">
                     Introduce un nombre.
                   </div>
                   <div *ngIf="nombre.errors?.['minlength']">
                     El nombre debe tener 5 carácteres o más.
                   </div>
+                  <div *ngIf="nombre.errors?.['pattern']">
+                    Recuerda introducir los apellidos.
+                  </div>
                 </div>
               </div>
               <!-- Correo -->
               <div class="mb-3">
-                <input type="email" class="form-control" placeholder="Email" name="email" [(ngModel)]="usuario.correo" required pattern="[a-zA-Z0-9!#$%&'*_+-]([\.]?[a-zA-Z0-9!#$%&'*_+-])+@[a-zA-Z0-9]([^@&%$\/()=?¿!.,:;]|\d)+[a-zA-Z0-9][\.][a-zA-Z]{2,4}([\.][a-zA-Z]{2})?" #correo="ngModel">
+                <input type="email" class="form-control" placeholder="Email" name="email" [(ngModel)]="usuario.correo" required pattern="[a-zA-Z0-9!#$%&'*_+-]([\.]?[a-zA-Z0-9!#$%&'*_+-])+@[a-zA-Z0-9]([^@&%$\/()=?¿!.,:;]|\d)+[a-zA-Z0-9][\.][a-zA-Z]{2,4}([\.][a-zA-Z]{2})?" #correo="ngModel" [ngClass]="{'is-valid': !correo.invalid, 'is-invalid': correo.dirty && correo.invalid}">
                 <!-- Validación correo -->
-                <div *ngIf="correo.invalid && (correo.dirty || correo.touched)" class="alert p-0 m-0 val-error">
+                <div *ngIf="correo.invalid && (correo.dirty)" class="alert p-0 m-0 val-error">
                   <div *ngIf="correo.errors?.['required']">
                     Introduce un correo.
                   </div>
@@ -223,22 +244,34 @@
               </div>
               <!-- Contraseña -->
               <div class="mb-3 mt-3">
-                <input type="password" class="form-control" placeholder="Contraseña" name="contrasenya" [(ngModel)]="usuario.contrasenya" required pattern="^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$" #contrasenya="ngModel">
+                <input type="password" class="form-control" placeholder="Contraseña" name="contrasenya" [(ngModel)]="usuario.contrasenya" required pattern="^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$" #contrasenya="ngModel" [ngClass]="{'is-valid': !contrasenya.invalid, 'is-invalid': contrasenya.dirty && contrasenya.invalid}">
                 <!-- Validación contraseña -->
-                <div *ngIf="contrasenya.invalid && (contrasenya.dirty || contrasenya.touched)" class="alert p-0 m-0 val-error">
+                <div *ngIf="contrasenya.invalid && (contrasenya.dirty)" class="alert p-0 m-0 val-error">
                   <div *ngIf="contrasenya.errors?.['required']">
                     Introduce una contraseña.
                   </div>
                   <div *ngIf="contrasenya.errors?.['pattern']">
-                    La contraseña debe tener entre 8 y 16 caracteres y almenos una mayúscula y una minúscula.
+                    La contraseña debe tener entre 8 y 16 caracteres y almenos una mayúscula, una minúscula y un número.
                   </div>
                 </div>
               </div>
               <!-- Contraseña 2 + Iniciar sesión ¿? -->
               <div class="mb-3 mt-3">
-                <input type="password" class="form-control" placeholder="Repite la contraseña" name="contrasenya2" [(ngModel)]="usuario.contrasenya2" required>
+                <input type="password" id="password2" class="form-control" placeholder="Repite la contraseña" name="contrasenya2" [(ngModel)]="usuario.contrasenya2" required pattern="^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$" #contrasenya2="ngModel" [ngClass]="{'is-valid': !contrasenya2.invalid && contrasenya2.value == contrasenya.value, 'is-invalid': contrasenya2.dirty && contrasenya2.invalid && contrasenya2.value != contrasenya.value}">
+                <!-- Validación contraseña2 -->
+                <div *ngIf="contrasenya2.invalid && (contrasenya2.dirty)" class="alert p-0 m-0 val-error">
+                  <div *ngIf="contrasenya2.errors?.['required']">
+                    Vuelve a introducir la contraseña.
+                  </div>
+                  <div *ngIf="contrasenya2.errors?.['pattern']">
+                    Contraseña inválida.
+                  </div>
+                </div>
+                <p *ngIf="boolean1" class="val-error">El correo ya existe.</p>
+                <p *ngIf="boolean2" class="val-error">El nick ya existe.</p>
                 <p class="d-flex flex-row-reverse m-2"><a href="" data-bs-toggle="modal" data-bs-target="#iniciar-sesion">Inicia sesión</a>¿Ya tienes una cuenta?&nbsp;</p>
               </div>
+
               <!-- Submit-->
               <div class="d-grid">
                   <button type="submit" class="btn btn-success" [disabled]="!creacionUsuario.form.valid" >Crear usuario</button>
