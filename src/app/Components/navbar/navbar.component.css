@@ -15,12 +15,11 @@
   content: none;
 }
 
-.escritorio-hover.dropdown:hover .dropdown-menu {
-  display: block;
-  margin-top: 0;
-}
-
 .nowrap {
   white-space: nowrap;
+}
+
+.pointer {
+  cursor: pointer;
 }
 /*# sourceMappingURL=navbar.component.css.map */

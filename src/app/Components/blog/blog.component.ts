@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { IBlog } from 'src/app/interfaces/i-blog';
 import { IUsuario } from 'src/app/interfaces/i-usuario';
 import { BlogService } from 'src/app/services/blog.service';
+import { FormsModule } from '@angular/forms';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-blog',

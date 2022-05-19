@@ -1,1 +1,8 @@
-/* No CSS *//*# sourceMappingURL=blog.component.css.map */
+img {
+  height: 300px;
+}
+
+.card {
+  margin: 20px;
+}
+/*# sourceMappingURL=blog.component.css.map */

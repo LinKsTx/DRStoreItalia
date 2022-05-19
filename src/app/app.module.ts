@@ -11,6 +11,7 @@ import { ContactoComponent } from './Components/contacto/contacto.component';
 import { FooterComponent } from './Components/footer/footer.component';
 import { NavOptionsComponent } from './Components/nav-options/nav-options.component';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 //Rutas
@@ -45,7 +46,8 @@ const APP_ROUTES: Route[] = [
     BrowserModule,
     RouterModule.forRoot(APP_ROUTES),
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

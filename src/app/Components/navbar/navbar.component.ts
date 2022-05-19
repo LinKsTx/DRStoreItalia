@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { IUsuario } from 'src/app/interfaces/i-usuario';
@@ -36,7 +37,7 @@ export class NavbarComponent implements OnInit {
   constructor(
     private usuarioService: UsuarioService,
     private router: Router,
-    private cookieService: CookieService
+    private cookieService: CookieService,
   ) { }
 
   //Se inicia automáticamente
@@ -68,6 +69,7 @@ export class NavbarComponent implements OnInit {
     }
     //--------------------------------
   }
+
 /*----------------------- CREAR USUARIO -----------------------*/
   crearUsuario(){
     //hacemos el insert

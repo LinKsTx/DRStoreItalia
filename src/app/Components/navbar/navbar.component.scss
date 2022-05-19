@@ -33,3 +33,11 @@
 .pointer {
   cursor: pointer;
 }
+
+//Validación de formularios
+.val-error {
+  color: red !important;
+  font-size: small;
+  padding: 0;
+  margin: 0;
+}

@@ -138,29 +138,29 @@
       </div>
   </nav>
 </div>
- <!--MODAL INICIO DE SESIÓN-->
+ <!-- /MODAL INICIO DE SESIÓN/ -->
 <div class="modal fade" id="iniciar-sesion">
   <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
       <div id="modal-completo" class="modal-content">
-          <!-- MODAL HEADER -->
+          <!-- Modal header -->
           <div id="modal-head" class="modal-header">
               <h4 id="titulo-modal" class="modal-title">Iniciar sesión</h4>
               <h4><i id="close-modal" class="bi bi-x-circle-fill" data-bs-dismiss="modal"></i></h4>
           </div>
-          <!-- MODAL BODY -->
+          <!-- Modal body -->
           <div id="body-modal" class="modal-body">
               <form (ngSubmit)="logIn()">
-                <!-- MAIL -->
+                <!-- Correo -->
                 <div class="mb-3">
                   <input type="email" class="form-control" placeholder="Email" name="email" [(ngModel)]="usuario.correo">
                 </div>
-                <!-- PASSWORD + CREAR USUARIO?? -->
+                <!-- Contraseña +  crear cuenta ¿? -->
                 <div class="mb-3 mt-3">
                   <input type="password" class="form-control" placeholder="Contraseña" name="contrasenya" [(ngModel)]="usuario.contrasenya">
                   <p class="d-flex flex-row-reverse m-2"><a href="" data-bs-toggle="modal" data-bs-target="#crear-usuario">Crear cuenta</a>¿Necesitas una cuenta? ‏‏‎‎</p>
                 </div>
                 <div><span>{{errorLogIn}}</span></div>
-                <!-- SUBMIT BUTTON -->
+                <!-- Submit -->
                 <div class="d-grid">
                     <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Iniciar sesión</button>
                 </div>
@@ -169,41 +169,79 @@
       </div>
   </div>
 </div>
-<!--MODAL CREACIÓN DE USUARIO-->
+<!-- /MODAL CREACIÓN DE USUARIO/ -->
 <div class="modal fade" id="crear-usuario">
   <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
       <div id="modal-completo" class="modal-content">
-          <!-- MODAL HEADER -->
+          <!-- Modal header -->
           <div id="modal-head" class="modal-header">
               <h4 id="titulo-modal" class="modal-title">Crear usuario</h4>
               <h4><i id="close-modal" class="bi bi-x-circle-fill" data-bs-dismiss="modal"></i></h4>
           </div>
-          <!-- MODAL BODY -->
+          <!-- Modal body -->
           <div id="body-modal" class="modal-body">
-            <form (ngSubmit)="crearUsuario()">
-              <!-- NICK -->
+            <!-- Formulario -->
+            <form (ngSubmit)="crearUsuario()" class="was-validated" #creacionUsuario="ngForm">
+              <!-- Nick -->
               <div class="mb-3">
-                <input type="text" class="form-control" placeholder="Nick" name="Nick" [(ngModel)]="usuario.nick">
+                <input type="text" class="form-control" placeholder="Nick" name="Nick" [(ngModel)]="usuario.nick" required minlength="4" #nick="ngModel">
+                <!-- Validación nick-->
+                <div *ngIf="nick.invalid && (nick.dirty || nick.touched)" class="alert p-0 m-0 val-error">
+                  <div *ngIf="nick.errors?.['required']">
+                    Introduce un nick.
+                  </div>
+                  <div *ngIf="nick.errors?.['minlength']">
+                    El nick debe tener 4 carácteres o más.
+                  </div>
+                </div>
               </div>
-              <!-- NOMBRE -->
+              <!-- Nombre -->
               <div class="mb-3">
-                <input type="text" class="form-control" placeholder="Nombre" name="Nombre" [(ngModel)]="usuario.nombre">
+                <input type="text" class="form-control" placeholder="Nombre y apellidos" name="Nombre" [(ngModel)]="usuario.nombre" required minlength="5" #nombre="ngModel">
+                <!-- Validación nombre-->
+                <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="alert p-0 m-0 val-error">
+                  <div *ngIf="nombre.errors?.['required']">
+                    Introduce un nombre.
+                  </div>
+                  <div *ngIf="nombre.errors?.['minlength']">
+                    El nombre debe tener 5 carácteres o más.
+                  </div>
+                </div>
               </div>
-              <!-- MAIL -->
+              <!-- Correo -->
               <div class="mb-3">
-                <input type="email" class="form-control" placeholder="Email" name="email" [(ngModel)]="usuario.correo">
+                <input type="email" class="form-control" placeholder="Email" name="email" [(ngModel)]="usuario.correo" required pattern="[a-zA-Z0-9!#$%&'*_+-]([\.]?[a-zA-Z0-9!#$%&'*_+-])+@[a-zA-Z0-9]([^@&%$\/()=?¿!.,:;]|\d)+[a-zA-Z0-9][\.][a-zA-Z]{2,4}([\.][a-zA-Z]{2})?" #correo="ngModel">
+                <!-- Validación correo -->
+                <div *ngIf="correo.invalid && (correo.dirty || correo.touched)" class="alert p-0 m-0 val-error">
+                  <div *ngIf="correo.errors?.['required']">
+                    Introduce un correo.
+                  </div>
+                  <div *ngIf="correo.errors?.['pattern']">
+                    El correo introducido no es válido.
+                  </div>
+                </div>
               </div>
-              <!-- PASSWORD -->
+              <!-- Contraseña -->
               <div class="mb-3 mt-3">
-                <input type="password" class="form-control" placeholder="Contraseña" name="contrasenya" [(ngModel)]="usuario.contrasenya">
+                <input type="password" class="form-control" placeholder="Contraseña" name="contrasenya" [(ngModel)]="usuario.contrasenya" required pattern="^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$" #contrasenya="ngModel">
+                <!-- Validación contraseña -->
+                <div *ngIf="contrasenya.invalid && (contrasenya.dirty || contrasenya.touched)" class="alert p-0 m-0 val-error">
+                  <div *ngIf="contrasenya.errors?.['required']">
+                    Introduce una contraseña.
+                  </div>
+                  <div *ngIf="contrasenya.errors?.['pattern']">
+                    La contraseña debe tener entre 8 y 16 caracteres y almenos una mayúscula y una minúscula.
+                  </div>
+                </div>
               </div>
-              <!-- PASSWORD 2 -->
+              <!-- Contraseña 2 + Iniciar sesión ¿? -->
               <div class="mb-3 mt-3">
-                <input type="password" class="form-control" placeholder="Repite la contraseña" name="contrasenya2" [(ngModel)]="usuario.contrasenya2">
-                <p class="d-flex flex-row-reverse m-2"><a href="" data-bs-toggle="modal" data-bs-target="#modal-iniciosesion">Inicia sesión</a>¿Ya tienes una cuenta? ‏‏‎‎</p>
+                <input type="password" class="form-control" placeholder="Repite la contraseña" name="contrasenya2" [(ngModel)]="usuario.contrasenya2" required>
+                <p class="d-flex flex-row-reverse m-2"><a href="" data-bs-toggle="modal" data-bs-target="#iniciar-sesion">Inicia sesión</a>¿Ya tienes una cuenta?&nbsp;</p>
               </div>
+              <!-- Submit-->
               <div class="d-grid">
-                  <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Crear usuario</button>
+                  <button type="submit" class="btn btn-success" [disabled]="!creacionUsuario.form.valid" >Crear usuario</button>
               </div>
             </form>
           </div>
