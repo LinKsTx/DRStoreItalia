@@ -21,7 +21,7 @@
               </div>
               <!-- IMAGEN -->
               <div class="mb-3">
-                <input type="text" accept="image/png, image/jpeg" class="form-control" id="imagen"name="imagen" [(ngModel)]="blog.imagen">
+                <input type="file" name="myImage" accept="image/png, image/gif, image/jpeg" (change)="onFileSelected($event)"/>
               </div>
               <!-- SUBMIT BUTTON -->
               <div class="d-grid">
@@ -32,6 +32,12 @@
       </div>
   </div>
 </div>
-<div *ngFor="let blog of blogs">
-<span>{{blog.titulo}}</span>
+
+<div class="container-fluid d-flex flex-row">
+  <div class="d-flex flex-column" *ngFor="let blog of blogs">
+  <span class="text-center">{{blog.titulo}}</span>
+  <img [src]="blog.imagen" alt="" style="width: 200px; height: 150px">
+  </div>
 </div>
+
+

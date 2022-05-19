@@ -22,8 +22,9 @@
   $nick = $jsonUsuarios->nick;
   $nombre =  $jsonUsuarios->nombre;
   $correo =  $jsonUsuarios->correo;
-  $contrasenya =  $jsonUsuarios->contrasenya;
+  $contrasenya = $jsonUsuarios->contrasenya;
   $tipodeusuario = 1;
+  $encriptado = md5($contrasenya);
 
   //Meter en la base de datos el registro
   $sql = "INSERT INTO usuarios (nombre, nick, correo, contrasenya ,tipo) VALUES (?, ?, ?, ?, ?)";
@@ -32,7 +33,7 @@
             $sentencia->bindParam(1, $nick);
             $sentencia->bindParam(2, $nombre);
             $sentencia->bindParam(3, $correo);
-            $sentencia->bindParam(4, $contrasenya);
+            $sentencia->bindParam(4, $encriptado);
             $sentencia->bindParam(5, $tipodeusuario);
 
             //La ejecutamos

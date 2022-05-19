@@ -20,7 +20,8 @@
 
   //creación de variables para igualar
   $correo =  $jsonUsuarios->correo;
-  $contrasenya =  $jsonUsuarios->contrasenya;
+  $contrasenya = $jsonUsuarios->contrasenya;
+  $encriptado = md5($contrasenya);
 
   //Comprobar en la base de datos el login
   $sql = "SELECT * FROM usuarios WHERE correo=? AND contrasenya=?";
@@ -31,7 +32,7 @@
         //1 ? es correo
         $sentencia->bindParam(1, $correo);
         //2 ? es contraseña
-        $sentencia->bindParam(2, $contrasenya);
+        $sentencia->bindParam(2, $encriptado);
         //Ejecutamos sentencia
         $sentencia->execute();
         //Convierte resultado a array_assoc

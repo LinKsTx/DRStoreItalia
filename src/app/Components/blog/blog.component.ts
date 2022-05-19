@@ -76,4 +76,19 @@ export class BlogComponent implements OnInit {
     });
   }
 
+  changeImage(fileInput: HTMLInputElement) {
+    if (!fileInput.files || fileInput.files.length === 0) {
+      return;
+    }
+    const reader: FileReader = new FileReader();
+    reader.readAsDataURL(fileInput.files[0]);
+    reader.addEventListener('loadend', (e) => {
+      this.blog.imagen = reader.result as string;
+    });
+  }
+
+  onFileSelected(event: any){
+      this.changeImage(event.target);
+  }
+
 }

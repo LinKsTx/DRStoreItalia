@@ -117,7 +117,7 @@
                         <ul class="dropdown-menu text-center bg-light border-bot border-left border-right">
                           <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown" href="#">CUENTA</a></li>
                           <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown" *ngIf="usuarioactivo.tipo == 1" href="#">PEDIDOS</a></li>
-                          <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown" href="#" (click)="logOut()">CERRAR SESIÓN</a></li>
+                          <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown pointer" (click)="logOut()">CERRAR SESIÓN</a></li>
                         </ul>
                       </li>
                       <!-- carrito de compra -->
@@ -125,7 +125,7 @@
                         <a class="nav-link dropdown-toggle dropdown-toggle w-100" role="button" data-bs-toggle="dropdown"><span><i class="bi bi-cart"></i></span></a>
                         <ul class="dropdown-menu text-center bg-light">
                             <!-- elementos de carrito -->
-                            <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown" href="#">PRODUCTOS</a></li>
+                            <li><a class="nav-link fs-5 animate__animated animate__fadeInDown pointer">PRODUCTOS</a></li>
                         </ul>
                       </li>
                       <!-- configuración admin -->
@@ -152,17 +152,17 @@
               <form (ngSubmit)="logIn()">
                 <!-- MAIL -->
                 <div class="mb-3">
-                  <input type="email" class="form-control" id="email" placeholder="Email" name="email" [(ngModel)]="usuario.correo">
+                  <input type="email" class="form-control" placeholder="Email" name="email" [(ngModel)]="usuario.correo">
                 </div>
                 <!-- PASSWORD + CREAR USUARIO?? -->
                 <div class="mb-3 mt-3">
-                  <input type="password" class="form-control" id="contrasenya" placeholder="Contraseña" name="contrasenya" [(ngModel)]="usuario.contrasenya">
+                  <input type="password" class="form-control" placeholder="Contraseña" name="contrasenya" [(ngModel)]="usuario.contrasenya">
                   <p class="d-flex flex-row-reverse m-2"><a href="" data-bs-toggle="modal" data-bs-target="#crear-usuario">Crear cuenta</a>¿Necesitas una cuenta? ‏‏‎‎</p>
                 </div>
                 <div><span>{{errorLogIn}}</span></div>
                 <!-- SUBMIT BUTTON -->
                 <div class="d-grid">
-                    <button id="modal-button" type="submit" class="btn btn-success" data-bs-dismiss="modal">Iniciar sesión</button>
+                    <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Iniciar sesión</button>
                 </div>
               </form>
           </div>
@@ -183,27 +183,27 @@
             <form (ngSubmit)="crearUsuario()">
               <!-- NICK -->
               <div class="mb-3">
-                <input type="text" class="form-control" id="nick" placeholder="Nick" name="Nick" [(ngModel)]="usuario.nick">
+                <input type="text" class="form-control" placeholder="Nick" name="Nick" [(ngModel)]="usuario.nick">
               </div>
               <!-- NOMBRE -->
               <div class="mb-3">
-                <input type="text" class="form-control" id="nombre" placeholder="Nombre" name="Nombre" [(ngModel)]="usuario.nombre">
+                <input type="text" class="form-control" placeholder="Nombre" name="Nombre" [(ngModel)]="usuario.nombre">
               </div>
               <!-- MAIL -->
               <div class="mb-3">
-                <input type="email" class="form-control" id="email" placeholder="Email" name="email" [(ngModel)]="usuario.correo">
+                <input type="email" class="form-control" placeholder="Email" name="email" [(ngModel)]="usuario.correo">
               </div>
               <!-- PASSWORD -->
               <div class="mb-3 mt-3">
-                <input type="password" class="form-control" id="contrasenya" placeholder="Contraseña" name="contrasenya" [(ngModel)]="usuario.contrasenya">
+                <input type="password" class="form-control" placeholder="Contraseña" name="contrasenya" [(ngModel)]="usuario.contrasenya">
               </div>
               <!-- PASSWORD 2 -->
               <div class="mb-3 mt-3">
-                <input type="password" class="form-control" id="contrasenya2" placeholder="Repite la contraseña" name="contrasenya2" [(ngModel)]="usuario.contrasenya2">
+                <input type="password" class="form-control" placeholder="Repite la contraseña" name="contrasenya2" [(ngModel)]="usuario.contrasenya2">
                 <p class="d-flex flex-row-reverse m-2"><a href="" data-bs-toggle="modal" data-bs-target="#modal-iniciosesion">Inicia sesión</a>¿Ya tienes una cuenta? ‏‏‎‎</p>
               </div>
               <div class="d-grid">
-                  <button id="modal-button" type="submit" class="btn btn-success" data-bs-dismiss="modal">Crear usuario</button>
+                  <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Crear usuario</button>
               </div>
             </form>
           </div>

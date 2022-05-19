@@ -20,12 +20,16 @@
   content: none;
 }
 
- //dropdown por hover solo en la versión de escritorio
- .escritorio-hover.dropdown:hover .dropdown-menu {
-  display: block;
-  margin-top: 0; // remove the gap so it doesn't close
-}
+//  //dropdown por hover solo en la versión de escritorio
+//  .escritorio-hover.dropdown:hover .dropdown-menu {
+//   display: block;
+//   margin-top: 0; // remove the gap so it doesn't close
+// }
 
 .nowrap {
-  white-space:nowrap ;
+  white-space: nowrap;
+}
+
+.pointer {
+  cursor: pointer;
 }

@@ -90,7 +90,6 @@ export class NavbarComponent implements OnInit {
     //-- Forma sessionStorage --------
     // sessionStorage.setItem('user',JSON.stringify(resp[0]));
     // this.usuarioactivo = resp[0];
-    // this.router.navigate(['/home']);
     // console.log(this.usuarioactivo);
     //--------------------------------
     //-- Forma Cookies ---------------
@@ -113,6 +112,7 @@ export class NavbarComponent implements OnInit {
         }
       }
       this.usuarioactivo = JSON.parse(valor);
+      this.router.navigate(['/home']);
     } else {
 
       this.errorLogIn = "Correo y contraseña no coinciden";
@@ -140,6 +140,7 @@ export class NavbarComponent implements OnInit {
       contrasenya: "",
       contrasenya2: ""
     }
+    this.router.navigate(['/home']);
   }
 /*-------------------------------------------------------*/
 }

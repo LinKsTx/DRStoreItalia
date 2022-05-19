@@ -18,9 +18,6 @@
     exit("No hay datos");
   }
 
-  //Creación de variables
-  var_dump($jsonUsuarios);
-
   $titulo = $jsonUsuarios->titulo;
   $contenido = $jsonUsuarios->contenido;
   $imagen = $jsonUsuarios->imagen;
