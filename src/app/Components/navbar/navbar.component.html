@@ -115,7 +115,7 @@
                       <li class="nav-item dropdown m-2 estilo-hover escritorio-hover" *ngIf="usuarioactivo.nombre.length > 0">
                         <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><span><i class="bi bi-person"></i>&nbsp;{{usuarioactivo.nick}}</span></a>
                         <ul class="dropdown-menu text-center bg-light border-bot border-left border-right">
-                          <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown" href="#">CUENTA</a></li>
+                          <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown" href="#" data-bs-toggle="modal" data-bs-target="#cuenta">CUENTA</a></li>
                           <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown" *ngIf="usuarioactivo.tipo == 1" href="#">PEDIDOS</a></li>
                           <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown pointer" (click)="logOut()">CERRAR SESIÓN</a></li>
                         </ul>
@@ -280,6 +280,24 @@
                   <button type="submit" class="btn btn-success" [disabled]="(pass2.value != pass1.value) || nick.invalid || nombre.invalid || email.invalid || pass1.invalid" >Crear usuario</button>
               </div>
             </form>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- /MODAL CUENTA/ -->
+<div class="modal fade" id="cuenta">
+  <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+      <div id="modal-completo" class="modal-content">
+          <!-- Modal header -->
+          <div id="modal-head" class="modal-header">
+              <h4 id="titulo-modal" class="modal-title">Cuenta</h4>
+              <h4><i id="close-modal" class="bi bi-x-circle-fill" data-bs-dismiss="modal"></i></h4>
+          </div>
+          <!-- Modal body -->
+          <div id="body-modal" class="modal-body">
+            <p>{{usuarioactivo.nick}}</p>
+            <p>{{usuarioactivo.correo}}</p>
           </div>
       </div>
   </div>

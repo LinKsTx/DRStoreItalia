@@ -26,6 +26,8 @@
               <!-- IMAGEN -->
               <div class="mb-3">
                 <input type="file" name="myImage" accept="image/png, image/gif, image/jpeg" (change)="onFileSelected($event)"/>
+                <div class="text-center"><img [src]="blog.imagen" class="p-3 img-fluid"></div>
+
               </div>
               <!-- SUBMIT BUTTON -->
               <div class="d-grid">
@@ -36,6 +38,8 @@
       </div>
   </div>
 </div>
+
+<!--BLOGS-->
 <div class="container fluid d-flex justify-content-center">
   <div class="row justify-content-center">
     <div class="card p-0 col-sm-5 col-md-4 col-lg-4 col-xl-3" style="width:400px" *ngFor="let blog of blogs">
@@ -43,6 +47,7 @@
       <div class="card-body d-flex justify-content-center">
         <a class="card-title fs-4 text-decoration-none text-dark">{{blog.titulo}}</a>
       </div>
+      <span>{{blog.fecha | date:"dd/MM/yyyy"}}</span>
     </div>
   </div>
 </div>

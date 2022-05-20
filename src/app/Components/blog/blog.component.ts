@@ -68,6 +68,7 @@ export class BlogComponent implements OnInit {
         imagen: "",
         fecha: new Date(Date.now()),
       }
+      this.obtenerBlogs();
     });
   }
 
