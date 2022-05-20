@@ -41,3 +41,6 @@
   padding: 0;
   margin: 0;
 }
+.was-validated .form-control:valid, .form-control.is-valid {
+  background-image: none !important;
+}

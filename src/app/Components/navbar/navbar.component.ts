@@ -113,7 +113,7 @@ export class NavbarComponent implements OnInit {
   }
 /*-------------------------------------------------------------*/
 /*----------------------- LOG IN -----------------------*/
-  logIn(){
+  logIn(form: NgForm){
     this.usuarioService.logIn(this.usuario).subscribe((resp: any) =>{
     //-- Forma sessionStorage --------
     // sessionStorage.setItem('user',JSON.stringify(resp[0]));
@@ -141,6 +141,7 @@ export class NavbarComponent implements OnInit {
         }
       }
       this.usuarioactivo = JSON.parse(valor);
+      form.reset();
       this.cerrarModal("#iniciar-sesion");
       this.router.navigate(['/home']);
     } else {
@@ -172,10 +173,13 @@ export class NavbarComponent implements OnInit {
   }
 /*-------------------------------------------------------*/
 /*----------------------- CERRAR MODAL -----------------------*/
-cerrarModal(modal: string) {
-  $(modal).toggle();//ocultamos el modal
-  $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
-  $('.modal-backdrop').remove();//eliminamos el backdrop del modal
-}
+  cerrarModal(modal: string) {
+    $(modal).toggle();//ocultamos el modal
+    $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
+    $('.modal-backdrop').remove();//eliminamos el backdrop del modal
+  }
 /*------------------------------------------------------------*/
+  resetForm(form: NgForm) {
+    form.reset();
+  }
 }
