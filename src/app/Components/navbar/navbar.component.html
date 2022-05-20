@@ -269,6 +269,9 @@
                     Contraseña inválida.
                   </div>
                 </div>
+                <div class="val-error" *ngIf="pass2.value != pass1.value && pass2.dirty">
+                  Las contraseñas no coinciden.
+                </div>
                 <p class="d-flex flex-row-reverse m-2"><a href="" (click)="resetForm(creacionUsuario)" data-bs-toggle="modal" data-bs-target="#iniciar-sesion">Inicia sesión</a>¿Ya tienes una cuenta?&nbsp;</p>
               </div>
 
