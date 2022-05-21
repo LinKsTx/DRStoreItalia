@@ -41,6 +41,15 @@
   padding: 0;
   margin: 0;
 }
+//quitar check de validacion forms
 .was-validated .form-control:valid, .form-control.is-valid {
   background-image: none !important;
+}
+//alerta creacion usuario
+#alertacreacionusuario {
+position: fixed !important;
+top: 6% !important;
+right: 1% !important;
+z-index: 1;
+display: none;
 }

@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { IUsuario } from 'src/app/interfaces/i-usuario';
 import { UsuarioService } from 'src/app/services/usuario.service';
-import * as $ from 'jquery';
+import * as bootstrap from 'bootstrap';
+import { ViewChild, ElementRef} from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -12,6 +13,10 @@ import * as $ from 'jquery';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+
+  //observamos el boton de cerrar el modal
+  @ViewChild('cerrarmodalis') cerrarmodalis: ElementRef;
+  @ViewChild('cerrarmodalcu') cerrarmodalcu: ElementRef;
 
   //Boolean para sacar código de correo ya existente
   boolean1: boolean = false;
@@ -106,8 +111,10 @@ export class NavbarComponent implements OnInit {
           contrasenya2: ""
         }
         form.reset();
-        this.cerrarModal("#crear-usuario");
+        //literalmente es como hacer un click al boton de cerrar del modal
+        this.cerrarmodalcu.nativeElement.click();
         this.router.navigate(['/home']);
+        this.toogleAlert();
       }
     });
   }
@@ -142,7 +149,8 @@ export class NavbarComponent implements OnInit {
       }
       this.usuarioactivo = JSON.parse(valor);
       form.reset();
-      this.cerrarModal("#iniciar-sesion");
+      //clickamos el boton del modal para cerrar
+      this.cerrarmodalis.nativeElement.click();
       this.router.navigate(['/home']);
     } else {
       this.errorLogIn = "Correo y contraseña no coinciden";
@@ -172,14 +180,14 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 /*-------------------------------------------------------*/
-/*----------------------- CERRAR MODAL -----------------------*/
-  cerrarModal(modal: string) {
-    $(modal).toggle();//ocultamos el modal
-    $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
-    $('.modal-backdrop').remove();//eliminamos el backdrop del modal
-  }
-/*------------------------------------------------------------*/
+/*----------------------- RESET FORM -----------------------*/
   resetForm(form: NgForm) {
     form.reset();
   }
+  /*----------------------------------------------------------*/
+/*----------------------- TOGGLE ALERT -----------------------*/
+  toogleAlert() {
+    $("#alertacreacionusuario").toggle();
+  }
+  /*------------------------------------------------------------*/
 }

@@ -139,13 +139,13 @@
   </nav>
 </div>
  <!-- /MODAL INICIO DE SESIÓN/ -->
-<div class="modal fade" id="iniciar-sesion">
+<div class="modal fade" id="iniciar-sesion" >
   <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
       <div id="modal-completo" class="modal-content">
           <!-- Modal header -->
           <div id="modal-head" class="modal-header">
               <h4 id="titulo-modal" class="modal-title">Iniciar sesión</h4>
-              <h4><i id="close-modal" class="bi bi-x-circle-fill" data-bs-dismiss="modal"></i></h4>
+              <h4><i id="close-modal" class="bi bi-x-circle-fill" data-bs-dismiss="modal" #cerrarmodalis></i></h4>
           </div>
           <!-- Modal body -->
           <div id="body-modal" class="modal-body">
@@ -194,7 +194,7 @@
           <!-- Modal header -->
           <div id="modal-head" class="modal-header">
               <h4 id="titulo-modal" class="modal-title">Crear usuario</h4>
-              <h4><i id="close-modal" class="bi bi-x-circle-fill" data-bs-dismiss="modal"></i></h4>
+              <h4><i id="close-modal" class="bi bi-x-circle-fill" data-bs-dismiss="modal" #cerrarmodalcu></i></h4>
           </div>
           <!-- Modal body -->
           <div id="body-modal" class="modal-body">
@@ -259,7 +259,7 @@
               </div>
               <!-- Contraseña 2 + Iniciar sesión ¿? -->
               <div class="mb-3 mt-3">
-                <input type="password" id="password2" class="form-control" placeholder="Repite la contraseña" name="pass2" [(ngModel)]="usuario.contrasenya2" required pattern="^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$" #pass2="ngModel" [ngClass]="{'is-valid': pass2.value == pass1.value, 'is-invalid': pass2.dirty && pass2.value != pass1.value}">
+                <input type="password" id="password2" class="form-control" placeholder="Repite la contraseña" name="pass2" [(ngModel)]="usuario.contrasenya2" required pattern="^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$" #pass2="ngModel" [ngClass]="{'is-valid': pass2.value == pass1.value, 'is-invalid': pass2.dirty && pass2.value != pass1.value || pass2.errors?.['pattern']}">
                 <!-- Validación contraseña2 -->
                 <div *ngIf="pass2.invalid && (pass2.dirty)" class="alert p-0 m-0 val-error">
                   <div *ngIf="pass2.errors?.['required']">
@@ -302,3 +302,13 @@
       </div>
   </div>
 </div>
+
+<div id="alertacreacionusuario" class="animate__animated animate__fadeInRight">
+  <div class="alert alert-success d-flex align-content-center" role="alert">
+   <span><i class="bi bi-person-plus fs-5"></i>&nbsp;&nbsp;Has creado un usuario correctamente. &nbsp;</span>
+   <button type="button" class="btn-close mt-1" (click)="toogleAlert();" aria-label="Close"></button>
+</div>
+</div>
+
+
+
