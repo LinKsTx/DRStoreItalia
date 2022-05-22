@@ -7,6 +7,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 import * as bootstrap from 'bootstrap';
 import { ViewChild, ElementRef} from '@angular/core';
 
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -45,7 +46,18 @@ export class NavbarComponent implements OnInit {
     nombre: "",
     correo: "",
     contrasenya: "",
-    contrasenya2: ""
+    contrasenya2: "",
+    pic : ""
+  }
+
+   //Usuario perfil
+   usuarioperfil : IUsuario = {
+    nick: "",
+    nombre: "",
+    correo: "",
+    contrasenya: "",
+    contrasenya2: "",
+    pic: ""
   }
 
   //Constructor
@@ -83,6 +95,8 @@ export class NavbarComponent implements OnInit {
       console.log ("No hay usuario activo");
     }
     //--------------------------------
+    //obtenemos el pic del usuario activo y lo igualamos a this.usuarioactivo.
+    this.getPic();
   }
 
 /*----------------------- CREAR USUARIO -----------------------*/
@@ -157,7 +171,9 @@ export class NavbarComponent implements OnInit {
       this.boolean3 = true;
     }
     //--------------------------------
+    this.getPic();
     });
+    console.log(this.usuarioactivo);
   }
 /*------------------------------------------------------*/
 /*----------------------- LOG OUT -----------------------*/
@@ -190,4 +206,40 @@ export class NavbarComponent implements OnInit {
     $("#alertacreacionusuario").toggle();
   }
   /*------------------------------------------------------------*/
+  updatePic() {
+    //igualar el creado con el activo
+    this.usuarioperfil.nick = this.usuarioactivo.nick;
+    this.usuarioperfil.nombre = this.usuarioactivo.nombre;
+    this.usuarioperfil.correo = this.usuarioactivo.correo;
+    this.usuarioperfil.contrasenya = this.usuarioactivo.contrasenya;
+
+    //servicio
+    this.usuarioService.updatePic(this.usuarioperfil).subscribe((respuesta)=>{
+      this.usuarioperfil.pic = "";
+      this.getPic();
+    });
+    console.log(this.usuarioperfil.pic);
+  }
+
+  changeImage(fileInput: HTMLInputElement) {
+    if (!fileInput.files || fileInput.files.length === 0) {
+      return;
+    }
+    const reader: FileReader = new FileReader();
+    reader.readAsDataURL(fileInput.files[0]);
+    reader.addEventListener('loadend', (e) => {
+      this.usuarioperfil.pic = reader.result as string;
+    });
+  }
+
+  onFileSelected(event: any){
+      this.changeImage(event.target);
+  }
+
+  getPic() {
+    this.usuarioService.getPic(this.usuarioactivo).subscribe((respuesta: any)=>{
+      console.log(respuesta[0].pic);
+      this.usuarioactivo.pic = respuesta[0].pic;
+    });
+  }
 }

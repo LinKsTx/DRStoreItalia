@@ -13,6 +13,7 @@ import { NavOptionsComponent } from './Components/nav-options/nav-options.compon
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 //Rutas
 const APP_ROUTES: Route[] = [
@@ -48,6 +49,7 @@ const APP_ROUTES: Route[] = [
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    ImageCropperModule
   ],
   providers: [],
   bootstrap: [AppComponent]

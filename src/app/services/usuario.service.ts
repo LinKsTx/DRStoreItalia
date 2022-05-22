@@ -23,4 +23,15 @@ export class UsuarioService {
     return this.http.post(`${this.baseUrl}/usuario/iniciar_sesion.php`, usuario);
   }
 
+   //Actualizar pic
+   updatePic(usuario: IUsuario){
+    return this.http.put(`${this.baseUrl}/usuario/update_imagen.php`, usuario);
+  }
+
+  //Obtener pic
+  getPic(usuario: IUsuario){
+    return this.http.post(`${this.baseUrl}/usuario/obtener_pic.php`, usuario);
+  }
+
+
 }

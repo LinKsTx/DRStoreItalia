@@ -18,32 +18,26 @@
     exit("No hay datos");
   }
 
-  //creación de variables para igualar
-  $correo =  $jsonUsuarios->correo;
-  $contrasenya = $jsonUsuarios->contrasenya;
-  $encriptado = md5($contrasenya);
+  $nick = $jsonUsuarios->nick;
 
   //Comprobar en la base de datos el login
-  $sql = "SELECT id, nombre, nick, correo, tipo  FROM usuarios WHERE correo=? AND contrasenya=?";
+  $sql = "SELECT pic FROM usuarios WHERE nick=?";
 
         //Le pasamos la linea 26 como consulta
         $sentencia = $pdoObject->prepare($sql);
         //Le pasamos valores ->
-        //1 ? es correo
-        $sentencia->bindParam(1, $correo);
-        //2 ? es contraseña
-        $sentencia->bindParam(2, $encriptado);
+        $sentencia->bindParam(1, $nick);
         //Ejecutamos sentencia
         $sentencia->execute();
         //Convierte resultado a array_assoc
         $result = $sentencia->fetch(PDO::FETCH_ASSOC);
 
-            //Si hay cosas dentro, te devuelve los datos
-            if ($result) {
-              echo json_encode([$result]);
+        //Si hay cosas dentro, te devuelve los datos
+        if ($result) {
+          echo json_encode([$result]);
 
-            } else {
-              echo json_encode("X");
-            }
+        } else {
+          echo json_encode("Z");
+        }
 
   ?>

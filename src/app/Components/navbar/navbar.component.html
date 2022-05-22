@@ -46,7 +46,7 @@
                       <li class="nav-item dropdown m-2 estilohover" *ngIf="usuarioactivo.nombre.length > 0">
                         <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><span><i class="bi bi-person"></i>&nbsp;{{usuarioactivo.nick}}</span></a>
                         <ul class="dropdown-menu text-center bg-light ">
-                          <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown" href="#">CUENTA</a></li>
+                          <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown" href="#" data-bs-toggle="modal" data-bs-target="#cuenta">CUENTA</a></li>
                           <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown" *ngIf="usuarioactivo.tipo == 1" href="#">PEDIDOS</a></li>
                           <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown" href="#" (click)="logOut()">CERRAR SESIÓN</a></li>
                         </ul>
@@ -112,8 +112,18 @@
                           <a class="nav-link pointer-cursor nowrap" href="#" data-bs-toggle="modal" data-bs-target="#iniciar-sesion" *ngIf="usuarioactivo.nombre.length === 0">INICIAR SESIÓN</a>
                       </li>
                       <!-- sesion iniciada -->
-                      <li class="nav-item dropdown m-2 estilo-hover escritorio-hover" *ngIf="usuarioactivo.nombre.length > 0">
-                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><span><i class="bi bi-person"></i>&nbsp;{{usuarioactivo.nick}}</span></a>
+                      <!--sin foto-->
+                      <li class="nav-item dropdown m-2 estilo-hover escritorio-hover" *ngIf="usuarioactivo.nombre.length > 0 && !usuarioactivo.pic">
+                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><span id="sin-foto"><i class="bi bi-person"></i>&nbsp;{{usuarioactivo.nick}}</span></a>
+                        <ul class="dropdown-menu text-center bg-light border-bot border-left border-right">
+                          <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown" href="#" data-bs-toggle="modal" data-bs-target="#cuenta">CUENTA</a></li>
+                          <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown" *ngIf="usuarioactivo.tipo == 1" href="#">PEDIDOS</a></li>
+                          <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown pointer" (click)="logOut()">CERRAR SESIÓN</a></li>
+                        </ul>
+                      </li>
+                      <!--con foto-->
+                      <li class="nav-item dropdown m-1 estilo-hover escritorio-hover" *ngIf="usuarioactivo.nombre.length > 0 && usuarioactivo.pic">
+                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><span id="con-foto"><img class="rounded-circle" [src]="usuarioactivo.pic" alt="" style="width:48px ;">&nbsp;&nbsp;{{usuarioactivo.nick}}</span></a>
                         <ul class="dropdown-menu text-center bg-light border-bot border-left border-right">
                           <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown" href="#" data-bs-toggle="modal" data-bs-target="#cuenta">CUENTA</a></li>
                           <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown" *ngIf="usuarioactivo.tipo == 1" href="#">PEDIDOS</a></li>
@@ -296,8 +306,23 @@
           </div>
           <!-- Modal body -->
           <div id="body-modal" class="modal-body">
+            <div id="pic-usuario-profile" class="text-center"><img class="img-fluid updateimg rounded-circle" [src]="usuarioactivo.pic" alt=""></div>
             <p>{{usuarioactivo.nick}}</p>
             <p>{{usuarioactivo.correo}}</p>
+          </div>
+          <div>
+            <form (ngSubmit)="updatePic();">
+              <!-- IMAGEN -->
+              <div class="mb-3">
+                <input type="file" name="myImage" accept="image/png, image/gif, image/jpeg" (change)="onFileSelected($event)"/>
+                <div class="text-center"><img [src]="usuarioperfil.pic" class="p-3 img-fluid"></div>
+
+              </div>
+              <!-- SUBMIT BUTTON -->
+              <div class="d-grid">
+                <button id="modal-button" type="submit" class="btn btn-success">Actualizar imagen</button>
+            </div>
+            </form>
           </div>
       </div>
   </div>

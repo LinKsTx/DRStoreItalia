@@ -5,5 +5,6 @@ export interface IUsuario {
     contrasenya: string,
      //? = optativa, no da error si no la pones
     contrasenya2?: string,
+    pic?: string;
     tipo?: number
 }

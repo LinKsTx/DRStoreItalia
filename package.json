@@ -25,6 +25,7 @@
     "jquery": "^3.6.0",
     "js-cookie": "^3.0.1",
     "ngx-cookie-service": "^13.2.0",
+    "ngx-image-cropper": "^6.1.0",
     "popper.js": "^1.16.1",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",
