@@ -2,7 +2,7 @@
 <div class="container-fluid d-flex justify-content-center">
   <a class="nav-link pointer-cursor btn btn-success text-light m-4" href="#" data-bs-toggle="modal" data-bs-target="#crear-blog" *ngIf="usuarioactivo.tipo == 2">CREAR BLOG</a>
 </div>
-
+<!--------------------------- /MODALES/ --------------------------->
 <!-- /MODAL CREACIÓN DE BLOG/ -->
 <div class="modal fade" id="crear-blog">
   <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
@@ -50,7 +50,7 @@
           </div>
           <!-- MODAL BODY -->
           <div id="body-modal" class="modal-body">
-            <form (ngSubmit)="updateBlogs()">
+            <form (ngSubmit)="updateBlogs(blogeditado)">
               <!-- TITULO -->
               <div class="mb-3">
                 <input type="text" class="form-control" placeholder="Título" name="titulo" [(ngModel)]="blogeditado.titulo">
@@ -73,7 +73,7 @@
       </div>
   </div>
 </div>
-
+<!----------------------------------------------------------------->
 <!-- /BLOGS/ -->
 <div class="container fluid d-flex justify-content-center">
   <div class="row justify-content-center">

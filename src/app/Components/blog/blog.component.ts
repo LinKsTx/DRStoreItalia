@@ -16,6 +16,7 @@ export class BlogComponent implements OnInit {
 /*----------------------- DECLARAR VARIABLES -------------------*/
 
   blog: IBlog = {
+    id: 0,
     titulo: "",
     contenido: "",
     imagen: "",
@@ -23,6 +24,7 @@ export class BlogComponent implements OnInit {
   }
 
   blogeditado: IBlog = {
+    id: 0,
     titulo: "",
     contenido: "",
     imagen: "",
@@ -68,8 +70,10 @@ export class BlogComponent implements OnInit {
     } else{
       console.log ("No hay usuario activo");
     }
-    //leer Blog
+    //------------------------------------------
+    //-- leer Blog -----------------------------
     this.obtenerBlogs();
+    //------------------------------------------
      }
 
 /*----------------------- CREAR BLOG ---------------------------*/
@@ -102,19 +106,31 @@ export class BlogComponent implements OnInit {
   }
 /*--------------------------------------------------------------*/
 /*----------------------- EDITAR BLOGS -------------------------*/
-updateBlogs(){
-  this.blogService.editBlog(this.blogeditado).subscribe((data: any) =>{
-
+updateBlogs(datosEditados: IBlog){
+  console.log(datosEditados);
+  this.blogService.editBlog(datosEditados).subscribe((data: any) =>{
+    this.blogeditado = {
+      id: 0,
+      titulo: "",
+      contenido: "",
+      imagen: "",
+      fecha: new Date(Date.now()),
+    }
+    this.obtenerBlogs();
 });
 }
 /*--------------------------------------------------------------*/
 /*----------------------- PASAR INFO PARA UPDATE ---------------*/
-pasarInfo(blog: IBlog){
-  this.blogeditado = blog;
+pasarInfo(datos: IBlog){
+  this.blogeditado.id = datos.id;
+  this.blogeditado.titulo = datos.titulo;
+  this.blogeditado.contenido = datos.contenido;
+  this.blogeditado.imagen = datos.imagen;
+  this.blogeditado.fecha = datos.fecha;
 }
 /*--------------------------------------------------------------*/
 /*----------------------- CHANGE IMAGE -------------------------*/
-  changeImage(fileInput: HTMLInputElement) {
+changeImage(fileInput: HTMLInputElement) {
     if (!fileInput.files || fileInput.files.length === 0) {
       return;
     }
@@ -123,14 +139,14 @@ pasarInfo(blog: IBlog){
     reader.addEventListener('loadend', (e) => {
       this.blog.imagen = reader.result as string;
     });
-  }
+}
 /*--------------------------------------------------------------*/
 /*----------------------- FILE SELECTED ------------------------*/
-  onFileSelected(event: any){
+onFileSelected(event: any){
       this.changeImage(event.target);
-  }
+}
 /*--------------------------------------------------------------*/
-/*----------------------- CHANGE IMAGE 2 -------------------------*/
+/*----------------------- CHANGE IMAGE 2 ------------------------*/
 changeImage2(fileInput: HTMLInputElement) {
   if (!fileInput.files || fileInput.files.length === 0) {
     return;
@@ -142,7 +158,7 @@ changeImage2(fileInput: HTMLInputElement) {
   });
 }
 /*--------------------------------------------------------------*/
-/*----------------------- FILE SELECTED 2 ------------------------*/
+/*----------------------- FILE SELECTED 2 ----------------------*/
 onFileSelected2(event: any){
     this.changeImage2(event.target);
 }

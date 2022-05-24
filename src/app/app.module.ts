@@ -15,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { BlogDetailComponent } from './Components/blog-detail/blog-detail.component';
+import { ProductosDetailComponent } from './Components/productos-detail/productos-detail.component';
 
 //Rutas
 const APP_ROUTES: Route[] = [
@@ -22,9 +23,11 @@ const APP_ROUTES: Route[] = [
   {path: 'home', component: HomeComponent},
   //Productos
   {path: 'productos', component: ProductosComponent},
+  //Productos:id
+  {path: 'productos-detail/:id', component: ProductosDetailComponent},
   //Blog
   {path: 'blog', component: BlogComponent},
-  //Blog
+  //Blog:id
   {path: 'blog-detail/:id', component: BlogDetailComponent},
   //Contacto
   {path: 'contacto', component: ContactoComponent},

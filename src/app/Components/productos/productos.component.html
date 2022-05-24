@@ -1,1 +1,121 @@
-<p>Esto serán los productos!</p>
+<!-- /CREAR PRODUCTO (BOTÓN)/ -->
+<div class="container-fluid d-flex justify-content-center">
+  <a class="nav-link pointer-cursor btn btn-success text-light m-4" href="#" data-bs-toggle="modal" data-bs-target="#crear-producto" *ngIf="usuarioactivo.tipo == 2">CREAR PRODUCTO</a>
+</div>
+
+<!--------------------------- /MODALES/ --------------------------->
+<!-- /MODAL CREACIÓN DE PRODUCTO/ -->
+<div class="modal fade" id="crear-producto">
+  <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+      <div id="modal-completo" class="modal-content">
+          <!-- MODAL HEADER -->
+          <div id="modal-head" class="modal-header">
+              <h4 id="titulo-modal" class="modal-title">Crear producto</h4>
+              <h4><i id="close-modal" class="bi bi-x-circle-fill" data-bs-dismiss="modal"></i></h4>
+          </div>
+          <!-- MODAL BODY -->
+          <div id="body-modal" class="modal-body">
+            <form (ngSubmit)="crearProducto()">
+              <!-- NOMBRE -->
+              <div class="mb-3">
+                <input type="text" class="form-control" placeholder="Nombre" name="nombre" [(ngModel)]="producto.nombre">
+              </div>
+              <!-- PRECIO -->
+              <div class="mb-3">
+                <input type="number" step="0.1" class="form-control" placeholder="Precio" name="precio" [(ngModel)]="producto.precio">
+              </div>
+              <!-- DESCRIPCIÓN -->
+              <div class="mb-3">
+                <textarea class="form-control" placeholder="Descripción" name="descripcion" [(ngModel)]="producto.descripcion"></textarea>
+              </div>
+              <!-- CATEGORÍA -->
+              <div class="mb-3">
+                <input type="text" class="form-control" placeholder="Categoría" name="categoría" [(ngModel)]="producto.categoria">
+              </div>
+              <!-- MARCA -->
+              <div class="mb-3">
+                <input type="text" class="form-control" placeholder="Marca" name="marca" [(ngModel)]="producto.marca">
+              </div>
+              <!-- IMAGEN -->
+              <div class="mb-3">
+                <input type="file" name="myImage" accept="image/png, image/gif, image/jpeg" (change)="onFileSelected($event)"/>
+                <div class="text-center"><img [src]="producto.imagen" class="p-3 img-fluid"></div>
+              </div>
+              <!-- SUBMIT BUTTON -->
+              <div class="d-grid">
+                <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Crear producto</button>
+            </div>
+            </form>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- /MODAL EDITAR DE PRODUCTO/ -->
+<div class="modal fade" id="editar-producto">
+  <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+      <div id="modal-completo" class="modal-content">
+          <!-- MODAL HEADER -->
+          <div id="modal-head" class="modal-header">
+              <h4 id="titulo-modal" class="modal-title">Editar producto</h4>
+              <h4><i id="close-modal" class="bi bi-x-circle-fill" data-bs-dismiss="modal"></i></h4>
+          </div>
+          <!-- MODAL BODY -->
+          <div id="body-modal" class="modal-body">
+            <form (ngSubmit)="updateProducts(productoeditado)">
+              <!-- NOMBRE -->
+              <div class="mb-3">
+                <input type="text" class="form-control" placeholder="Nombre" name="nombre" [(ngModel)]="productoeditado.nombre">
+              </div>
+              <!-- PRECIO -->
+              <div class="mb-3">
+                <input type="number" step="0.1" class="form-control" placeholder="Precio" name="precio" [(ngModel)]="productoeditado.precio">
+              </div>
+              <!-- DESCRIPCIÓN -->
+              <div class="mb-3">
+                <textarea class="form-control" placeholder="Descripción" name="descripcion" [(ngModel)]="productoeditado.descripcion"></textarea>
+              </div>
+              <!-- CATEGORÍA -->
+              <div class="mb-3">
+                <input type="text" class="form-control" placeholder="Categoría" name="categoría" [(ngModel)]="productoeditado.categoria">
+              </div>
+              <!-- MARCA -->
+              <div class="mb-3">
+                <input type="text" class="form-control" placeholder="Marca" name="marca" [(ngModel)]="productoeditado.marca">
+              </div>
+              <!-- IMAGEN -->
+              <div class="mb-3">
+                <input type="file" name="myImage" accept="image/png, image/gif, image/jpeg" (change)="onFileSelected($event)"/>
+                <div class="text-center"><img [src]="productoeditado.imagen" class="p-3 img-fluid"></div>
+              </div>
+              <!-- SUBMIT BUTTON -->
+              <div class="d-grid">
+                <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Editar producto</button>
+            </div>
+            </form>
+          </div>
+      </div>
+  </div>
+</div>
+<!----------------------------------------------------------------->
+<!-- /PRODUCTOS/ -->
+<div class="container fluid d-flex justify-content-center">
+  <div class="row justify-content-center">
+    <div class="card p-0 col-sm-5 col-md-4 col-lg-4 col-xl-3" style="width:400px" *ngFor="let producto of productos; let i = index">
+      <img class="card-img-top img-fluid" [src]="producto.imagen" alt="Card image" [routerLink]="['/productos-detail', producto.id]">
+      <div class="card-body d-flex justify-content-center">
+        <a class="card-title fs-4 text-decoration-none text-dark" >{{producto.nombre}}</a>
+      </div>
+      <span class="text-center">{{producto.precio | currency:'EUR':true}}</span>
+      <span class="text-center">{{producto.categoria}}</span>
+      <span class="text-center">{{producto.marca}}</span>
+      <span class="text-center">{{producto.stock}}</span>
+      <div class="d-flex justify-content-end p-2" *ngIf="usuarioactivo.tipo == 2">
+        <button (click)="eliminarProductos(producto.id, i)" class="btn btn-danger">Borrar</button>
+      </div>
+      <div class="d-flex justify-content-start p-2" *ngIf="usuarioactivo.tipo == 2">
+        <button type="submit" class="btn btn-success"data-bs-toggle="modal" data-bs-target="#editar-producto" (click)="pasarInfo(producto)">Editar blog</button>
+      </div>
+    </div>
+  </div>
+</div>
