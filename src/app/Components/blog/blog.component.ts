@@ -13,6 +13,8 @@ import * as $ from 'jquery';
 })
 export class BlogComponent implements OnInit {
 
+/*----------------------- DECLARAR VARIABLES -------------------*/
+
   blog: IBlog = {
     titulo: "",
     contenido: "",
@@ -30,11 +32,15 @@ export class BlogComponent implements OnInit {
     contrasenya2: ""
   }
 
+/*--------------------------------------------------------------*/
+
+  //CONSTRUCTOR
   constructor(
     private blogService: BlogService,
     private router: Router,
   ) { }
 
+  //SE INICIA AUTOMÁTICAMENTE
   ngOnInit(): void {
     //-- Forma Cookies (usuario) ---------------
     let busca;
@@ -59,6 +65,7 @@ export class BlogComponent implements OnInit {
     this.obtenerBlogs();
      }
 
+/*----------------------- CREAR BLOG ---------------------------*/
   crearBlog() {
     this.blogService.addBlog(this.blog).subscribe(()=>{
       console.log(this.blog);
@@ -71,14 +78,16 @@ export class BlogComponent implements OnInit {
       this.obtenerBlogs();
     });
   }
-
+/*--------------------------------------------------------------*/
+/*----------------------- OBTENER BLOGS ------------------------*/
   obtenerBlogs(){
       this.blogService.readBlog().subscribe((data: any) =>{
       console.log(data);
       this.blogs = data;
     });
   }
-
+/*--------------------------------------------------------------*/
+/*----------------------- CHANGE IMAGE -------------------------*/
   changeImage(fileInput: HTMLInputElement) {
     if (!fileInput.files || fileInput.files.length === 0) {
       return;
@@ -89,9 +98,10 @@ export class BlogComponent implements OnInit {
       this.blog.imagen = reader.result as string;
     });
   }
-
+/*--------------------------------------------------------------*/
+/*----------------------- FILE SELECTED ------------------------*/
   onFileSelected(event: any){
       this.changeImage(event.target);
   }
-
+/*--------------------------------------------------------------*/
 }

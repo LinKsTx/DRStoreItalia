@@ -1,40 +1,41 @@
-//Cambiar fuente del navegador
+// ----------------- OTROS ---------------------
+//Fuente general
 #navegador {
   font-family: monolisk-black;
 }
-
-//DROPDOWNS
+//Para que el span no tengan wrap
+.nowrap {
+  white-space: nowrap;
+}
+//Cursor onclick
+.pointer {
+  cursor: pointer;
+}
+// ---------------------------------------------
+// ----------------- DROPDOWNS -----------------
 //Quita el estilo por defecto de bootstrap sobre los dropdown
 .estilo-hover:hover, .dropdown-menu {
   border-style: none;
   border-radius: 0%;
 }
-
 //Control sobre la animación de los dropdowns
 .animate__animated.animate__fadeInDown {
   --animate-duration: 0.5s;
 }
-
 //Quita la flecha de los dropdowns
 .dropdown-toggle::after {
   content: none;
 }
-
-//  //dropdown por hover solo en la versión de escritorio
-//  .escritorio-hover.dropdown:hover .dropdown-menu {
-//   display: block;
-//   margin-top: 0; // remove the gap so it doesn't close
-// }
-
-.nowrap {
-  white-space: nowrap;
+/*
+//dropdown por hover solo en la versión de escritorio
+ .escritorio-hover.dropdown:hover .dropdown-menu {
+  display: block;
+  margin-top: 0; // remove the gap so it doesn't close
 }
-
-.pointer {
-  cursor: pointer;
-}
-
-//Validación de formularios
+*/
+// ---------------------------------------------
+// ------------ VALIDACIÓN DE FORMULARIOS ------
+//Estilo de validación
 .val-error {
   color: red !important;
   font-size: small;
@@ -45,7 +46,9 @@
 .was-validated .form-control:valid, .form-control.is-valid {
   background-image: none !important;
 }
-//alerta creacion usuario
+// ---------------------------------------------
+// ----------------- ALERTAS -------------------
+//Estilo de alerta y flujo
 #alertacreacionusuario {
 position: fixed !important;
 top: 6% !important;
@@ -53,12 +56,14 @@ right: 1% !important;
 z-index: 1;
 display: none;
 }
-//estilo imagen
-// .updateimg {
-//   width: 320px !important;
-//   height: 320px !important;
-// }
+// ---------------------------------------------
+// ----------------- IMAGENES ------------------
+//Tamaño de pic
 #pic-usuario-profile {
   width: 320px !important;
   height: 320px !important;
 }
+// ---------------------------------------------
+// ----------------- ESTILO DE MODALES ---------
+//(Pendiente)
+// ---------------------------------------------

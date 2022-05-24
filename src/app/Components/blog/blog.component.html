@@ -1,9 +1,9 @@
-<!--CREAR BLOG-->
+<!-- /CREAR BLOG (BOTÓN)/ -->
 <div class="container-fluid d-flex justify-content-center">
   <a class="nav-link pointer-cursor btn btn-success text-light m-4" href="#" data-bs-toggle="modal" data-bs-target="#crear-blog" *ngIf="usuarioactivo.tipo == 2">CREAR BLOG</a>
 </div>
 
-<!--MODAL CREACIÓN DE BLOG-->
+<!-- /MODAL CREACIÓN DE BLOG/ -->
 <div class="modal fade" id="crear-blog">
   <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
       <div id="modal-completo" class="modal-content">
@@ -39,7 +39,7 @@
   </div>
 </div>
 
-<!--BLOGS-->
+<!-- /BLOGS/ -->
 <div class="container fluid d-flex justify-content-center">
   <div class="row justify-content-center">
     <div class="card p-0 col-sm-5 col-md-4 col-lg-4 col-xl-3" style="width:400px" *ngFor="let blog of blogs">

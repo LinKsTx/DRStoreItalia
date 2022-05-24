@@ -1,3 +1,4 @@
+<!--------------------------- /NAVBARS/ --------------------------->
 <!-- /NAVBAR/ -->
 <!-- xs sm, luego se expande. (versión encogido) -->
 <div class="container-fluid d-block d-lg-none bg-light">
@@ -43,12 +44,22 @@
                           <a class="nav-link pointer-cursor nowrap" href="#" data-bs-toggle="modal" data-bs-target="#iniciar-sesion" *ngIf="usuarioactivo.nombre.length === 0">INICIAR SESIÓN</a>
                       </li>
                       <!-- sesion iniciada -->
-                      <li class="nav-item dropdown m-2 estilohover" *ngIf="usuarioactivo.nombre.length > 0">
-                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><span><i class="bi bi-person"></i>&nbsp;{{usuarioactivo.nick}}</span></a>
-                        <ul class="dropdown-menu text-center bg-light ">
+                      <!--sin foto-->
+                      <li class="nav-item dropdown m-2 estilo-hover escritorio-hover" *ngIf="usuarioactivo.nombre.length > 0 && !usuarioactivo.pic">
+                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><span id="sin-foto"><i class="bi bi-person"></i>&nbsp;{{usuarioactivo.nick}}</span></a>
+                        <ul class="dropdown-menu text-center bg-light border-bot border-left border-right">
                           <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown" href="#" data-bs-toggle="modal" data-bs-target="#cuenta">CUENTA</a></li>
                           <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown" *ngIf="usuarioactivo.tipo == 1" href="#">PEDIDOS</a></li>
-                          <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown" href="#" (click)="logOut()">CERRAR SESIÓN</a></li>
+                          <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown pointer" (click)="logOut()">CERRAR SESIÓN</a></li>
+                        </ul>
+                      </li>
+                      <!--con foto-->
+                      <li class="nav-item dropdown m-1 estilo-hover escritorio-hover" *ngIf="usuarioactivo.nombre.length > 0 && usuarioactivo.pic">
+                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><span id="con-foto"><img class="rounded-circle" [src]="usuarioactivo.pic" alt="" style="width:48px ;">&nbsp;&nbsp;{{usuarioactivo.nick}}</span></a>
+                        <ul class="dropdown-menu text-center bg-light border-bot border-left border-right">
+                          <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown" href="#" data-bs-toggle="modal" data-bs-target="#cuenta">CUENTA</a></li>
+                          <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown" *ngIf="usuarioactivo.tipo == 1" href="#">PEDIDOS</a></li>
+                          <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown pointer" (click)="logOut()">CERRAR SESIÓN</a></li>
                         </ul>
                       </li>
                       <!-- carrito de compra (manda a productos o click para verlos ¿? arreglar)-->
@@ -148,6 +159,8 @@
       </div>
   </nav>
 </div>
+<!----------------------------------------------------------------->
+<!--------------------------- /MODALES/ --------------------------->
  <!-- /MODAL INICIO DE SESIÓN/ -->
 <div class="modal fade" id="iniciar-sesion" >
   <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
@@ -197,6 +210,7 @@
       </div>
   </div>
 </div>
+
 <!-- /MODAL CREACIÓN DE USUARIO/ -->
 <div class="modal fade" id="crear-usuario">
   <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
@@ -327,13 +341,15 @@
       </div>
   </div>
 </div>
-
+<!----------------------------------------------------------------->
+<!--------------------------- /OTROS/ ----------------------------->
+<!-- /ALERTA CREACIÓN USUARIO/ -->
 <div id="alertacreacionusuario" class="animate__animated animate__fadeInRight">
   <div class="alert alert-success d-flex align-content-center" role="alert">
    <span><i class="bi bi-person-plus fs-5"></i>&nbsp;&nbsp;Has creado un usuario correctamente. &nbsp;</span>
    <button type="button" class="btn-close mt-1" (click)="toogleAlert();" aria-label="Close"></button>
 </div>
 </div>
-
+<!----------------------------------------------------------------->
 
 

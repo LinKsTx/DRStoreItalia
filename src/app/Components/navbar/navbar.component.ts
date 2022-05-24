@@ -15,6 +15,8 @@ import { ViewChild, ElementRef} from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
+/*----------------------- DECLARAR VARIABLES -------------------*/
+
   //observamos el boton de cerrar el modal
   @ViewChild('cerrarmodalis') cerrarmodalis: ElementRef;
   @ViewChild('cerrarmodalcu') cerrarmodalcu: ElementRef;
@@ -60,14 +62,16 @@ export class NavbarComponent implements OnInit {
     pic: ""
   }
 
-  //Constructor
+/*--------------------------------------------------------------*/
+
+  //CONSTRUCTOR
   constructor(
     private usuarioService: UsuarioService,
     private router: Router,
     private cookieService: CookieService,
   ) { }
 
-  //Se inicia automáticamente
+  //SE INICIA AUTOMÁTICAMENTE
   ngOnInit(): void {
     //-- Forma sessionStorage --------
     // if(sessionStorage.length>0){
@@ -99,7 +103,7 @@ export class NavbarComponent implements OnInit {
     this.getPic();
   }
 
-/*----------------------- CREAR USUARIO -----------------------*/
+/*----------------------- CREAR USUARIO ------------------------*/
   crearUsuario(form: NgForm){
     //hacemos el insert
     console.log(this.usuario);
@@ -132,8 +136,8 @@ export class NavbarComponent implements OnInit {
       }
     });
   }
-/*-------------------------------------------------------------*/
-/*----------------------- LOG IN -----------------------*/
+/*--------------------------------------------------------------*/
+/*----------------------- LOG IN -------------------------------*/
   logIn(form: NgForm){
     this.usuarioService.logIn(this.usuario).subscribe((resp: any) =>{
     //-- Forma sessionStorage --------
@@ -175,8 +179,8 @@ export class NavbarComponent implements OnInit {
     });
     console.log(this.usuarioactivo);
   }
-/*------------------------------------------------------*/
-/*----------------------- LOG OUT -----------------------*/
+/*--------------------------------------------------------------*/
+/*----------------------- LOG OUT ------------------------------*/
   logOut() {
     //-- Forma sessionStorage --------
     //sessionStorage.clear();
@@ -195,17 +199,18 @@ export class NavbarComponent implements OnInit {
     }
     this.router.navigate(['/home']);
   }
-/*-------------------------------------------------------*/
-/*----------------------- RESET FORM -----------------------*/
+/*--------------------------------------------------------------*/
+/*----------------------- RESET FORM ---------------------------*/
   resetForm(form: NgForm) {
     form.reset();
   }
-  /*----------------------------------------------------------*/
-/*----------------------- TOGGLE ALERT -----------------------*/
+  /*------------------------------------------------------------*/
+/*----------------------- TOGGLE ALERT -------------------------*/
   toogleAlert() {
     $("#alertacreacionusuario").toggle();
   }
   /*------------------------------------------------------------*/
+  /*--------------------- UPDATE PIC ---------------------------*/
   updatePic() {
     //igualar el creado con el activo
     this.usuarioperfil.nick = this.usuarioactivo.nick;
@@ -220,7 +225,7 @@ export class NavbarComponent implements OnInit {
     });
     console.log(this.usuarioperfil.pic);
   }
-
+/*----------------------- CHANGE IMAGE -------------------------*/
   changeImage(fileInput: HTMLInputElement) {
     if (!fileInput.files || fileInput.files.length === 0) {
       return;
@@ -231,15 +236,18 @@ export class NavbarComponent implements OnInit {
       this.usuarioperfil.pic = reader.result as string;
     });
   }
-
+/*--------------------------------------------------------------*/
+/*----------------------- FILE SELECTED ------------------------*/
   onFileSelected(event: any){
       this.changeImage(event.target);
   }
-
+/*--------------------------------------------------------------*/
+/*----------------------- GET PIC ------------------------------*/
   getPic() {
     this.usuarioService.getPic(this.usuarioactivo).subscribe((respuesta: any)=>{
       console.log(respuesta[0].pic);
       this.usuarioactivo.pic = respuesta[0].pic;
     });
   }
+  /*------------------------------------------------------------*/
 }

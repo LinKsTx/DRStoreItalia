@@ -12,7 +12,7 @@ export class UsuarioService {
 
   constructor(private http: HttpClient) { }
 
-  //Usuarios
+  //SESIÓN
   //Crear usuario
   addUsuario(usuario: IUsuario){
     return this.http.post(`${this.baseUrl}/usuario/crear_usuario.php`, usuario);
@@ -23,8 +23,9 @@ export class UsuarioService {
     return this.http.post(`${this.baseUrl}/usuario/iniciar_sesion.php`, usuario);
   }
 
-   //Actualizar pic
-   updatePic(usuario: IUsuario){
+  //PIC
+  //Actualizar pic
+  updatePic(usuario: IUsuario){
     return this.http.put(`${this.baseUrl}/usuario/update_imagen.php`, usuario);
   }
 
