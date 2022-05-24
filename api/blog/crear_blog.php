@@ -23,7 +23,7 @@
   $imagen = $jsonUsuarios->imagen;
   $fecha = $jsonUsuarios->fecha;
 
-//Meter en la base de datos el blog
+  //Meter en la base de datos el blog
   $sql = "INSERT INTO blog (titulo,contenido,imagen,fecha) VALUES (?, ?, ?, ?)";
         $sentencia = $pdoObject->prepare($sql);
         $sentencia->bindParam(1, $titulo);

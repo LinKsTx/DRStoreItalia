@@ -39,23 +39,24 @@
   $boolean1 = false;
   $boolean2 = false;
 
+  //Sacar errores dependiendo de si nick o correo ya existen en la BBDD para poder diferenciarlos y validar
+  //Si correo y nick ya existen
   if ($sentencia->rowCount() > 0 && $sentencia2->rowCount() > 0) {
     $boolean1 = true;
     $boolean2 = true;
     echo json_encode("5");
   } else {
+    //Si correo ya existe
     if ($sentencia->rowCount() > 0) {
       echo json_encode("3");
         $boolean1 = true;
     }
+    //Si nick ya existe
     if ($sentencia2->rowCount() > 0) {
       echo json_encode("4");
         $boolean2 = true;
     }
   }
-
-
-
 
 if ($boolean1 == false && $boolean2 == false) {
   //Meter en la base de datos el registro

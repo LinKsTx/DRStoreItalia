@@ -11,16 +11,13 @@
         $conexion= new Conexion();
         $pdoObject = $conexion->getConexion();
 
-        //consulta
-
+        //Consulta
         $sql = "SELECT * FROM blog";
-        //preparas
+        //Preparas
         $sentencia = $pdoObject->prepare($sql);
         $sentencia->execute();
         $result = $sentencia->fetchAll(PDO::FETCH_ASSOC);
-
-
-
+        //Resultado
         if ($result) {
           echo json_encode($result);
         } else {

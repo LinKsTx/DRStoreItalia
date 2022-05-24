@@ -35,7 +35,6 @@
         //Si hay cosas dentro, te devuelve los datos
         if ($result) {
           echo json_encode([$result]);
-
         } else {
           echo json_encode("Z");
         }
