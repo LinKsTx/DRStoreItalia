@@ -17,11 +17,11 @@
             <form (ngSubmit)="crearBlog()">
               <!-- TITULO -->
               <div class="mb-3">
-                <input type="text" class="form-control" id="nick" placeholder="Título" name="titulo" [(ngModel)]="blog.titulo">
+                <input type="text" class="form-control" placeholder="Título" name="titulo" [(ngModel)]="blog.titulo">
               </div>
               <!-- CONTENIDO -->
               <div class="mb-3">
-                <textarea class="form-control" id="nombre" placeholder="Contenido" name="contenido" [(ngModel)]="blog.contenido"></textarea>
+                <textarea class="form-control" placeholder="Contenido" name="contenido" [(ngModel)]="blog.contenido"></textarea>
               </div>
               <!-- IMAGEN -->
               <div class="mb-3">
@@ -31,7 +31,42 @@
               </div>
               <!-- SUBMIT BUTTON -->
               <div class="d-grid">
-                <button id="modal-button" type="submit" class="btn btn-success" data-bs-dismiss="modal">Crear blog</button>
+                <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Crear blog</button>
+            </div>
+            </form>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- /MODAL EDITAR DE BLOG/ -->
+<div class="modal fade" id="editar-blog">
+  <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+      <div id="modal-completo" class="modal-content">
+          <!-- MODAL HEADER -->
+          <div id="modal-head" class="modal-header">
+              <h4 id="titulo-modal" class="modal-title">Editar blog</h4>
+              <h4><i id="close-modal" class="bi bi-x-circle-fill" data-bs-dismiss="modal"></i></h4>
+          </div>
+          <!-- MODAL BODY -->
+          <div id="body-modal" class="modal-body">
+            <form (ngSubmit)="updateBlogs()">
+              <!-- TITULO -->
+              <div class="mb-3">
+                <input type="text" class="form-control" placeholder="Título" name="titulo" [(ngModel)]="blogeditado.titulo">
+              </div>
+              <!-- CONTENIDO -->
+              <div class="mb-3">
+                <textarea class="form-control" placeholder="Contenido" name="contenido" [(ngModel)]="blogeditado.contenido"></textarea>
+              </div>
+              <!-- IMAGEN -->
+              <div class="mb-3">
+                <input type="file" name="myImage" accept="image/png, image/gif, image/jpeg" (change)="onFileSelected2($event)"/>
+                <div class="text-center"><img [src]="blogeditado.imagen" class="p-3 img-fluid"></div>
+              </div>
+              <!-- SUBMIT BUTTON -->
+              <div class="d-grid">
+                <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Editar blog</button>
             </div>
             </form>
           </div>
@@ -42,12 +77,18 @@
 <!-- /BLOGS/ -->
 <div class="container fluid d-flex justify-content-center">
   <div class="row justify-content-center">
-    <div class="card p-0 col-sm-5 col-md-4 col-lg-4 col-xl-3" style="width:400px" *ngFor="let blog of blogs">
-      <img class="card-img-top img-fluid" [src]="blog.imagen" alt="Card image">
+    <div class="card p-0 col-sm-5 col-md-4 col-lg-4 col-xl-3" style="width:400px" *ngFor="let blog of blogs; let i = index">
+      <img class="card-img-top img-fluid" [src]="blog.imagen" alt="Card image" [routerLink]="['/blog-detail', blog.id]">
       <div class="card-body d-flex justify-content-center">
-        <a class="card-title fs-4 text-decoration-none text-dark">{{blog.titulo}}</a>
+        <a class="card-title fs-4 text-decoration-none text-dark" [routerLink]="['/blog-detail', blog.id]">{{blog.titulo}}</a>
       </div>
-      <span>{{blog.fecha | date:"dd/MM/yyyy"}}</span>
+      <span class="text-center">{{blog.fecha | date:"dd/MM/yyyy"}}</span>
+      <div class="d-flex justify-content-end p-2" *ngIf="usuarioactivo.tipo == 2">
+        <button (click)="eliminarBlogs(blog.id, i)" class="btn btn-danger">Borrar</button>
+      </div>
+      <div class="d-flex justify-content-start p-2" *ngIf="usuarioactivo.tipo == 2">
+        <button type="submit" class="btn btn-success"data-bs-toggle="modal" data-bs-target="#editar-blog" (click)="pasarInfo(blog)">Editar blog</button>
+      </div>
     </div>
   </div>
 </div>

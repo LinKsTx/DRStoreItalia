@@ -22,6 +22,13 @@ export class BlogComponent implements OnInit {
     fecha: new Date(Date.now()),
   }
 
+  blogeditado: IBlog = {
+    titulo: "",
+    contenido: "",
+    imagen: "",
+    fecha: new Date(Date.now()),
+  }
+
   blogs: IBlog[];
 
   usuarioactivo : IUsuario = {
@@ -87,6 +94,25 @@ export class BlogComponent implements OnInit {
     });
   }
 /*--------------------------------------------------------------*/
+/*----------------------- ELIMINAR BLOGS -----------------------*/
+  eliminarBlogs(id: number, posicion: number){
+    this.blogService.deleteBlog(id).subscribe((data: any) =>{
+      this.blogs.splice(posicion, 1);
+  });
+  }
+/*--------------------------------------------------------------*/
+/*----------------------- EDITAR BLOGS -------------------------*/
+updateBlogs(){
+  this.blogService.editBlog(this.blogeditado).subscribe((data: any) =>{
+
+});
+}
+/*--------------------------------------------------------------*/
+/*----------------------- PASAR INFO PARA UPDATE ---------------*/
+pasarInfo(blog: IBlog){
+  this.blogeditado = blog;
+}
+/*--------------------------------------------------------------*/
 /*----------------------- CHANGE IMAGE -------------------------*/
   changeImage(fileInput: HTMLInputElement) {
     if (!fileInput.files || fileInput.files.length === 0) {
@@ -103,5 +129,22 @@ export class BlogComponent implements OnInit {
   onFileSelected(event: any){
       this.changeImage(event.target);
   }
+/*--------------------------------------------------------------*/
+/*----------------------- CHANGE IMAGE 2 -------------------------*/
+changeImage2(fileInput: HTMLInputElement) {
+  if (!fileInput.files || fileInput.files.length === 0) {
+    return;
+  }
+  const reader: FileReader = new FileReader();
+  reader.readAsDataURL(fileInput.files[0]);
+  reader.addEventListener('loadend', (e) => {
+    this.blogeditado.imagen = reader.result as string;
+  });
+}
+/*--------------------------------------------------------------*/
+/*----------------------- FILE SELECTED 2 ------------------------*/
+onFileSelected2(event: any){
+    this.changeImage2(event.target);
+}
 /*--------------------------------------------------------------*/
 }

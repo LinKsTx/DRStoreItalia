@@ -20,4 +20,20 @@ export class BlogService {
   readBlog(){
     return this.http.get(`${this.baseUrl}/blog/ver_blog.php`);
   }
+
+  //Ver blog por id
+  readBlogId(id: number){
+    return this.http.get(`${this.baseUrl}/blog/ver_blog_id.php?id=${id}`);
+  }
+
+  //Eliminar blogs
+  deleteBlog(id: number){
+    return this.http.delete(`${this.baseUrl}/blog/eliminar_blog.php?id=${id}`);
+  }
+
+  //Editar blogs
+  editBlog(Blog: IBlog){
+    return this.http.put(`${this.baseUrl}/blog/editar_blog.php`, Blog);
+  }
+
 }
