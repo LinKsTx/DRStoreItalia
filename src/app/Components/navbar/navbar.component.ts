@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
@@ -6,6 +6,8 @@ import { IUsuario } from 'src/app/interfaces/i-usuario';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import * as bootstrap from 'bootstrap';
 import { ViewChild, ElementRef} from '@angular/core';
+import { IProducto } from 'src/app/interfaces/i-producto';
+import { ProductosService } from 'src/app/services/productos.service';
 
 
 @Component({
@@ -52,6 +54,8 @@ export class NavbarComponent implements OnInit {
     pic : ""
   }
 
+  carrito: IProducto[];
+
    //Usuario perfil
    usuarioperfil : IUsuario = {
     nick: "",
@@ -67,6 +71,7 @@ export class NavbarComponent implements OnInit {
   //CONSTRUCTOR
   constructor(
     private usuarioService: UsuarioService,
+    private productosService: ProductosService,
     private router: Router,
     private cookieService: CookieService,
   ) { }
@@ -101,6 +106,10 @@ export class NavbarComponent implements OnInit {
     //--------------------------------
     //obtenemos el pic del usuario activo y lo igualamos a this.usuarioactivo.
     this.getPic();
+    //push a carrito
+    this.productosService.productoEmitido.subscribe(respuesta =>{
+      this.carrito = respuesta,
+      console.log(this.carrito); })
   }
 
 /*----------------------- CREAR USUARIO ------------------------*/

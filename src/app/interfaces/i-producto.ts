@@ -6,5 +6,6 @@ export interface IProducto {
     categoria: string,
     marca: string,
     imagen: string,
+    cantidad?: number,
     stock?: number
 }

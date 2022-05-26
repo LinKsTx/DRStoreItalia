@@ -18,17 +18,19 @@
 
         $titulo = $jsonBlogUpdate->titulo;
         $contenido = $jsonBlogUpdate->contenido;
+        $categoria = $jsonBlogUpdate->categoria;
         $imagen = $jsonBlogUpdate->imagen;
         $idString = $jsonBlogUpdate->id;
         $idNumber = intval($idString);
 
-        $sql = "UPDATE blog SET titulo=?, contenido=?, imagen=? WHERE id=?;";
+        $sql = "UPDATE blog SET titulo=?, contenido=?, categoria=?, imagen=? WHERE id=?;";
 
         $sentencia = $pdoObject->prepare($sql);
         $sentencia->bindParam(1, $titulo);
         $sentencia->bindParam(2, $contenido);
-        $sentencia->bindParam(3, $imagen);
-        $sentencia->bindParam(4, $idNumber);
+        $sentencia->bindParam(3, $categoria);
+        $sentencia->bindParam(4, $imagen);
+        $sentencia->bindParam(5, $idNumber);
 
         if ($sentencia->execute()) {
           echo json_encode(["success"=>1]);

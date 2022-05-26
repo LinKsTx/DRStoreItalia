@@ -19,6 +19,7 @@ export class BlogComponent implements OnInit {
     id: 0,
     titulo: "",
     contenido: "",
+    categoria: "",
     imagen: "",
     fecha: new Date(Date.now()),
   }
@@ -27,6 +28,7 @@ export class BlogComponent implements OnInit {
     id: 0,
     titulo: "",
     contenido: "",
+    categoria: "",
     imagen: "",
     fecha: new Date(Date.now()),
   }
@@ -125,6 +127,7 @@ pasarInfo(datos: IBlog){
   this.blogeditado.id = datos.id;
   this.blogeditado.titulo = datos.titulo;
   this.blogeditado.contenido = datos.contenido;
+  this.blogeditado.categoria = datos.categoria;
   this.blogeditado.imagen = datos.imagen;
   this.blogeditado.fecha = datos.fecha;
 }
@@ -163,4 +166,7 @@ onFileSelected2(event: any){
     this.changeImage2(event.target);
 }
 /*--------------------------------------------------------------*/
+hoverContenido() {
+
+}
 }

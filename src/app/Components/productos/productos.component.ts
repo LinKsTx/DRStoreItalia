@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 import { IProducto } from 'src/app/interfaces/i-producto';
 import { IUsuario } from 'src/app/interfaces/i-usuario';
 import { ProductosService } from 'src/app/services/productos.service';
@@ -24,6 +25,10 @@ export class ProductosComponent implements OnInit {
     stock: 0
   }
 
+  productos: IProducto[];
+
+  productosCarrito: IProducto[] = [];
+
   productoeditado: IProducto = {
     id: 0,
     nombre: "",
@@ -34,8 +39,6 @@ export class ProductosComponent implements OnInit {
     imagen: "",
     stock: 0
   }
-
-  productos: IProducto[];
 
   usuarioactivo : IUsuario = {
     nick: "",
@@ -157,6 +160,39 @@ changeImage(fileInput: HTMLInputElement) {
 /*----------------------- FILE SELECTED ------------------------*/
 onFileSelected(event: any){
     this.changeImage(event.target);
+}
+/*--------------------------------------------------------------*/
+/*----------------------- CHANGE IMAGE 2 ------------------------*/
+changeImage2(fileInput: HTMLInputElement) {
+  if (!fileInput.files || fileInput.files.length === 0) {
+    return;
+  }
+  const reader: FileReader = new FileReader();
+  reader.readAsDataURL(fileInput.files[0]);
+  reader.addEventListener('loadend', (e) => {
+    this.productoeditado.imagen = reader.result as string;
+  });
+}
+/*--------------------------------------------------------------*/
+/*----------------------- FILE SELECTED 2 ----------------------*/
+onFileSelected2(event: any){
+    this.changeImage2(event.target);
+}
+/*--------------------------------------------------------------*/
+/*----------------------- EMITIR 1 ------------------------*/
+pushACarrito(datoEmitido: IProducto){
+  let existe: boolean = false;
+  for (let i = 0; i < this.productosCarrito.length; i++) {
+    if(this.productosCarrito[i] == datoEmitido) {
+      console.log("el producto ya ha sido añadido");
+      existe = true;
+      break;
+    }
+  }
+  if(!existe) {
+    this.productosCarrito.push(datoEmitido);
+    this.productoService.productoEmitido.next(this.productosCarrito);
+  }
 }
 /*--------------------------------------------------------------*/
 }

@@ -1,7 +1,72 @@
-<!-- /CREAR BLOG (BOTÓN)/ -->
-<div class="container-fluid d-flex justify-content-center">
-  <a class="nav-link pointer-cursor btn btn-success text-light m-4" href="#" data-bs-toggle="modal" data-bs-target="#crear-blog" *ngIf="usuarioactivo.tipo == 2">CREAR BLOG</a>
+
+
+<!-- /CONTENEDOR PRINCIPAL/ -->
+<div class="container-fluid d-flex flex-column justify-content-center align-items-center m-0 p-0">
+  <!--/NAV-BLOG/-->
+   <!--Mini nav con filtros (vision dispositivos pequeños)-->
+   <nav id="nav-blog1" class="navbar w-100 d-xl-none bg-light m-0 p-1 fs-7 animate__animated animate__fadeIn border-bottom">
+    <ul class="nav d-flex align-items-center">
+      <li class="nav-item m-2">
+        <a *ngIf="usuarioactivo.tipo == 2" class="text-dark" href="#" data-bs-toggle="modal" data-bs-target="#crear-blog"><i class="bi bi-file-earmark-plus"></i><span class="d-none d-lg-inline-block">&nbsp;Crear blog</span></a>
+      </li>
+      <li class="nav-item m-2">
+        <a class="text-dark" href="#"><i class="bi bi-clock"></i><span class="d-none d-lg-inline-block">&nbsp;Novedades</span></a>
+      </li>
+      <li class="nav-item m-2">
+        <a class="text-dark" href="#"><i class="bi bi-egg"></i><span class="d-none d-lg-inline-block">&nbsp;Suplementos</span></a>
+      </li>
+      <li class="nav-item m-2">
+        <a class="text-dark" href="#"><i class="bi bi-person-heart"></i><span class="d-none d-lg-inline-block">&nbsp;Ejercicio</span></a>
+      </li>
+    </ul>
+    <ul class="nav d-flex align-items-center ms-auto">
+      <li class="nav-item m-2 ">
+        <input class="" type="text" placeholder="Busca por título">&nbsp;&nbsp;<i class="bi bi-search"></i>
+      </li>
+    </ul>
+  </nav>
+  <!--Mini nav con filtros (vision escritorio)-->
+  <nav id="nav-blog2" class="navbar d-none d-xl-flex bg-light m-2 p-2 fs-7 animate__animated animate__fadeIn border rounded">
+    <ul class="nav d-flex align-items-center">
+      <li class="nav-item m-2">
+        <a *ngIf="usuarioactivo.tipo == 2" class="text-dark" href="#" data-bs-toggle="modal" data-bs-target="#crear-blog"><i class="bi bi-file-earmark-plus"></i><span class="d-none d-lg-inline-block">&nbsp;Crear blog</span></a>
+      </li>
+      <li class="nav-item m-2">
+        <a class="text-dark" href="#"><i class="bi bi-clock"></i><span class="d-none d-lg-inline-block">&nbsp;Novedades</span></a>
+      </li>
+      <li class="nav-item m-2">
+        <a class="text-dark" href="#"><i class="bi bi-egg"></i><span class="d-none d-lg-inline-block">&nbsp;Suplementos</span></a>
+      </li>
+      <li class="nav-item m-2">
+        <a class="text-dark" href="#"><i class="bi bi-person-heart"></i><span class="d-none d-lg-inline-block">&nbsp;Ejercicio</span></a>
+      </li>
+    </ul>
+    <ul class="nav d-flex align-items-center ms-auto">
+      <li class="nav-item m-2 ">
+        <input class="" type="text" placeholder="Busca por título">&nbsp;&nbsp;<i class="bi bi-search"></i>
+      </li>
+    </ul>
+  </nav>
+  <!-- /BLOGS/ -->
+  <div class="row container-fluid d-flex justify-content-center">
+    <!-- carta del blog -->
+    <div id="blog-carta" class="card m-4 p-0 col-12 col-sm-6" *ngFor="let blog of blogs; let i = index">
+      <img id="imagen-carta" class="card-img-top img-fluid pointer" [src]="blog.imagen" [routerLink]="['/blog-detail', blog.id]">
+      <div>
+        <span id="categoria-carta" class="p-0 m-2 float-start">{{blog.categoria}}</span>
+      </div>
+      <div class="card-body p-0 d-flex align-items-center justify-content-center">
+          <a id="titulo-carta" class="card-title text-decoration-none fs-3 text-center text-dark pointer titulo" [routerLink]="['/blog-detail', blog.id]">{{blog.titulo}}</a>
+      </div>
+      <span id="fecha-carta" class="card-text m-2 float-end">{{blog.fecha | date:"dd/MM/yyyy"}}</span>
+      <div class="p-0" *ngIf="usuarioactivo.tipo == 2">
+        <button class="btn btn-danger float-start m-2" (click)="eliminarBlogs(blog.id, i)">Borrar</button>
+        <button type="submit" class="btn btn-success float-end m-2"data-bs-toggle="modal" data-bs-target="#editar-blog" (click)="pasarInfo(blog)">Editar producto</button>
+      </div>
+    </div>
+  </div>
 </div>
+
 <!--------------------------- /MODALES/ --------------------------->
 <!-- /MODAL CREACIÓN DE BLOG/ -->
 <div class="modal fade" id="crear-blog">
@@ -23,11 +88,14 @@
               <div class="mb-3">
                 <textarea class="form-control" placeholder="Contenido" name="contenido" [(ngModel)]="blog.contenido"></textarea>
               </div>
+              <!-- CATEGORÍA -->
+              <div class="mb-3">
+                <input type="text" class="form-control" placeholder="Categoría" name="categoria" [(ngModel)]="blog.categoria">
+              </div>
               <!-- IMAGEN -->
               <div class="mb-3">
                 <input type="file" name="myImage" accept="image/png, image/gif, image/jpeg" (change)="onFileSelected($event)"/>
                 <div class="text-center"><img [src]="blog.imagen" class="p-3 img-fluid"></div>
-
               </div>
               <!-- SUBMIT BUTTON -->
               <div class="d-grid">
@@ -59,6 +127,10 @@
               <div class="mb-3">
                 <textarea class="form-control" placeholder="Contenido" name="contenido" [(ngModel)]="blogeditado.contenido"></textarea>
               </div>
+              <!-- CATEGORÍA -->
+              <div class="mb-3">
+                <input type="text" class="form-control" placeholder="Categoría" name="categoria" [(ngModel)]="blogeditado.categoria">
+              </div>
               <!-- IMAGEN -->
               <div class="mb-3">
                 <input type="file" name="myImage" accept="image/png, image/gif, image/jpeg" (change)="onFileSelected2($event)"/>
@@ -74,22 +146,7 @@
   </div>
 </div>
 <!----------------------------------------------------------------->
-<!-- /BLOGS/ -->
-<div class="container fluid d-flex justify-content-center">
-  <div class="row justify-content-center">
-    <div class="card p-0 col-sm-5 col-md-4 col-lg-4 col-xl-3" style="width:400px" *ngFor="let blog of blogs; let i = index">
-      <img class="card-img-top img-fluid" [src]="blog.imagen" alt="Card image" [routerLink]="['/blog-detail', blog.id]">
-      <div class="card-body d-flex justify-content-center">
-        <a class="card-title fs-4 text-decoration-none text-dark" [routerLink]="['/blog-detail', blog.id]">{{blog.titulo}}</a>
-      </div>
-      <span class="text-center">{{blog.fecha | date:"dd/MM/yyyy"}}</span>
-      <div class="d-flex justify-content-end p-2" *ngIf="usuarioactivo.tipo == 2">
-        <button (click)="eliminarBlogs(blog.id, i)" class="btn btn-danger">Borrar</button>
-      </div>
-      <div class="d-flex justify-content-start p-2" *ngIf="usuarioactivo.tipo == 2">
-        <button type="submit" class="btn btn-success"data-bs-toggle="modal" data-bs-target="#editar-blog" (click)="pasarInfo(blog)">Editar blog</button>
-      </div>
-    </div>
-  </div>
-</div>
+
+
+
 

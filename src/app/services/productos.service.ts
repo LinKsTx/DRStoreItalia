@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IProducto } from '../interfaces/i-producto';
 
@@ -34,4 +35,8 @@ export class ProductosService {
   editProduct(Producto: IProducto){
     return this.http.put(`${this.baseUrl}/producto/editar_producto.php`, Producto);
   }
+
+  //Emitir producto
+  public productoEmitido:BehaviorSubject<IProducto[]>= new BehaviorSubject<IProducto[]>([]);
+
 }

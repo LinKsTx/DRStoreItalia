@@ -7,10 +7,6 @@
 .nowrap {
   white-space: nowrap;
 }
-//Cursor onclick
-.pointer {
-  cursor: pointer;
-}
 // ---------------------------------------------
 // ----------------- DROPDOWNS -----------------
 //Quita el estilo por defecto de bootstrap sobre los dropdown
@@ -21,6 +17,9 @@
 //Control sobre la animación de los dropdowns
 .animate__animated.animate__fadeInDown {
   --animate-duration: 0.5s;
+}
+.animate__animated.animate__fadeIn {
+  --animate-duration: 0.75s;
 }
 //Quita la flecha de los dropdowns
 .dropdown-toggle::after {

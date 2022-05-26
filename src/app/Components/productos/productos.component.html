@@ -85,7 +85,7 @@
               </div>
               <!-- IMAGEN -->
               <div class="mb-3">
-                <input type="file" name="myImage" accept="image/png, image/gif, image/jpeg" (change)="onFileSelected($event)"/>
+                <input type="file" name="myImage" accept="image/png, image/gif, image/jpeg" (change)="onFileSelected2($event)"/>
                 <div class="text-center"><img [src]="productoeditado.imagen" class="p-3 img-fluid"></div>
               </div>
               <!-- SUBMIT BUTTON -->
@@ -114,7 +114,10 @@
         <button (click)="eliminarProductos(producto.id, i)" class="btn btn-danger">Borrar</button>
       </div>
       <div class="d-flex justify-content-start p-2" *ngIf="usuarioactivo.tipo == 2">
-        <button type="submit" class="btn btn-success"data-bs-toggle="modal" data-bs-target="#editar-producto" (click)="pasarInfo(producto)">Editar blog</button>
+        <button type="submit" class="btn btn-success"data-bs-toggle="modal" data-bs-target="#editar-producto" (click)="pasarInfo(producto)">Editar producto</button>
+      </div>
+      <div class="d-flex justify-content-start p-2" *ngIf="usuarioactivo.tipo == 1">
+        <button type="submit" class="btn btn-warning" (click)="pushACarrito(producto)">Añadir al carrito de la compra</button>
       </div>
     </div>
   </div>

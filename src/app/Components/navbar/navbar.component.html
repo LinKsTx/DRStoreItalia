@@ -1,7 +1,7 @@
 <!--------------------------- /NAVBARS/ --------------------------->
 <!-- /NAVBAR/ -->
 <!-- xs sm, luego se expande. (versión encogido) -->
-<div class="container-fluid d-block d-lg-none bg-light">
+<div class="container-fluid d-block d-lg-none bg-light border">
     <nav id="navegador" class="navbar navbar-expand-sm navbar-light monolisk m-0 fs-4">
       <!-- contenedor (logo + botón (forma colapsada) + navbar -->
       <div id="contenedor-navegador" class="container-fluid">
@@ -47,7 +47,7 @@
                       <!--sin foto-->
                       <li class="nav-item dropdown m-2 estilo-hover escritorio-hover" *ngIf="usuarioactivo.nombre.length > 0 && !usuarioactivo.pic">
                         <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><span id="sin-foto"><i class="bi bi-person"></i>&nbsp;{{usuarioactivo.nick}}</span></a>
-                        <ul class="dropdown-menu text-center bg-light border-bot border-left border-right">
+                        <ul class="dropdown-menu text-center bg-light border">
                           <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown" href="#" data-bs-toggle="modal" data-bs-target="#cuenta">CUENTA</a></li>
                           <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown" *ngIf="usuarioactivo.tipo == 1" href="#">PEDIDOS</a></li>
                           <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown pointer" (click)="logOut()">CERRAR SESIÓN</a></li>
@@ -56,7 +56,7 @@
                       <!--con foto-->
                       <li class="nav-item dropdown m-1 estilo-hover escritorio-hover" *ngIf="usuarioactivo.nombre.length > 0 && usuarioactivo.pic">
                         <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><span id="con-foto"><img class="rounded-circle" [src]="usuarioactivo.pic" alt="" style="width:48px ;">&nbsp;&nbsp;{{usuarioactivo.nick}}</span></a>
-                        <ul class="dropdown-menu text-center bg-light border-bot border-left border-right">
+                        <ul class="dropdown-menu text-center bg-light border">
                           <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown" href="#" data-bs-toggle="modal" data-bs-target="#cuenta">CUENTA</a></li>
                           <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown" *ngIf="usuarioactivo.tipo == 1" href="#">PEDIDOS</a></li>
                           <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown pointer" (click)="logOut()">CERRAR SESIÓN</a></li>
@@ -79,7 +79,7 @@
 </div>
 <!-- /NAVBAR/ -->
 <!-- desde lg, luego se expande. (versión normal) -->
-<div class="container-fluid d-none d-lg-flex justify-content-center bg-light">
+<div class="container-fluid d-none d-lg-flex justify-content-center bg-light border">
     <nav id="navegador" class="navbar navbar-expand-sm navbar-light monolisk m-0 fs-4 w-50">
       <!-- contenedor (logo + botón (forma colapsada) + navbar -->
       <div id="contenedor-navegador" class="container-fluid">
@@ -126,7 +126,7 @@
                       <!--sin foto-->
                       <li class="nav-item dropdown m-2 estilo-hover escritorio-hover" *ngIf="usuarioactivo.nombre.length > 0 && !usuarioactivo.pic">
                         <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><span id="sin-foto"><i class="bi bi-person"></i>&nbsp;{{usuarioactivo.nick}}</span></a>
-                        <ul class="dropdown-menu text-center bg-light border-bot border-left border-right">
+                        <ul class="dropdown-menu text-center bg-light border animate__animated animate__fadeIn">
                           <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown" href="#" data-bs-toggle="modal" data-bs-target="#cuenta">CUENTA</a></li>
                           <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown" *ngIf="usuarioactivo.tipo == 1" href="#">PEDIDOS</a></li>
                           <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown pointer" (click)="logOut()">CERRAR SESIÓN</a></li>
@@ -135,7 +135,7 @@
                       <!--con foto-->
                       <li class="nav-item dropdown m-1 estilo-hover escritorio-hover" *ngIf="usuarioactivo.nombre.length > 0 && usuarioactivo.pic">
                         <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><span id="con-foto"><img class="rounded-circle" [src]="usuarioactivo.pic" alt="" style="width:48px ;">&nbsp;&nbsp;{{usuarioactivo.nick}}</span></a>
-                        <ul class="dropdown-menu text-center bg-light border-bot border-left border-right">
+                        <ul class="dropdown-menu text-center bg-light border animate__animated animate__fadeIn">
                           <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown" href="#" data-bs-toggle="modal" data-bs-target="#cuenta">CUENTA</a></li>
                           <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown" *ngIf="usuarioactivo.tipo == 1" href="#">PEDIDOS</a></li>
                           <li><a class="nav-link pointer-cursor fs-5 animate__animated animate__fadeInDown pointer" (click)="logOut()">CERRAR SESIÓN</a></li>
@@ -144,9 +144,21 @@
                       <!-- carrito de compra -->
                       <li class="nav-item dropdown m-2 estilo-hover escritorio-hover" *ngIf="usuarioactivo.nombre.length > 0 && usuarioactivo.tipo == 1">
                         <a class="nav-link dropdown-toggle dropdown-toggle w-100" role="button" data-bs-toggle="dropdown"><span><i class="bi bi-cart"></i></span></a>
-                        <ul class="dropdown-menu text-center bg-light">
+                        <ul class="dropdown-menu text-center bg-light border animate__animated animate__fadeIn">
+                            <li><a class="nav-link fs-5 animate__animated animate__fadeInDown pointer">IR AL CARRITO</a></li>
                             <!-- elementos de carrito -->
-                            <li><a class="nav-link fs-5 animate__animated animate__fadeInDown pointer">PRODUCTOS</a></li>
+                            <li *ngFor="let producto of carrito">
+                              <div class="card p-0">
+                                <img class="card-img-top img-fluid" [src]="producto.imagen" alt="Card image" [routerLink]="['/productos-detail', producto.id]">
+                                <div class="card-body d-flex justify-content-center">
+                                  <a class="card-title fs-4 text-decoration-none text-dark" >{{producto.nombre}}</a>
+                                </div>
+                                <span class="text-center">{{producto.precio | currency:'EUR':true}}</span>
+                                <span class="text-center">{{producto.categoria}}</span>
+                                <span class="text-center">{{producto.marca}}</span>
+                                <span class="text-center">{{producto.stock}}</span>
+                              </div>
+                            </li>
                         </ul>
                       </li>
                       <!-- configuración admin -->
