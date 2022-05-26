@@ -4,10 +4,10 @@
 <div class="container-fluid d-flex flex-column justify-content-center align-items-center m-0 p-0">
   <!--/NAV-BLOG/-->
    <!--Mini nav con filtros (vision dispositivos pequeños)-->
-   <nav id="nav-blog1" class="navbar w-100 d-xl-none bg-light m-0 p-1 fs-7 animate__animated animate__fadeIn border-bottom">
+   <nav id="nav-blog1" class="navbar w-100 d-lg-none bg-light m-0 p-1 fs-7 animate__animated animate__fadeIn border border-top-0 border-2 ">
     <ul class="nav d-flex align-items-center">
       <li class="nav-item m-2">
-        <a *ngIf="usuarioactivo.tipo == 2" class="text-dark" href="#" data-bs-toggle="modal" data-bs-target="#crear-blog"><i class="bi bi-file-earmark-plus"></i><span class="d-none d-lg-inline-block">&nbsp;Crear blog</span></a>
+        <a *ngIf="usuarioactivo.tipo == 2" class="text-azulito" href="#" data-bs-toggle="modal" data-bs-target="#crear-blog"><i class="bi bi-file-earmark-plus"></i><span class="d-none d-lg-inline-block">&nbsp;Crear blog</span></a>
       </li>
       <li class="nav-item m-2">
         <a class="text-dark" href="#"><i class="bi bi-clock"></i><span class="d-none d-lg-inline-block">&nbsp;Novedades</span></a>
@@ -20,16 +20,16 @@
       </li>
     </ul>
     <ul class="nav d-flex align-items-center ms-auto">
-      <li class="nav-item m-2 ">
-        <input class="" type="text" placeholder="Busca por título">&nbsp;&nbsp;<i class="bi bi-search"></i>
+      <li class="nav-item m-2 d-flex align-items-center flex-row">
+        <input class="form-control" type="text" placeholder="Buscar por título">&nbsp;&nbsp;<i class="bi bi-search"></i>
       </li>
     </ul>
   </nav>
   <!--Mini nav con filtros (vision escritorio)-->
-  <nav id="nav-blog2" class="navbar d-none d-xl-flex bg-light m-2 p-2 fs-7 animate__animated animate__fadeIn border rounded">
+  <nav id="nav-blog2" class="navbar d-none d-lg-flex bg-light m-2 p-2 fs-7 animate__animated animate__fadeIn border border-2 rounded">
     <ul class="nav d-flex align-items-center">
       <li class="nav-item m-2">
-        <a *ngIf="usuarioactivo.tipo == 2" class="text-dark" href="#" data-bs-toggle="modal" data-bs-target="#crear-blog"><i class="bi bi-file-earmark-plus"></i><span class="d-none d-lg-inline-block">&nbsp;Crear blog</span></a>
+        <a *ngIf="usuarioactivo.tipo == 2" class="text-azulito" href="#" data-bs-toggle="modal" data-bs-target="#crear-blog"><i class="bi bi-file-earmark-plus"></i><span class="d-none d-lg-inline-block">&nbsp;Crear blog</span></a>
       </li>
       <li class="nav-item m-2">
         <a class="text-dark" href="#"><i class="bi bi-clock"></i><span class="d-none d-lg-inline-block">&nbsp;Novedades</span></a>
@@ -41,16 +41,16 @@
         <a class="text-dark" href="#"><i class="bi bi-person-heart"></i><span class="d-none d-lg-inline-block">&nbsp;Ejercicio</span></a>
       </li>
     </ul>
-    <ul class="nav d-flex align-items-center ms-auto">
-      <li class="nav-item m-2 ">
-        <input class="" type="text" placeholder="Busca por título">&nbsp;&nbsp;<i class="bi bi-search"></i>
+    <ul class="nav d-flex align-items-center flex-row ms-auto">
+      <li class="nav-item m-2 d-flex align-items-center flex-row">
+        <input class="form-control" type="text" placeholder="Buscar por título">&nbsp;&nbsp;<i class="bi bi-search"></i>
       </li>
     </ul>
   </nav>
   <!-- /BLOGS/ -->
   <div class="row container-fluid d-flex justify-content-center">
     <!-- carta del blog -->
-    <div id="blog-carta" class="card m-4 p-0 col-12 col-sm-6" *ngFor="let blog of blogs; let i = index">
+    <div id="blog-carta" class="card m-4 p-0 col-12 col-sm-6 border border-2" *ngFor="let blog of blogs | paginate: { itemsPerPage: 6, currentPage: p}; let i = index">
       <img id="imagen-carta" class="card-img-top img-fluid pointer" [src]="blog.imagen" [routerLink]="['/blog-detail', blog.id]">
       <div>
         <span id="categoria-carta" class="p-0 m-2 float-start">{{blog.categoria}}</span>
@@ -65,6 +65,7 @@
       </div>
     </div>
   </div>
+  <pagination-controls (pageChange)="p = $event" nextLabel="" previousLabel="" ></pagination-controls>
 </div>
 
 <!--------------------------- /MODALES/ --------------------------->

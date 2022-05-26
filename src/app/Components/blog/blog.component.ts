@@ -15,6 +15,8 @@ export class BlogComponent implements OnInit {
 
 /*----------------------- DECLARAR VARIABLES -------------------*/
 
+  p :number = 1;
+
   blog: IBlog = {
     id: 0,
     titulo: "",
@@ -79,7 +81,7 @@ export class BlogComponent implements OnInit {
      }
 
 /*----------------------- CREAR BLOG ---------------------------*/
-  crearBlog() {
+crearBlog() {
     this.blogService.addBlog(this.blog).subscribe(()=>{
       console.log(this.blog);
       this.blog = {
@@ -90,22 +92,22 @@ export class BlogComponent implements OnInit {
       }
       this.obtenerBlogs();
     });
-  }
+}
 /*--------------------------------------------------------------*/
 /*----------------------- OBTENER BLOGS ------------------------*/
-  obtenerBlogs(){
+obtenerBlogs(){
       this.blogService.readBlog().subscribe((data: any) =>{
       console.log(data);
       this.blogs = data;
     });
-  }
+}
 /*--------------------------------------------------------------*/
 /*----------------------- ELIMINAR BLOGS -----------------------*/
-  eliminarBlogs(id: number, posicion: number){
+eliminarBlogs(id: number, posicion: number){
     this.blogService.deleteBlog(id).subscribe((data: any) =>{
       this.blogs.splice(posicion, 1);
   });
-  }
+}
 /*--------------------------------------------------------------*/
 /*----------------------- EDITAR BLOGS -------------------------*/
 updateBlogs(datosEditados: IBlog){
@@ -166,7 +168,4 @@ onFileSelected2(event: any){
     this.changeImage2(event.target);
 }
 /*--------------------------------------------------------------*/
-hoverContenido() {
-
-}
 }

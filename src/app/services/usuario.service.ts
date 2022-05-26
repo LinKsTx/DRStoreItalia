@@ -34,5 +34,10 @@ export class UsuarioService {
     return this.http.post(`${this.baseUrl}/usuario/obtener_pic.php`, usuario);
   }
 
+  //Ver usuarios
+  readUsuarios(){
+    return this.http.get(`${this.baseUrl}/usuario/ver_usuarios.php`);
+  }
+
 
 }

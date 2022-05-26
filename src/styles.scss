@@ -16,4 +16,27 @@
 .pointer {
   cursor: pointer;
 }
-
+.contener {
+  object-fit: contain;
+}
+.text-azulito {
+  color: #0dcaf0;
+}
+.text-azulito:hover {
+  color: #0dcaf0;
+}
+app-contacto {
+  min-height: 83vh;
+}
+app-blog {
+  min-height: 83vh;
+}
+app-blog-detail {
+  min-height: 83vh;
+}
+app-productos {
+  min-height: 83vh;
+}
+app-productos-detail {
+  min-height: 83vh;
+}

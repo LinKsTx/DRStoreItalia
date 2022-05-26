@@ -1,6 +1,40 @@
 img {
-  height: 300px;
+  height: 200px;
 }
 .card {
   margin: 20px;
+}
+#img-productos-carrito {
+  width: 60px !important;
+  height: 60px !important;
+}
+#tarjeta-producto {
+  width: 300px;
+}
+#imagen-producto {
+  height: 250px;
+  object-fit:contain;
+}
+#titulo-producto {
+  transition: 0.5s;
+}
+#titulo-producto:hover {
+  transition: 0.5s;
+  color: #0dcaf0 !important;
+}
+#categoria-producto {
+  font-style: italic;
+}
+.hovernav {
+  transition: 0.5s;
+  }
+
+.hovernav:hover {
+  transition: 0.5s;
+  background-color: #0dcaf0;
+}
+#nav-prod2 {
+width: 99% !important;
+}
+html {
 }

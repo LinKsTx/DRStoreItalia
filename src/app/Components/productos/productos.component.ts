@@ -14,6 +14,8 @@ export class ProductosComponent implements OnInit {
 
   /*----------------------- DECLARAR VARIABLES -------------------*/
 
+  p :number = 1;
+
   producto: IProducto = {
     id: 0,
     nombre: "",
@@ -22,6 +24,7 @@ export class ProductosComponent implements OnInit {
     categoria: "",
     marca: "",
     imagen: "",
+    cantidad: 1,
     stock: 0
   }
 
@@ -37,6 +40,7 @@ export class ProductosComponent implements OnInit {
     categoria: "",
     marca: "",
     imagen: "",
+    cantidad: 1,
     stock: 0
   }
 

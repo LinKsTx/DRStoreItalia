@@ -1,7 +1,122 @@
-<!-- /CREAR PRODUCTO (BOTÓN)/ -->
-<div class="container-fluid d-flex justify-content-center">
-  <a class="nav-link pointer-cursor btn btn-success text-light m-4" href="#" data-bs-toggle="modal" data-bs-target="#crear-producto" *ngIf="usuarioactivo.tipo == 2">CREAR PRODUCTO</a>
+<!-- /CONTENEDOR NAVS/ -->
+<div class="container-fluid d-flex flex-column justify-content-center align-items-center m-0 p-0">
+  <!--/NAV PRODUCTOS/-->
+   <!--Mini nav con filtros (categoría) (vision dispositivos pequeños)-->
+   <nav id="nav-prod1" class="navbar w-100 d-lg-none bg-light m-0 p-1 fs-7 animate__animated animate__fadeIn border border-top-0 border-2 ">
+    <div class=" container-fluid p-2">
+      <button type="button" class="btn border border-2 rounded float-end" data-bs-toggle="collapse" data-bs-target="#productos-categorias"><i class="bi bi-list"></i></button>
+    </div>
+    <div id="productos-categorias" class="collapse navbar-collapse border-top border-2">
+      <ul class="nav d-flex flex-column justify-content-center align-items-center">
+        <li class="nav-item m-2">
+          <a *ngIf="usuarioactivo.tipo == 2" class="text-azulito" href="#" data-bs-toggle="modal" data-bs-target="#crear-producto"><span class="d-none d-lg-inline-block">&nbsp;Crear producto</span></a>
+        </li>
+        <li class="nav-item m-2 border-bottom border-2">
+          <a class="text-dark" href="#"><span class="d-inline-block d-lg-none">&nbsp;Proteina</span></a>
+        </li>
+        <li class="nav-item m-2 border-bottom border-2">
+          <a class="text-dark" href="#"><span class="d-inline-block d-lg-none">&nbsp;Alimentos y snacks</span></a>
+        </li>
+        <li class="nav-item m-2 border-bottom border-2">
+          <a class="text-dark" href="#"><span class="d-inline-block d-lg-none">&nbsp;Vitaminas y minerales</span></a>
+        </li>
+        <li class="nav-item m-2 border-bottom border-2">
+          <a class="text-dark" href="#"><span class="d-inline-block d-lg-none">&nbsp;Creatina</span></a>
+        </li>
+        <li class="nav-item m-2 border-bottom border-2">
+          <a class="text-dark" href="#"><span class="d-inline-block d-lg-none">&nbsp;Aminoácidos</span></a>
+        </li>
+        <li class="nav-item m-2 border-bottom border-2">
+          <a class="text-dark" href="#"><span class="d-inline-block d-lg-none">&nbsp;Accesorios</span></a>
+        </li>
+      </ul>
+      <ul class="nav d-flex flex-column justify-content-center align-items-center ms-auto">
+        <li class="nav-item m-2 d-flex align-items-center flex-row">
+          <input class="form-control" type="text" placeholder="Buscar por nombre">&nbsp;&nbsp;<i class="bi bi-search"></i>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!--Mini nav con filtros (categoría) (vision escritorio)-->
+  <nav id="nav-prod2" class="navbar d-none d-lg-flex  justify-content-center bg-light m-2 p-2 fs-7 animate__animated animate__fadeIn border border-2 rounded">
+    <ul class="nav d-flex justify-content-center align-items-center">
+      <li class="nav-item m-3">
+        <a *ngIf="usuarioactivo.tipo == 2" class="text-azulito" href="#" data-bs-toggle="modal" data-bs-target="#crear-producto"><i class="bi bi-file-earmark-plus"></i><span class="d-none d-lg-inline-block">&nbsp;Crear producto</span></a>
+      </li>
+      <li class="nav-item m-3">
+        <a class="text-dark" href="#"><span class="d-none d-lg-inline-block">&nbsp;Proteina</span></a>
+      </li>
+      <li class="nav-item m-3">
+        <a class="text-dark" href="#"><span class="d-none d-lg-inline-block">&nbsp;Alimentos y snacks</span></a>
+      </li>
+      <li class="nav-item m-3">
+        <a class="text-dark" href="#"><span class="d-none d-lg-inline-block">&nbsp;Vitaminas y minerales</span></a>
+      </li>
+      <li class="nav-item m-3">
+        <a class="text-dark" href="#"><span class="d-none d-lg-inline-block">&nbsp;Creatina</span></a>
+      </li>
+      <li class="nav-item m-3">
+        <a class="text-dark" href="#"><span class="d-none d-lg-inline-block">&nbsp;Aminoácidos</span></a>
+      </li>
+      <li class="nav-item m-3">
+        <a class="text-dark" href="#"><span class="d-none d-lg-inline-block">&nbsp;Accesorios</span></a>
+      </li>
+    </ul>
+    <ul class="nav d-flex align-items-center flex-row ms-auto">
+      <li class="nav-item m-2 d-flex align-items-center flex-row">
+        <input class="form-control" type="text" placeholder="Buscar por nombre">&nbsp;&nbsp;<i class="bi bi-search"></i>
+      </li>
+    </ul>
+  </nav>
 </div>
+<!-- FILTRO + PRODUCTOS -->
+<div class="container-fluid d-flex flex-row">
+  <!-- Filtros -->
+  <div class="d-none d-lg-flex align-content-center flex-column p-4 m-3">
+    <h3>Marcas</h3>
+    <!-- MyProtein -->
+    <div class="form-check m-1">
+      <input class="form-check-input" type="checkbox" value="" id="MyProtein">
+      <label class="form-check-label" for="MyProtein">
+        MyProtein
+      </label>
+    </div>
+    <!-- Amix -->
+    <div class="form-check m-1">
+      <input class="form-check-input" type="checkbox" value="" id="MyProtein">
+      <label class="form-check-label" for="MyProtein">
+        Amix
+      </label>
+    </div>
+  </div>
+  <!-- Productos -->
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div id="tarjeta-producto" class="card m-4 p-0 col-12 col-sm-6 col-md-6 border border-2" *ngFor="let producto of productos | paginate: { itemsPerPage: 8, currentPage: p}; let i = index">
+      <img id="imagen-producto" class="card-img-top img-fluid pointer p-4" [src]="producto.imagen" [routerLink]="['/blog-detail', producto.id]">
+      <div>
+        <span id="categoria-producto" class="p-0 m-2 float-start">{{producto.categoria}}</span>
+      </div>
+      <div class="card-body p-0 d-flex align-items-center flex-column justify-content-center">
+          <a id="titulo-producto" class="card-title text-decoration-none fs-3 text-center text-dark pointer titulo m-0" [routerLink]="['/blog-detail', producto.id]">{{producto.nombre}}</a>
+          <span id="categoria-producto" class="p-0 m-0 float-start">{{producto.marca}}</span>
+          <span id="fecha-producto" class="card-text m-2 float-end">{{producto.precio}} € </span>
+        </div>
+        <div class="d-flex justify-content-center" *ngIf="usuarioactivo.tipo == 1">
+          <button type="submit" class="btn btn-info m-2" (click)="pushACarrito(producto)">Añadir al carrito de la compra</button>
+        </div>
+        <div class="p-0" *ngIf="usuarioactivo.tipo == 2">
+          <button class="btn btn-danger float-start m-2" (click)="eliminarProductos(producto.id, i)">Borrar</button>
+          <button type="submit" class="btn btn-success float-end m-2"data-bs-toggle="modal" data-bs-target="#editar-producto" (click)="pasarInfo(producto)">Editar producto</button>
+        </div>
+      </div>
+      <pagination-controls class="text-center" (pageChange)="p = $event" nextLabel="" previousLabel=""></pagination-controls>
+    </div>
+  </div>
+</div>
+
+
+
 
 <!--------------------------- /MODALES/ --------------------------->
 <!-- /MODAL CREACIÓN DE PRODUCTO/ -->
@@ -98,27 +213,3 @@
   </div>
 </div>
 <!----------------------------------------------------------------->
-<!-- /PRODUCTOS/ -->
-<div class="container fluid d-flex justify-content-center">
-  <div class="row justify-content-center">
-    <div class="card p-0 col-sm-5 col-md-4 col-lg-4 col-xl-3" style="width:400px" *ngFor="let producto of productos; let i = index">
-      <img class="card-img-top img-fluid" [src]="producto.imagen" alt="Card image" [routerLink]="['/productos-detail', producto.id]">
-      <div class="card-body d-flex justify-content-center">
-        <a class="card-title fs-4 text-decoration-none text-dark" >{{producto.nombre}}</a>
-      </div>
-      <span class="text-center">{{producto.precio | currency:'EUR':true}}</span>
-      <span class="text-center">{{producto.categoria}}</span>
-      <span class="text-center">{{producto.marca}}</span>
-      <span class="text-center">{{producto.stock}}</span>
-      <div class="d-flex justify-content-end p-2" *ngIf="usuarioactivo.tipo == 2">
-        <button (click)="eliminarProductos(producto.id, i)" class="btn btn-danger">Borrar</button>
-      </div>
-      <div class="d-flex justify-content-start p-2" *ngIf="usuarioactivo.tipo == 2">
-        <button type="submit" class="btn btn-success"data-bs-toggle="modal" data-bs-target="#editar-producto" (click)="pasarInfo(producto)">Editar producto</button>
-      </div>
-      <div class="d-flex justify-content-start p-2" *ngIf="usuarioactivo.tipo == 1">
-        <button type="submit" class="btn btn-warning" (click)="pushACarrito(producto)">Añadir al carrito de la compra</button>
-      </div>
-    </div>
-  </div>
-</div>

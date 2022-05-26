@@ -16,6 +16,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { BlogDetailComponent } from './Components/blog-detail/blog-detail.component';
 import { ProductosDetailComponent } from './Components/productos-detail/productos-detail.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 //Rutas
 const APP_ROUTES: Route[] = [
@@ -56,7 +57,9 @@ const APP_ROUTES: Route[] = [
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    ImageCropperModule
+    ImageCropperModule,
+    NgxPaginationModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

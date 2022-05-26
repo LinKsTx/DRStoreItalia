@@ -44,6 +44,8 @@ export class NavbarComponent implements OnInit {
     contrasenya2: ""
   }
 
+  usuarioslist: IUsuario[];
+
   //Recoge el usuario activo
   usuarioactivo : IUsuario = {
     nick: "",
@@ -110,6 +112,8 @@ export class NavbarComponent implements OnInit {
     this.productosService.productoEmitido.subscribe(respuesta =>{
       this.carrito = respuesta,
       console.log(this.carrito); })
+    //obtenemos usuarios
+    this.obtenerUsuarios();
   }
 
 /*----------------------- CREAR USUARIO ------------------------*/
@@ -258,5 +262,13 @@ export class NavbarComponent implements OnInit {
       this.usuarioactivo.pic = respuesta[0].pic;
     });
   }
-  /*------------------------------------------------------------*/
+/*--------------------------------------------------------------*/
+/*----------------------- OBTENER USUARIOS ---------------------*/
+  obtenerUsuarios(){
+    this.usuarioService.readUsuarios().subscribe((data: any) =>{
+    console.log(data);
+    this.usuarioslist = data;
+  });
+}
+ /*--------------------------------------------------------------*/
 }
