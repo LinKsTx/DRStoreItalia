@@ -98,7 +98,6 @@ export class NavbarComponent implements OnInit {
         igual = micookie.indexOf("=");
         valor = micookie.substring(igual+1);
       }
-
     }
     if(valor) {
       this.usuarioactivo = JSON.parse(valor);
@@ -108,12 +107,18 @@ export class NavbarComponent implements OnInit {
     //--------------------------------
     //obtenemos el pic del usuario activo y lo igualamos a this.usuarioactivo.
     this.getPic();
+    //------------------------------------------------------------------------
+
     //push a carrito
     this.productosService.productoEmitido.subscribe(respuesta =>{
       this.carrito = respuesta,
       console.log(this.carrito); })
+    //--------------
+
     //obtenemos usuarios
     this.obtenerUsuarios();
+    //------------------
+
   }
 
 /*----------------------- CREAR USUARIO ------------------------*/
@@ -217,7 +222,7 @@ export class NavbarComponent implements OnInit {
   resetForm(form: NgForm) {
     form.reset();
   }
-  /*------------------------------------------------------------*/
+/*--------------------------------------------------------------*/
 /*----------------------- TOGGLE ALERT -------------------------*/
   toogleAlert() {
     $("#alertacreacionusuario").toggle();

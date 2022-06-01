@@ -7,8 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavOptionsComponent implements OnInit {
 
+  //CONSTRUCTOR
   constructor() { }
 
+  //SE INICIA AUTOMÁTICAMENTE
   ngOnInit(): void {
   }
 

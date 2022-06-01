@@ -10,6 +10,8 @@ import { ProductosService } from 'src/app/services/productos.service';
 })
 export class ProductosDetailComponent implements OnInit {
 
+/*----------------------- DECLARAR VARIABLES -------------------*/
+
   xd: string;
 
   producto: IProducto = {
@@ -23,26 +25,31 @@ export class ProductosDetailComponent implements OnInit {
     stock: 0
   }
 
+/*--------------------------------------------------------------*/
+
+  //CONSTRUCTOR
   constructor(private productosService: ProductosService,
     private router: Router,
     private route: ActivatedRoute,
     ) { }
 
-    ngOnInit() {
-      const id = +this.route.snapshot.params["id"]; // Recibimos parámetro
-      this.productosService.readProductId(id)
-      .subscribe(
-      (p : any)=> this.producto = p[0],
-      error => console.error(error)
-      );
-      this.stock();
+  //SE INICIA AUTOMÁTICAMENTE
+  ngOnInit() {
+    const id = +this.route.snapshot.params["id"]; // Recibimos parámetro
+    this.productosService.readProductId(id)
+    .subscribe(
+    (p : any)=> this.producto = p[0],
+    error => console.error(error)
+    );
+    this.stock();
+    }
+
+    stock() {
+      if(this.producto.stock = 0) {
+        this.xd= "si hay stock";
+      } else if(this.producto.stock = 1) {
+        this.xd= "no hay stock";
       }
-      stock() {
-        if(this.producto.stock = 0) {
-          this.xd= "si hay stock";
-        } else if(this.producto.stock = 1) {
-          this.xd= "no hay stock";
-        }
-      }
+    }
 
 }

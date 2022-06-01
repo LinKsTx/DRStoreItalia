@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject } from 'rxjs';
 import { IProducto } from 'src/app/interfaces/i-producto';
 import { IUsuario } from 'src/app/interfaces/i-usuario';
@@ -57,7 +58,8 @@ export class ProductosComponent implements OnInit {
   //CONSTRUCTOR
   constructor(
     private productoService: ProductosService,
-    private router: Router
+    private router: Router,
+    private cookieService: CookieService
   ) { }
 
   //SE INICIA AUTOMÁTICAMENTE

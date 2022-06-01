@@ -10,24 +10,29 @@ import { BlogService } from 'src/app/services/blog.service';
 })
 export class BlogDetailComponent implements OnInit {
 
+/*----------------------- DECLARAR VARIABLES -------------------*/
+
   blog: IBlog = {
     titulo: "",
     contenido: "",
     imagen: "",
   }
 
+/*--------------------------------------------------------------*/
+
+  //CONSTRUCTOR
   constructor(private blogService: BlogService,
     private router: Router,
     private route: ActivatedRoute,
     ) { }
-
-    ngOnInit() {
-      const id = +this.route.snapshot.params["id"]; // Recibimos parámetro
-      this.blogService.readBlogId(id)
-      .subscribe(
-      (p : any)=> this.blog = p[0],
-      error => console.error(error)
-      );
-      }
+  //SE INICIA AUTOMÁTICAMENTE
+  ngOnInit() {
+    const id = +this.route.snapshot.params["id"]; // Recibimos parámetro
+    this.blogService.readBlogId(id)
+    .subscribe(
+    (p : any)=> this.blog = p[0],
+    error => console.error(error)
+    );
+    }
 
 }
