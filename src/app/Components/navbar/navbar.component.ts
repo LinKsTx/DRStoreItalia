@@ -8,6 +8,8 @@ import * as bootstrap from 'bootstrap';
 import { ViewChild, ElementRef} from '@angular/core';
 import { IProducto } from 'src/app/interfaces/i-producto';
 import { ProductosService } from 'src/app/services/productos.service';
+import { PedidosService } from 'src/app/services/pedidos.service';
+import { IPedido } from 'src/app/interfaces/i-pedido';
 
 
 @Component({
@@ -18,6 +20,10 @@ import { ProductosService } from 'src/app/services/productos.service';
 export class NavbarComponent implements OnInit {
 
 /*----------------------- DECLARAR VARIABLES -------------------*/
+
+  preciofinal: number;
+
+  ne: boolean = true;
 
   //observamos el boton de cerrar el modal
   @ViewChild('cerrarmodalis') cerrarmodalis: ElementRef;
@@ -56,7 +62,7 @@ export class NavbarComponent implements OnInit {
     pic : ""
   }
 
-  carrito: IProducto[];
+  carrito: IProducto[] = [];
 
    //Usuario perfil
    usuarioperfil : IUsuario = {
@@ -68,12 +74,17 @@ export class NavbarComponent implements OnInit {
     pic: ""
   }
 
+  pedido: IPedido = {
+    pedido: "",
+  }
+
 /*--------------------------------------------------------------*/
 
   //CONSTRUCTOR
   constructor(
     private usuarioService: UsuarioService,
     private productosService: ProductosService,
+    private pedidosService: PedidosService,
     private router: Router,
     private cookieService: CookieService,
   ) { }
@@ -93,6 +104,7 @@ export class NavbarComponent implements OnInit {
     let listaCookies = document.cookie.split(";");
     for (let i in listaCookies) {
       busca = listaCookies[i].search("user");
+
       if (busca > -1) {
         micookie=listaCookies[i]
         igual = micookie.indexOf("=");
@@ -104,16 +116,27 @@ export class NavbarComponent implements OnInit {
     } else{
       console.log ("No hay usuario activo");
     }
+
     //--------------------------------
     //obtenemos el pic del usuario activo y lo igualamos a this.usuarioactivo.
     this.getPic();
     //------------------------------------------------------------------------
 
-    //push a carrito
+    //push a carrito mediante servicio
     this.productosService.productoEmitido.subscribe(respuesta =>{
-      this.carrito = respuesta,
+      this.carrito = JSON.parse(sessionStorage.getItem('carrito'));
+      this.ne = true;
       console.log(this.carrito); })
+
+      if(sessionStorage.getItem('carrito')) {
+        if(sessionStorage.getItem('carrito').length > 0) {
+          this.ne = true;
+        }
+      } else {
+        this.ne = false;
+      }
     //--------------
+
 
     //obtenemos usuarios
     this.obtenerUsuarios();
@@ -276,4 +299,43 @@ export class NavbarComponent implements OnInit {
   });
 }
  /*--------------------------------------------------------------*/
+ /*----------------------- VACIAR CARRITO ---------------------*/
+ vaciarCarrito(){
+  this.carrito = [];
+  sessionStorage.removeItem('carrito');
+  this.ne = false;
+}
+/*--------------------------------------------------------------*/
+/*----------------------- CREAR PEDIDO ------------------------*/
+crearPedido(){
+  this.pedido.pedido = JSON.stringify(this.carrito);
+  this.pedido.id_usuario = this.usuarioactivo.id;
+  console.log(this.pedido);
+  this.pedidosService.addPedido(this.pedido).subscribe((respuesta)=>{
+    console.log(this.pedido);
+    this.vaciarCarrito();
+    this.pedido.pedido = "";
+    window.location.reload();
+  });
+}
+/*--------------------------------------------------------------*/
+/*----------------------- SUMAR CANTIDAD ------------------------*/
+sumarCantidad(producto: IProducto){
+if(producto.cantidad == 10) {
+} else {
+  producto.cantidad++;
+  producto.precio = producto.precioporunidad * producto.cantidad;
+
+}
+}
+/*--------------------------------------------------------------*/
+/*----------------------- RESTAR CANTIDAD ------------------------*/
+restarCantidad(producto: IProducto){
+  if(producto.cantidad == 1) {
+  } else {
+    producto.cantidad--;
+    producto.precio = producto.precioporunidad * producto.cantidad;
+  }
+  }
+  /*--------------------------------------------------------------*/
 }

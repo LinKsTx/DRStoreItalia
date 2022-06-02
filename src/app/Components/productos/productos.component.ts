@@ -15,6 +15,8 @@ export class ProductosComponent implements OnInit {
 
   /*----------------------- DECLARAR VARIABLES -------------------*/
 
+  filtrocategoria: string = "";
+
   p :number = 1;
 
   producto: IProducto = {
@@ -30,6 +32,8 @@ export class ProductosComponent implements OnInit {
   }
 
   productos: IProducto[];
+
+  productossinfiltro: IProducto[];
 
   productosCarrito: IProducto[] = [];
 
@@ -87,6 +91,13 @@ export class ProductosComponent implements OnInit {
     //-- leer Productos ------------------------
     this.obtenerProductos();
     //------------------------------------------
+    if(sessionStorage.getItem('carrito')) {
+      if(sessionStorage.getItem('carrito').length > 0) {
+        this.productosCarrito = JSON.parse(sessionStorage.getItem('carrito'));
+        console.log(this.productosCarrito);
+      }
+    }
+
   }
 
 /*----------------------- CREAR PRODUCTO -----------------------*/
@@ -114,14 +125,15 @@ obtenerProductos(){
   });
 }
 /*--------------------------------------------------------------*/
-/*----------------------- ELIMINAR BLOGS -----------------------*/
+/*----------------------- ELIMINAR PRODUCTOS -----------------------*/
 eliminarProductos(id: number, posicion: number){
   this.productoService.deleteProduct(id).subscribe((data: any) =>{
     this.productos.splice(posicion, 1);
+    this.p=1;
 });
 }
 /*--------------------------------------------------------------*/
-/*----------------------- EDITAR BLOGS -------------------------*/
+/*----------------------- EDITAR PRODUCTOS -------------------------*/
 updateProducts(datosEditados: IProducto){
   console.log(datosEditados);
   this.productoService.editProduct(datosEditados).subscribe((data: any) =>{
@@ -189,15 +201,31 @@ onFileSelected2(event: any){
 pushACarrito(datoEmitido: IProducto){
   let existe: boolean = false;
   for (let i = 0; i < this.productosCarrito.length; i++) {
-    if(this.productosCarrito[i] == datoEmitido) {
+    if(this.productosCarrito[i].id == datoEmitido.id) {
       console.log("el producto ya ha sido añadido");
       existe = true;
       break;
     }
   }
   if(!existe) {
+    datoEmitido.cantidad = 1;
+    datoEmitido.precioporunidad = datoEmitido.precio;
     this.productosCarrito.push(datoEmitido);
+    //creamos la ss para el producto
+    sessionStorage.setItem('carrito',JSON.stringify(this.productosCarrito));
     this.productoService.productoEmitido.next(this.productosCarrito);
+
+  }
+}
+/*--------------------------------------------------------------*/
+/*----------------------- FILTRAR CATEGORIA ------------------------*/
+filtrarCategoria(filtro: string){
+  if(this.filtrocategoria == filtro) {
+    console.log("si entra");
+    window.location.reload();
+    this.filtrocategoria == null;
+  } else {
+    this.filtrocategoria = filtro;
   }
 }
 /*--------------------------------------------------------------*/

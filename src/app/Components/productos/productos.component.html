@@ -44,7 +44,7 @@
         <a *ngIf="usuarioactivo.tipo == 2" class="text-azulito" href="#" data-bs-toggle="modal" data-bs-target="#crear-producto"><i class="bi bi-file-earmark-plus"></i><span class="d-none d-lg-inline-block">&nbsp;Crear producto</span></a>
       </li>
       <li class="nav-item m-3">
-        <a class="text-dark" href="#"><span class="d-none d-lg-inline-block">&nbsp;Proteina</span></a>
+        <a class="text-dark pointer" (click)="filtrarCategoria('Proteina')"><span class="d-none d-lg-inline-block">&nbsp;Proteina</span></a>
       </li>
       <li class="nav-item m-3">
         <a class="text-dark" href="#"><span class="d-none d-lg-inline-block">&nbsp;Alimentos y snacks</span></a>
@@ -92,13 +92,13 @@
   <!-- Productos -->
   <div class="container-fluid">
     <div class="row justify-content-center">
-      <div id="tarjeta-producto" class="card m-4 p-0 col-12 col-sm-6 col-md-6 border border-2" *ngFor="let producto of productos | paginate: { itemsPerPage: 8, currentPage: p}; let i = index">
-      <img id="imagen-producto" class="card-img-top img-fluid pointer p-4" [src]="producto.imagen" [routerLink]="['/blog-detail', producto.id]">
+      <div id="tarjeta-producto" class="card m-4 p-0 col-12 col-sm-6 col-md-6 border border-2" *ngFor="let producto of productos | categoria: filtrocategoria |paginate: { itemsPerPage: 8, currentPage: p}; let i = index">
+      <img id="imagen-producto" class="card-img-top img-fluid pointer p-4" [src]="producto.imagen" [routerLink]="['/productos-detail', producto.id]">
       <div>
         <span id="categoria-producto" class="p-0 m-2 float-start">{{producto.categoria}}</span>
       </div>
       <div class="card-body p-0 d-flex align-items-center flex-column justify-content-center">
-          <a id="titulo-producto" class="card-title text-decoration-none fs-3 text-center text-dark pointer titulo m-0" [routerLink]="['/blog-detail', producto.id]">{{producto.nombre}}</a>
+          <a id="titulo-producto" class="card-title text-decoration-none fs-3 text-center text-dark pointer titulo m-0" [routerLink]="['/productos-detail', producto.id]">{{producto.nombre}}</a>
           <span id="categoria-producto" class="p-0 m-0 float-start">{{producto.marca}}</span>
           <span id="fecha-producto" class="card-text m-2 float-end">{{producto.precio}} € </span>
         </div>

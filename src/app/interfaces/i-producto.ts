@@ -7,5 +7,6 @@ export interface IProducto {
     marca: string,
     imagen: string,
     cantidad?: number,
+    precioporunidad?: number,
     stock?: number
 }

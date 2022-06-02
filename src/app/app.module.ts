@@ -17,6 +17,8 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { BlogDetailComponent } from './Components/blog-detail/blog-detail.component';
 import { ProductosDetailComponent } from './Components/productos-detail/productos-detail.component';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { CookieService } from 'ngx-cookie-service';
+import { CategoriaPipe } from './pipes/categoria.pipe';
 
 //Rutas
 const APP_ROUTES: Route[] = [
@@ -49,7 +51,8 @@ const APP_ROUTES: Route[] = [
     ContactoComponent,
     FooterComponent,
     NavOptionsComponent,
-    BlogDetailComponent
+    BlogDetailComponent,
+    CategoriaPipe
   ],
   imports: [
     BrowserModule,
@@ -61,7 +64,7 @@ const APP_ROUTES: Route[] = [
     NgxPaginationModule
 
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -106,6 +106,7 @@ obtenerBlogs(){
 eliminarBlogs(id: number, posicion: number){
     this.blogService.deleteBlog(id).subscribe((data: any) =>{
       this.blogs.splice(posicion, 1);
+      this.p=1;
   });
 }
 /*--------------------------------------------------------------*/
