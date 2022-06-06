@@ -1,5 +1,10 @@
+@charset "UTF-8";
 #navegador {
-  font-family: monolisk-black;
+  font-family: 'Maven Pro', sans-serif;
+}
+
+.nowrap {
+  white-space: nowrap;
 }
 
 .estilo-hover:hover, .dropdown-menu {
@@ -11,16 +16,25 @@
   --animate-duration: 0.5s;
 }
 
+.animate__animated.animate__fadeIn {
+  --animate-duration: 0.75s;
+}
+
 .dropdown-toggle::after {
   content: none;
 }
 
-.nowrap {
-  white-space: nowrap;
-}
-
-.pointer {
-  cursor: pointer;
+/*
+// //dropdown por hover solo en la versión de escritorio
+//  .escritorio-hover.dropdown:hover .dropdown-menu {
+//   display: block;
+//   margin-top: 0; // remove the gap so it doesn't close
+// }
+*/
+.dropdown-menu.carrito {
+  width: 290px;
+  max-height: 350px;
+  overflow-y: auto;
 }
 
 .val-error {
@@ -40,5 +54,91 @@
   right: 1% !important;
   z-index: 1;
   display: none;
+}
+
+#alertacomprarealizada {
+  position: fixed !important;
+  top: 6% !important;
+  right: 1% !important;
+  z-index: 1;
+  display: none;
+}
+
+#pic-usuario-profile {
+  width: 320px !important;
+  height: 320px !important;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+#img-productos-carrito {
+  width: 60px !important;
+  height: 60px !important;
+}
+
+.estilo-navlink {
+  color: rgba(0, 0, 0, 0.55) !important;
+  text-decoration: none;
+}
+
+.estilo-navlink:hover {
+  color: rgba(0, 0, 0, 0.55) !important;
+  text-decoration: none;
+}
+
+#gear:hover {
+  -webkit-animation-name: ckw;
+          animation-name: ckw;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-transform-origin: 50% 50%;
+          transform-origin: 50% 50%;
+  display: inline-block;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+}
+
+@-webkit-keyframes ckw {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+  }
+}
+
+@keyframes ckw {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+  }
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  background-color: #cececf;
+}
+
+::-webkit-scrollbar {
+  width: 16px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 100px;
+  background-color: #f0f0f1;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 80px;
+  border: 6px solid #cececf;
+  border-left: 0;
+  border-right: 0;
+  background-color: #cececf;
 }
 /*# sourceMappingURL=navbar.component.css.map */

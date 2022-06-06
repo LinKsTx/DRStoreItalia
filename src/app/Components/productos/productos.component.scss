@@ -1,9 +1,4 @@
-img {
-  height: 200px;
-}
-.card {
-  margin: 20px;
-}
+//Productos
 #img-productos-carrito {
   width: 60px !important;
   height: 60px !important;
@@ -14,9 +9,15 @@ img {
 #imagen-producto {
   height: 250px;
   object-fit:contain;
+  transition: 1s;
+}
+#imagen-producto:hover {
+  transition: 1s;
+  transform: scale(1.2);
 }
 #titulo-producto {
   transition: 0.5s;
+  font-family: 'Fira Sans Condensed', sans-serif;
 }
 #titulo-producto:hover {
   transition: 0.5s;
@@ -28,7 +29,6 @@ img {
 .hovernav {
   transition: 0.5s;
   }
-
 .hovernav:hover {
   transition: 0.5s;
   background-color: #0dcaf0;
@@ -36,5 +36,6 @@ img {
 #nav-prod2 {
 width: 99% !important;
 }
-html {
+#contenedorproductos {
+  min-height: 90vh;
 }

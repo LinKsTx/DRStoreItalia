@@ -1,20 +1,27 @@
+//Fuente
+#nav-options {
+  font-family: 'Fira Sans Condensed', sans-serif;
+}
 //estilo al hacer hover, focus y active en dropdown de idiomas (copia al estilo de bootstrap)
 a.dropdown-item:hover {
   background-color: inherit;
   opacity: 100%;
 }
-
 a.dropdown-item:focus {
   background-color: inherit;
   opacity: 100%;
 }
-
 a.dropdown-item:active {
   background-color: inherit;
   opacity: 100%;
 }
-
 a.dropdown-item {
   opacity: 80%;
 }
-
+//Control sobre la animación de los dropdowns
+.animate__animated.animate__fadeInDown {
+  --animate-duration: 0.5s;
+}
+.animate__animated.animate__fadeIn {
+  --animate-duration: 0.75s;
+}

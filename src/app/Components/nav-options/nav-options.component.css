@@ -1,3 +1,7 @@
+#nav-options {
+  font-family: 'Fira Sans Condensed', sans-serif;
+}
+
 a.dropdown-item:hover {
   background-color: inherit;
   opacity: 100%;
@@ -15,5 +19,13 @@ a.dropdown-item:active {
 
 a.dropdown-item {
   opacity: 80%;
+}
+
+.animate__animated.animate__fadeInDown {
+  --animate-duration: 0.5s;
+}
+
+.animate__animated.animate__fadeIn {
+  --animate-duration: 0.75s;
 }
 /*# sourceMappingURL=nav-options.component.css.map */

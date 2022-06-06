@@ -1,8 +1,39 @@
-img {
+.titulo {
+  font-weight: bold;
+}
+
+.parrafo {
+  font-family: 'Nunito', sans-serif;
+}
+
+#contenedorblogs {
+  min-height: 90vh;
+}
+
+#blog-carta {
+  width: 450px;
+}
+
+#imagen-carta {
   height: 300px;
 }
 
-.card {
-  margin: 20px;
+#titulo-carta {
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+#titulo-carta:hover {
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  color: #0dcaf0 !important;
+}
+
+#categoria-carta {
+  font-style: italic;
+}
+
+#nav-blog2 {
+  width: 99% !important;
 }
 /*# sourceMappingURL=blog.component.css.map */

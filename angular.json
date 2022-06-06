@@ -34,7 +34,10 @@
               "src/styles.scss",
               "node_modules/bootstrap/dist/css/bootstrap.css",
               "node_modules/bootstrap-icons/font/bootstrap-icons.css",
-              "node_modules/animate.css/animate.css"
+              "node_modules/animate.css/animate.css",
+              "node_modules/sweetalert2/src/sweetalert2.scss",
+              "node_modules/magic.css/dist/magic.css",
+              "node_modules/ngx-spinner/animations/ball-clip-rotate.css"
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.js",

@@ -47,7 +47,7 @@
         <a class="text-dark pointer" (click)="filtrarCategoria('Proteina')"><span class="d-none d-lg-inline-block">&nbsp;Proteina</span></a>
       </li>
       <li class="nav-item m-3">
-        <a class="text-dark" href="#"><span class="d-none d-lg-inline-block">&nbsp;Alimentos y snacks</span></a>
+        <a class="text-dark pointer" (click)="filtrarCategoria('Alimentos y snacks')"><span class="d-none d-lg-inline-block">&nbsp;Alimentos y snacks</span></a>
       </li>
       <li class="nav-item m-3">
         <a class="text-dark" href="#"><span class="d-none d-lg-inline-block">&nbsp;Vitaminas y minerales</span></a>
@@ -64,7 +64,7 @@
     </ul>
     <ul class="nav d-flex align-items-center flex-row ms-auto">
       <li class="nav-item m-2 d-flex align-items-center flex-row">
-        <input class="form-control" type="text" placeholder="Buscar por nombre">&nbsp;&nbsp;<i class="bi bi-search"></i>
+        <input class="form-control" type="text" name="filtrobusqueda" placeholder="Buscar por nombre" [(ngModel)]="filtrobusqueda" >&nbsp;&nbsp;<i class="bi bi-search"></i>
       </li>
     </ul>
   </nav>
@@ -91,27 +91,29 @@
   </div>
   <!-- Productos -->
   <div class="container-fluid">
-    <div class="row justify-content-center">
-      <div id="tarjeta-producto" class="card m-4 p-0 col-12 col-sm-6 col-md-6 border border-2" *ngFor="let producto of productos | categoria: filtrocategoria |paginate: { itemsPerPage: 8, currentPage: p}; let i = index">
-      <img id="imagen-producto" class="card-img-top img-fluid pointer p-4" [src]="producto.imagen" [routerLink]="['/productos-detail', producto.id]">
-      <div>
-        <span id="categoria-producto" class="p-0 m-2 float-start">{{producto.categoria}}</span>
+    <div id="contenedorproductos" class="container-fluid">
+      <div class="row justify-content-center">
+        <div id="tarjeta-producto" class="card m-4 p-0 col-12 col-sm-6 col-md-6 border border-2" *ngFor="let producto of productos | categoria: filtrocategoria | busquedaProducto: filtrobusqueda | paginate: { itemsPerPage: 8, currentPage: p}; let i = index">
+        <img id="imagen-producto" class="card-img-top img-fluid pointer p-4" [src]="producto.imagen" [routerLink]="['/productos-detail', producto.id]">
+        <div>
+          <span id="categoria-producto" class="p-0 m-2 float-start">{{producto.categoria}}</span>
+        </div>
+        <div class="card-body p-0 d-flex align-items-center flex-column justify-content-center">
+            <a id="titulo-producto" class="card-title text-decoration-none fs-3 text-center text-dark pointer titulo m-0" [routerLink]="['/productos-detail', producto.id]">{{producto.nombre}}</a>
+            <span id="categoria-producto" class="p-0 m-0 float-start">{{producto.marca}}</span>
+            <span id="fecha-producto" class="card-text m-2 float-end">{{producto.precio}} € </span>
+          </div>
+          <div class="d-flex justify-content-center" *ngIf="usuarioactivo.tipo == 1">
+            <button type="submit" class="btn btn-info m-2" (click)="pushACarrito(producto)">Añadir al carrito de la compra</button>
+          </div>
+          <div class="p-0" *ngIf="usuarioactivo.tipo == 2">
+            <button class="btn btn-danger float-start m-2" (click)="eliminarProductos(producto.id, i)">Borrar</button>
+            <button type="submit" class="btn btn-success float-end m-2"data-bs-toggle="modal" data-bs-target="#editar-producto" (click)="pasarInfo(producto)">Editar producto</button>
+          </div>
+        </div>
       </div>
-      <div class="card-body p-0 d-flex align-items-center flex-column justify-content-center">
-          <a id="titulo-producto" class="card-title text-decoration-none fs-3 text-center text-dark pointer titulo m-0" [routerLink]="['/productos-detail', producto.id]">{{producto.nombre}}</a>
-          <span id="categoria-producto" class="p-0 m-0 float-start">{{producto.marca}}</span>
-          <span id="fecha-producto" class="card-text m-2 float-end">{{producto.precio}} € </span>
-        </div>
-        <div class="d-flex justify-content-center" *ngIf="usuarioactivo.tipo == 1">
-          <button type="submit" class="btn btn-info m-2" (click)="pushACarrito(producto)">Añadir al carrito de la compra</button>
-        </div>
-        <div class="p-0" *ngIf="usuarioactivo.tipo == 2">
-          <button class="btn btn-danger float-start m-2" (click)="eliminarProductos(producto.id, i)">Borrar</button>
-          <button type="submit" class="btn btn-success float-end m-2"data-bs-toggle="modal" data-bs-target="#editar-producto" (click)="pasarInfo(producto)">Editar producto</button>
-        </div>
-      </div>
-      <pagination-controls class="text-center" (pageChange)="p = $event" nextLabel="" previousLabel=""></pagination-controls>
     </div>
+    <pagination-controls class="text-center" (pageChange)="p = $event" nextLabel="" previousLabel="" [autoHide]="true"></pagination-controls>
   </div>
 </div>
 
@@ -134,7 +136,7 @@
               </div>
               <!-- PRECIO -->
               <div class="mb-3">
-                <input type="number" step="0.1" class="form-control" placeholder="Precio" name="precio" [(ngModel)]="producto.precio">
+                <input type="number" step="1" class="form-control" placeholder="Precio" name="precio" [(ngModel)]="producto.precio">
               </div>
               <!-- DESCRIPCIÓN -->
               <div class="mb-3">
@@ -210,3 +212,5 @@
   </div>
 </div>
 <!----------------------------------------------------------------->
+<!-- /SPINNER/ -->
+<ngx-spinner bdColor = "rgba(20,20,20,0.8)" size = "medium" color = "#b3b0b0" type = "ball-clip-rotate" [fullScreen] = "true"><p style="color: white" (scroll)="false"></p></ngx-spinner>

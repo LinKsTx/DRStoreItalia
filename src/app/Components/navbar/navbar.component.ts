@@ -10,6 +10,7 @@ import { IProducto } from 'src/app/interfaces/i-producto';
 import { ProductosService } from 'src/app/services/productos.service';
 import { PedidosService } from 'src/app/services/pedidos.service';
 import { IPedido } from 'src/app/interfaces/i-pedido';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -28,6 +29,7 @@ export class NavbarComponent implements OnInit {
   //observamos el boton de cerrar el modal
   @ViewChild('cerrarmodalis') cerrarmodalis: ElementRef;
   @ViewChild('cerrarmodalcu') cerrarmodalcu: ElementRef;
+  @ViewChild('cerrarmodalco') cerrarmodalco: ElementRef;
 
   //Boolean para sacar código de correo ya existente
   boolean1: boolean = false;
@@ -116,12 +118,10 @@ export class NavbarComponent implements OnInit {
     } else{
       console.log ("No hay usuario activo");
     }
-
     //--------------------------------
     //obtenemos el pic del usuario activo y lo igualamos a this.usuarioactivo.
     this.getPic();
     //------------------------------------------------------------------------
-
     //push a carrito mediante servicio
     this.productosService.productoEmitido.subscribe(respuesta =>{
       this.carrito = JSON.parse(sessionStorage.getItem('carrito'));
@@ -136,12 +136,24 @@ export class NavbarComponent implements OnInit {
         this.ne = false;
       }
     //--------------
+    //Comprobamos array de carrito
+    if(this.carrito) {
+      if(this.carrito.length == 0) {
+      this.ne = false;
+      }
+    }
 
-
+    //------------------
     //obtenemos usuarios
     this.obtenerUsuarios();
     //------------------
-
+    //hide de alertas y errores
+    $("#errornickexistente").hide();
+    $("#errorcorreoexistente").hide();
+    $("#errorcorreocontra").hide();
+    $("#alertacreacionusuario").hide();
+    $("#carritovacio").hide();
+    //-------------------------------
   }
 
 /*----------------------- CREAR USUARIO ------------------------*/
@@ -156,11 +168,28 @@ export class NavbarComponent implements OnInit {
 
       if(respuesta == 3) {
         this.boolean1 = true;
+      //mostramos y hacemos hide con fade el error
+      $("#errorcorreoexistente").fadeIn();
+      setTimeout(() => {
+        $("#errorcorreoexistente").fadeOut();
+      }, 3000);
       } else if (respuesta == 4) {
         this.boolean2 = true;
+      //mostramos y hacemos hide con fade el error
+      $("#errornickexistente").fadeIn();
+      setTimeout(() => {
+        $("#errornickexistente").fadeOut();
+      }, 3000);
       } else if (respuesta == 5) {
         this.boolean1 = true;
         this.boolean2 = true;
+      //mostramos y hacemos hide con fade el error
+      $("#errornickexistente").fadeIn();
+      $("#errorcorreoexistente").fadeIn();
+      setTimeout(() => {
+        $("#errornickexistente").fadeOut();
+        $("#errorcorreoexistente").fadeOut();
+      }, 3000);
       } else {
         this.usuario = {
           nick: "",
@@ -173,7 +202,10 @@ export class NavbarComponent implements OnInit {
         //literalmente es como hacer un click al boton de cerrar del modal
         this.cerrarmodalcu.nativeElement.click();
         this.router.navigate(['/home']);
-        this.toogleAlert();
+        $("#alertacreacionusuario").fadeIn();
+        setTimeout(() => {
+          $("#alertacreacionusuario").fadeOut();
+        }, 4000);
       }
     });
   }
@@ -212,8 +244,12 @@ export class NavbarComponent implements OnInit {
       this.cerrarmodalis.nativeElement.click();
       this.router.navigate(['/home']);
     } else {
-      this.errorLogIn = "Correo y contraseña no coinciden";
       this.boolean3 = true;
+      //mostramos y hacemos hide con fade el error
+      $("#errorcorreocontra").fadeIn();
+      setTimeout(() => {
+        $("#errorcorreocontra").fadeOut();
+      }, 3000);
     }
     //--------------------------------
     this.getPic();
@@ -246,12 +282,12 @@ export class NavbarComponent implements OnInit {
     form.reset();
   }
 /*--------------------------------------------------------------*/
-/*----------------------- TOGGLE ALERT -------------------------*/
-  toogleAlert() {
-    $("#alertacreacionusuario").toggle();
+/*----------------------- TOGGLE ALERT (CERRAR) ----------------*/
+  toogleAlertFadeOut(alerta: string) {
+    $(alerta).fadeOut();
   }
-  /*------------------------------------------------------------*/
-  /*--------------------- UPDATE PIC ---------------------------*/
+/*------------------------------------------------------------*/
+/*--------------------- UPDATE PIC ---------------------------*/
   updatePic() {
     //igualar el creado con el activo
     this.usuarioperfil.nick = this.usuarioactivo.nick;
@@ -285,57 +321,144 @@ export class NavbarComponent implements OnInit {
 /*--------------------------------------------------------------*/
 /*----------------------- GET PIC ------------------------------*/
   getPic() {
-    this.usuarioService.getPic(this.usuarioactivo).subscribe((respuesta: any)=>{
-      console.log(respuesta[0].pic);
-      this.usuarioactivo.pic = respuesta[0].pic;
-    });
+      this.usuarioService.getPic(this.usuarioactivo).subscribe((respuesta: any)=>{
+        console.log(respuesta[0].pic);
+        this.usuarioactivo.pic = respuesta[0].pic;
+      });
   }
 /*--------------------------------------------------------------*/
 /*----------------------- OBTENER USUARIOS ---------------------*/
   obtenerUsuarios(){
-    this.usuarioService.readUsuarios().subscribe((data: any) =>{
-    console.log(data);
-    this.usuarioslist = data;
-  });
-}
- /*--------------------------------------------------------------*/
- /*----------------------- VACIAR CARRITO ---------------------*/
- vaciarCarrito(){
-  this.carrito = [];
-  sessionStorage.removeItem('carrito');
-  this.ne = false;
-}
+      this.usuarioService.readUsuarios().subscribe((data: any) =>{
+      console.log(data);
+      this.usuarioslist = data;
+    });
+  }
 /*--------------------------------------------------------------*/
-/*----------------------- CREAR PEDIDO ------------------------*/
-crearPedido(){
+/*----------------------- VACIAR CARRITO -----------------------*/
+  vaciarCarrito(){
+    if(this.carrito) {
+      if(this.carrito.length == 0) {
+        //mostramos y hacemos hide con fade el error
+        $("#carritovacio").fadeIn();
+        setTimeout(() => {
+          $("#carritovacio").fadeOut();
+        }, 3000);
+      } else {
+        this.carrito = [];
+        sessionStorage.setItem("carrito", JSON.stringify([]));
+        // sessionStorage.removeItem('carrito');
+        this.ne = false;
+      }
+    } else {
+      //mostramos y hacemos hide con fade el error
+      $("#carritovacio").fadeIn();
+      setTimeout(() => {
+        $("#carritovacio").fadeOut();
+      }, 3000);
+    }
+
+  }
+/*--------------------------------------------------------------*/
+/*----------------------- BORRAR PRODUCTO DE CARRITO -----------*/
+  borrarProducto(id: number){
+    console.log(this.carrito);
+    this.carrito = this.carrito.filter(element=>element.id !== id);
+    sessionStorage.removeItem('carrito');
+    sessionStorage.setItem('carrito', JSON.stringify(this.carrito));
+    console.log(this.carrito);
+    if(this.carrito.length == 0) {
+      this.ne = false;
+    }
+
+  }
+/*--------------------------------------------------------------*/
+/*----------------------- CREAR PEDIDO -------------------------*/
+  crearPedido(){
   this.pedido.pedido = JSON.stringify(this.carrito);
   this.pedido.id_usuario = this.usuarioactivo.id;
-  console.log(this.pedido);
-  this.pedidosService.addPedido(this.pedido).subscribe((respuesta)=>{
-    console.log(this.pedido);
-    this.vaciarCarrito();
-    this.pedido.pedido = "";
-    window.location.reload();
-  });
-}
+  console.log(this.carrito);
+  if(this.carrito) {
+    if(this.carrito.length == 0) {
+      //mostramos y hacemos hide con fade el error
+      $("#carritovacio").fadeIn();
+      setTimeout(() => {
+        $("#carritovacio").fadeOut();
+      }, 3000);
+    } else {
+      this.pedidosService.addPedido(this.pedido).subscribe((respuesta)=>{
+        console.log(this.usuarioactivo);
+        this.vaciarCarrito();
+        this.pedido.pedido = "";
+        // $("#alertacomprarealizada").fadeIn();
+        // setTimeout(() => {
+        //   $("#alertacomprarealizada").fadeOut();
+        // }, 4000);
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          text: 'La compra se ha realizado correctamente',
+          width: "300px",
+          heightAuto: false,
+          showClass: {
+            popup: 'animate__animated animate__fadeInRight'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutRight'
+          },
+          showConfirmButton: false,
+          timer: 1500
+        })
+        this.cerrarmodalco.nativeElement.click();
+        // window.location.reload();
+      });
+  }
+    } else {
+      //mostramos y hacemos hide con fade el error
+      $("#carritovacio").fadeIn();
+      setTimeout(() => {
+        $("#carritovacio").fadeOut();
+      }, 3000);
+  }
+
+
+
+  }
 /*--------------------------------------------------------------*/
 /*----------------------- SUMAR CANTIDAD ------------------------*/
-sumarCantidad(producto: IProducto){
-if(producto.cantidad == 10) {
-} else {
-  producto.cantidad++;
-  producto.precio = producto.precioporunidad * producto.cantidad;
-
+  sumarCantidad(producto: IProducto){
+  //se hacen los cambios
+  if(producto.cantidad == 10) {
+  } else {
+    producto.cantidad++;
+    producto.precio = producto.precioporunidad * producto.cantidad;
+  //se localiza posicion en array local
+  for(let i=0; i< this.carrito.length;i++) {
+    if(this.carrito[i].id == producto.id) {
+      this.carrito[i].cantidad = producto.cantidad;
+    }
+  }
+  //se actualiza ss
+  sessionStorage.setItem('carrito', JSON.stringify(this.carrito));
 }
-}
+  }
 /*--------------------------------------------------------------*/
 /*----------------------- RESTAR CANTIDAD ------------------------*/
-restarCantidad(producto: IProducto){
+  restarCantidad(producto: IProducto){
+  //se hacen los cambios
   if(producto.cantidad == 1) {
   } else {
     producto.cantidad--;
     producto.precio = producto.precioporunidad * producto.cantidad;
   }
+   //se localiza posicion en array local
+   for(let i=0; i< this.carrito.length;i++) {
+    if(this.carrito[i].id == producto.id) {
+      this.carrito[i].cantidad = producto.cantidad;
+    }
+  }
+  //se actualiza ss
+  sessionStorage.setItem('carrito', JSON.stringify(this.carrito));
   }
   /*--------------------------------------------------------------*/
 }

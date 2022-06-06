@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { BehaviorSubject } from 'rxjs';
 import { IProducto } from 'src/app/interfaces/i-producto';
 import { IUsuario } from 'src/app/interfaces/i-usuario';
@@ -13,7 +14,9 @@ import { ProductosService } from 'src/app/services/productos.service';
 })
 export class ProductosComponent implements OnInit {
 
-  /*----------------------- DECLARAR VARIABLES -------------------*/
+/*----------------------- DECLARAR VARIABLES -------------------*/
+
+  filtrobusqueda = "";
 
   filtrocategoria: string = "";
 
@@ -63,7 +66,8 @@ export class ProductosComponent implements OnInit {
   constructor(
     private productoService: ProductosService,
     private router: Router,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private spinner: NgxSpinnerService
   ) { }
 
   //SE INICIA AUTOMÁTICAMENTE
@@ -97,7 +101,20 @@ export class ProductosComponent implements OnInit {
         console.log(this.productosCarrito);
       }
     }
-
+      //spinner
+      this.spinner.show();
+      $('html, body').css({
+        overflow: 'hidden',
+        height: '100%'
+      });
+      setTimeout(() => {
+        this.spinner.hide();
+        $('html, body').css({
+          overflow: 'auto',
+          height: 'auto'
+      });
+      }, 1500);
+      //-------
   }
 
 /*----------------------- CREAR PRODUCTO -----------------------*/
@@ -125,7 +142,7 @@ obtenerProductos(){
   });
 }
 /*--------------------------------------------------------------*/
-/*----------------------- ELIMINAR PRODUCTOS -----------------------*/
+/*----------------------- ELIMINAR PRODUCTOS -------------------*/
 eliminarProductos(id: number, posicion: number){
   this.productoService.deleteProduct(id).subscribe((data: any) =>{
     this.productos.splice(posicion, 1);
@@ -133,7 +150,7 @@ eliminarProductos(id: number, posicion: number){
 });
 }
 /*--------------------------------------------------------------*/
-/*----------------------- EDITAR PRODUCTOS -------------------------*/
+/*----------------------- EDITAR PRODUCTOS ---------------------*/
 updateProducts(datosEditados: IProducto){
   console.log(datosEditados);
   this.productoService.editProduct(datosEditados).subscribe((data: any) =>{
@@ -180,7 +197,7 @@ onFileSelected(event: any){
     this.changeImage(event.target);
 }
 /*--------------------------------------------------------------*/
-/*----------------------- CHANGE IMAGE 2 ------------------------*/
+/*----------------------- CHANGE IMAGE 2 -----------------------*/
 changeImage2(fileInput: HTMLInputElement) {
   if (!fileInput.files || fileInput.files.length === 0) {
     return;
@@ -197,8 +214,11 @@ onFileSelected2(event: any){
     this.changeImage2(event.target);
 }
 /*--------------------------------------------------------------*/
-/*----------------------- EMITIR 1 ------------------------*/
+/*----------------------- EMITIR 1 -----------------------------*/
 pushACarrito(datoEmitido: IProducto){
+  if(sessionStorage.getItem('carrito')){
+    this.productosCarrito = JSON.parse(sessionStorage.getItem('carrito'));
+  }
   let existe: boolean = false;
   for (let i = 0; i < this.productosCarrito.length; i++) {
     if(this.productosCarrito[i].id == datoEmitido.id) {
@@ -214,11 +234,11 @@ pushACarrito(datoEmitido: IProducto){
     //creamos la ss para el producto
     sessionStorage.setItem('carrito',JSON.stringify(this.productosCarrito));
     this.productoService.productoEmitido.next(this.productosCarrito);
-
   }
+
 }
 /*--------------------------------------------------------------*/
-/*----------------------- FILTRAR CATEGORIA ------------------------*/
+/*----------------------- FILTRAR CATEGORIA --------------------*/
 filtrarCategoria(filtro: string){
   if(this.filtrocategoria == filtro) {
     console.log("si entra");

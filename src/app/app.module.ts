@@ -19,6 +19,10 @@ import { ProductosDetailComponent } from './Components/productos-detail/producto
 import {NgxPaginationModule} from 'ngx-pagination';
 import { CookieService } from 'ngx-cookie-service';
 import { CategoriaPipe } from './pipes/categoria.pipe';
+import { BusquedaProductoPipe } from './pipes/busqueda-producto.pipe';
+import { PerfilComponent } from './Components/perfil/perfil.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //Rutas
 const APP_ROUTES: Route[] = [
@@ -52,7 +56,10 @@ const APP_ROUTES: Route[] = [
     FooterComponent,
     NavOptionsComponent,
     BlogDetailComponent,
-    CategoriaPipe
+    CategoriaPipe,
+    BusquedaProductoPipe,
+    PerfilComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -61,7 +68,9 @@ const APP_ROUTES: Route[] = [
     HttpClientModule,
     ReactiveFormsModule,
     ImageCropperModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgxSpinnerModule,
+    BrowserAnimationsModule
 
   ],
   providers: [CookieService],

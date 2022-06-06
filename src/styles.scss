@@ -1,42 +1,66 @@
-/* You can add global styles to this file, and also import other style files */
+//imports fuentes
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed&family=Libre+Franklin&family=Maven+Pro:wght@500&display=swap');
 @font-face {
   font-family: monolisk-black;
   src: url(assets/fonts/Monolisk-Black.ttf);
 }
-@font-face {
-  font-family: droidsans;
-  src: url(assets/fonts/DroidSans.ttf);
+.nowrap {
+  white-space: nowrap;
 }
-
-@font-face {
-  font-family: CitrusGhotic-Regular;
-  src: url(assets/fonts/Monolisk-Black.ttf);
+//fuentes
+//principal
+.maven {
+  font-family: "Maven Pro", sans-serif;
+}
+//títulos
+.fira {
+  font-family: "Fira Sans Condensed", sans-serif;
+}
+//texto
+.franklin {
+  font-family: "Libre Franklin", sans-serif;
 }
 //Cursor onclick
 .pointer {
   cursor: pointer;
 }
+//imagen contain
 .contener {
   object-fit: contain;
 }
+//color hover
 .text-azulito {
   color: #0dcaf0;
 }
 .text-azulito:hover {
   color: #0dcaf0;
 }
+//alturas
+app-home {
+  min-height: 83vh;
+  font-family: 'Libre Franklin', sans-serif;
+}
 app-contacto {
   min-height: 83vh;
+  font-family: 'Libre Franklin', sans-serif;
 }
 app-blog {
   min-height: 83vh;
+  font-family: 'Libre Franklin', sans-serif;
 }
 app-blog-detail {
   min-height: 83vh;
+  font-family: 'Libre Franklin', sans-serif;
 }
 app-productos {
   min-height: 83vh;
+  font-family: 'Libre Franklin', sans-serif;
 }
 app-productos-detail {
   min-height: 83vh;
+  font-family: 'Libre Franklin', sans-serif;
+}
+html{
+  padding: 0;
+  margin: 0;
 }

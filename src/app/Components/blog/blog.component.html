@@ -48,28 +48,29 @@
     </ul>
   </nav>
   <!-- /BLOGS/ -->
-  <div class="row container-fluid d-flex justify-content-center">
-    <!-- carta del blog -->
-    <div id="blog-carta" class="card m-4 p-0 col-12 col-sm-6 border border-2" *ngFor="let blog of blogs | paginate: { itemsPerPage: 6, currentPage: p}; let i = index">
-      <img id="imagen-carta" class="card-img-top img-fluid pointer" [src]="blog.imagen" [routerLink]="['/blog-detail', blog.id]">
-      <div>
-        <span id="categoria-carta" class="p-0 m-2 float-start">{{blog.categoria}}</span>
-      </div>
-      <div class="card-body p-0 d-flex align-items-center justify-content-center">
-          <a id="titulo-carta" class="card-title text-decoration-none fs-3 text-center text-dark pointer titulo" [routerLink]="['/blog-detail', blog.id]">{{blog.titulo}}</a>
-      </div>
-      <span id="fecha-carta" class="card-text m-2 float-end">{{blog.fecha | date:"dd/MM/yyyy"}}</span>
-      <div class="p-0" *ngIf="usuarioactivo.tipo == 2">
-        <button class="btn btn-danger float-start m-2" (click)="eliminarBlogs(blog.id, i)">Borrar</button>
-        <button type="submit" class="btn btn-success float-end m-2"data-bs-toggle="modal" data-bs-target="#editar-blog" (click)="pasarInfo(blog)">Editar producto</button>
+  <div id="contenedorblogs" class="container-fluid">
+    <div class="row container-fluid d-flex justify-content-center">
+        <!-- carta del blog -->
+        <div id="blog-carta" class="card m-4 p-0 col-12 col-sm-6 border border-2" *ngFor="let blog of blogs | paginate: { itemsPerPage: 6, currentPage: p}; let i = index">
+          <img id="imagen-carta" class="card-img-top img-fluid pointer" [src]="blog.imagen" [routerLink]="['/blog-detail', blog.id]">
+          <div>
+            <span id="categoria-carta" class="p-0 m-2 float-start">{{blog.categoria}}</span>
+          </div>
+          <div class="card-body p-0 d-flex align-items-center justify-content-center">
+              <a id="titulo-carta" class="card-title text-decoration-none fs-3 text-center text-dark pointer titulo" [routerLink]="['/blog-detail', blog.id]">{{blog.titulo}}</a>
+          </div>
+          <span id="fecha-carta" class="card-text m-2 float-end">{{blog.fecha | date:"dd/MM/yyyy"}}</span>
+          <div class="p-0" *ngIf="usuarioactivo.tipo == 2">
+            <button class="btn btn-danger float-start m-2" (click)="eliminarBlogs(blog.id, i)">Borrar</button>
+            <button type="submit" class="btn btn-success float-end m-2"data-bs-toggle="modal" data-bs-target="#editar-blog" (click)="pasarInfo(blog)">Editar producto</button>
+          </div>
+        </div>
       </div>
     </div>
+    <pagination-controls class="text-center" (pageChange)="p = $event" nextLabel="" previousLabel="" [autoHide]="true"></pagination-controls>
   </div>
 
-</div>
-<div class="container-fluid d-flex justify-content-center">
-  <pagination-controls (pageChange)="p = $event" nextLabel="" previousLabel="" ></pagination-controls>
-</div>
+
 
 <!--------------------------- /MODALES/ --------------------------->
 <!-- /MODAL CREACIÓN DE BLOG/ -->
