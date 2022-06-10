@@ -2,6 +2,45 @@
   background-color: rgba(0, 0, 0, 0.7);
 }
 
+.fonttxs {
+  font-size: 1rem;
+}
+
+.fontpxs {
+  font-size: 0.5rem;
+}
+
+.btn:focus {
+  outline: 0 !important;
+}
+
+.btnxs {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-color: transparent;
+  border: 2px solid rgba(224, 36, 44, 0.7);
+  border-radius: 0.6em;
+  color: rgba(224, 36, 44, 0.7);
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-item-align: center;
+      align-self: center;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 0.3rem;
+  margin: 20px;
+  padding: 1.2em 2.8em;
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: "Maven Pro", sans-serif;
+}
+
 .btn {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -35,10 +74,10 @@
 }
 
 .fourth {
-  border-color: rgba(64, 148, 52, 0.7);
+  border-color: rgba(224, 36, 44, 0.7);
   border-radius: 0;
-  color: rgba(64, 148, 52, 0.7);
-  background-image: linear-gradient(45deg, rgba(64, 148, 52, 0.7) 50%, transparent 50%);
+  color: rgba(224, 36, 44, 0.7);
+  background-image: linear-gradient(45deg, rgba(224, 36, 44, 0.7) 50%, transparent 50%);
   background-position: 100%;
   background-size: 400%;
   -webkit-transition: 800ms ease-in-out;
@@ -50,9 +89,9 @@
 }
 
 .fifth {
-  border-color: rgba(224, 36, 44, 0.7);
+  border-color: rgba(64, 148, 52, 0.7);
   border-radius: 0;
-  color: rgba(224, 36, 44, 0.7);
+  color: rgba(64, 148, 52, 0.7);
   position: relative;
   overflow: hidden;
   z-index: 2;
@@ -70,8 +109,8 @@
           transform: translateX(-50%);
   width: 0;
   height: 100%;
-  background: rgba(224, 36, 44, 0.7);
-  z-index: 2;
+  background: rgba(64, 148, 52, 0.7);
+  z-index: -1;
   -webkit-transition: width 800ms ease-in-out;
   transition: width 800ms ease-in-out;
 }
@@ -82,160 +121,5 @@
 
 .fifth:hover:after {
   width: 110%;
-}
-
-.loader {
-  -webkit-transform: rotateZ(45deg);
-          transform: rotateZ(45deg);
-  -webkit-perspective: 1000px;
-          perspective: 1000px;
-  border-radius: 50%;
-  width: 48px;
-  height: 48px;
-  color: #fff;
-}
-
-.loader:before,
-.loader:after {
-  content: '';
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  top: 0;
-  width: inherit;
-  height: inherit;
-  border-radius: 50%;
-  -webkit-transform: rotateX(70deg);
-          transform: rotateX(70deg);
-  -webkit-animation: 1s spin linear infinite;
-          animation: 1s spin linear infinite;
-}
-
-.loader:after {
-  color: #FF3D00;
-  -webkit-transform: rotateY(70deg);
-          transform: rotateY(70deg);
-  -webkit-animation-delay: .4s;
-          animation-delay: .4s;
-}
-
-@-webkit-keyframes rotate {
-  0% {
-    -webkit-transform: translate(-50%, -50%) rotateZ(0deg);
-            transform: translate(-50%, -50%) rotateZ(0deg);
-  }
-  100% {
-    -webkit-transform: translate(-50%, -50%) rotateZ(360deg);
-            transform: translate(-50%, -50%) rotateZ(360deg);
-  }
-}
-
-@keyframes rotate {
-  0% {
-    -webkit-transform: translate(-50%, -50%) rotateZ(0deg);
-            transform: translate(-50%, -50%) rotateZ(0deg);
-  }
-  100% {
-    -webkit-transform: translate(-50%, -50%) rotateZ(360deg);
-            transform: translate(-50%, -50%) rotateZ(360deg);
-  }
-}
-
-@-webkit-keyframes rotateccw {
-  0% {
-    -webkit-transform: translate(-50%, -50%) rotate(0deg);
-            transform: translate(-50%, -50%) rotate(0deg);
-  }
-  100% {
-    -webkit-transform: translate(-50%, -50%) rotate(-360deg);
-            transform: translate(-50%, -50%) rotate(-360deg);
-  }
-}
-
-@keyframes rotateccw {
-  0% {
-    -webkit-transform: translate(-50%, -50%) rotate(0deg);
-            transform: translate(-50%, -50%) rotate(0deg);
-  }
-  100% {
-    -webkit-transform: translate(-50%, -50%) rotate(-360deg);
-            transform: translate(-50%, -50%) rotate(-360deg);
-  }
-}
-
-@-webkit-keyframes spin {
-  0%,
-  100% {
-    -webkit-box-shadow: .2em 0px 0 0px currentcolor;
-            box-shadow: .2em 0px 0 0px currentcolor;
-  }
-  12% {
-    -webkit-box-shadow: .2em .2em 0 0 currentcolor;
-            box-shadow: .2em .2em 0 0 currentcolor;
-  }
-  25% {
-    -webkit-box-shadow: 0 .2em 0 0px currentcolor;
-            box-shadow: 0 .2em 0 0px currentcolor;
-  }
-  37% {
-    -webkit-box-shadow: -.2em .2em 0 0 currentcolor;
-            box-shadow: -.2em .2em 0 0 currentcolor;
-  }
-  50% {
-    -webkit-box-shadow: -.2em 0 0 0 currentcolor;
-            box-shadow: -.2em 0 0 0 currentcolor;
-  }
-  62% {
-    -webkit-box-shadow: -.2em -.2em 0 0 currentcolor;
-            box-shadow: -.2em -.2em 0 0 currentcolor;
-  }
-  75% {
-    -webkit-box-shadow: 0px -.2em 0 0 currentcolor;
-            box-shadow: 0px -.2em 0 0 currentcolor;
-  }
-  87% {
-    -webkit-box-shadow: .2em -.2em 0 0 currentcolor;
-            box-shadow: .2em -.2em 0 0 currentcolor;
-  }
-}
-
-@keyframes spin {
-  0%,
-  100% {
-    -webkit-box-shadow: .2em 0px 0 0px currentcolor;
-            box-shadow: .2em 0px 0 0px currentcolor;
-  }
-  12% {
-    -webkit-box-shadow: .2em .2em 0 0 currentcolor;
-            box-shadow: .2em .2em 0 0 currentcolor;
-  }
-  25% {
-    -webkit-box-shadow: 0 .2em 0 0px currentcolor;
-            box-shadow: 0 .2em 0 0px currentcolor;
-  }
-  37% {
-    -webkit-box-shadow: -.2em .2em 0 0 currentcolor;
-            box-shadow: -.2em .2em 0 0 currentcolor;
-  }
-  50% {
-    -webkit-box-shadow: -.2em 0 0 0 currentcolor;
-            box-shadow: -.2em 0 0 0 currentcolor;
-  }
-  62% {
-    -webkit-box-shadow: -.2em -.2em 0 0 currentcolor;
-            box-shadow: -.2em -.2em 0 0 currentcolor;
-  }
-  75% {
-    -webkit-box-shadow: 0px -.2em 0 0 currentcolor;
-            box-shadow: 0px -.2em 0 0 currentcolor;
-  }
-  87% {
-    -webkit-box-shadow: .2em -.2em 0 0 currentcolor;
-            box-shadow: .2em -.2em 0 0 currentcolor;
-  }
 }
 /*# sourceMappingURL=home.component.css.map */

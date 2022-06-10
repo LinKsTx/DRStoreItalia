@@ -46,12 +46,12 @@
     <div class="carousel-inner">
       <div class="carousel-item active">
         <img src="../../../assets/images/slider2.png" alt="" class="d-block w-100">
-        <div class="carousel-caption animate__animated animate__fadeInLeft d-flex flex-column justify-content-center h-50 w-50" style="top: 30%; left:0;">
-          <h2 class="fira"><span class="onimage p-2 nowrap">Suplementos, café italiano</span></h2>
-          <p class="franklin m-2"><span class="onimage nowrap p-2">y mucho más, a tu alcance.
+        <div id="cap" class="carousel-caption animate__animated animate__fadeInLeft d-flex flex-column justify-content-center h-50 w-50" style="top: 30%; left:0;">
+          <h2 class="fira ocultar"><span class="onimage p-2 nowrap">Suplementos, café italiano</span></h2>
+          <p class="franklin m-2 ocultar"><span class="onimage nowrap p-2">y mucho más, a tu alcance.
           </span></p>
           <div class="d-flex justify-content-center">
-            <button class="btn fifth" href="#" (click)="toProductos()">Productos</button>
+            <button class="btn fifth ocultar" href="#" (click)="toProductos()">Productos</button>
           </div>
         </div>
       </div>
@@ -59,7 +59,7 @@
         <img src="../../../assets/images/slider3.png" alt="" class="d-block w-100">
         <div class="carousel-caption animate__animated animate__fadeInRight d-flex flex-column justify-content-center h-50 w-50" style="top: 30%; left:52%;">
           <h2 class="fira"><span class="onimage p-2 nowrap">Blogs informativos</span></h2>
-          <p class="franklin m-2"><span class="onimage nowrap p-2">Para que aprendas acerca de este mundo.</span></p>
+          <p class="franklin m-2 "><span class="onimage nowrap p-2">Para que aprendas acerca de este mundo.</span></p>
           <div class="d-flex justify-content-center">
             <button class="btn fourth" (click)="toBlog()">Blog</button>
           </div>
@@ -84,7 +84,9 @@
 
   <!-- /RECOMENDACIONES/ -->
   <div class="container-fluid mt-5">
+
   </div>
+
 
   <!-- /SPINNER/ -->
   <ngx-spinner bdColor = "rgba(20,20,20,0.8)" size = "medium" color = "#b3b0b0" type = "ball-clip-rotate" [fullScreen] = "true"><p style="color: white" (scroll)="false"></p></ngx-spinner>

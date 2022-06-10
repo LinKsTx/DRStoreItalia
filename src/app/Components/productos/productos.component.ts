@@ -89,7 +89,7 @@ export class ProductosComponent implements OnInit {
     if(valor) {
       this.usuarioactivo = JSON.parse(valor);
     } else{
-      console.log ("No hay usuario activo");
+
     }
     //------------------------------------------
     //-- leer Productos ------------------------
@@ -98,29 +98,35 @@ export class ProductosComponent implements OnInit {
     if(sessionStorage.getItem('carrito')) {
       if(sessionStorage.getItem('carrito').length > 0) {
         this.productosCarrito = JSON.parse(sessionStorage.getItem('carrito'));
-        console.log(this.productosCarrito);
+
       }
     }
       //spinner
       this.spinner.show();
-      $('html, body').css({
-        overflow: 'hidden',
-        height: '100%'
-      });
+      // $('html, body').css({
+      //   overflow: 'hidden',
+      //   height: '100%'
+      // });
       setTimeout(() => {
         this.spinner.hide();
-        $('html, body').css({
-          overflow: 'auto',
-          height: 'auto'
-      });
+      //   $('html, body').css({
+      //     overflow: 'auto',
+      //     height: 'auto'
+      // });
       }, 1500);
       //-------
+      //Comprobar modo oscuro
+      if(sessionStorage.getItem('theme') == "modooscuro") {
+        $("app-productos").addClass("darkmode");
+      } else if (sessionStorage.getItem('theme') == "modoclaro"){
+        $('app-productos').removeClass("darkmode");
+      }
   }
 
 /*----------------------- CREAR PRODUCTO -----------------------*/
 crearProducto() {
     this.productoService.addProduct(this.producto).subscribe(()=>{
-      console.log(this.producto);
+
       this.producto = {
         id: 0,
         nombre: "",
@@ -137,7 +143,7 @@ crearProducto() {
 /*----------------------- OBTENER PRODUCTOS --------------------*/
 obtenerProductos(){
     this.productoService.readProduct().subscribe((data: any) =>{
-    console.log(data);
+
     this.productos = data;
   });
 }
@@ -152,7 +158,7 @@ eliminarProductos(id: number, posicion: number){
 /*--------------------------------------------------------------*/
 /*----------------------- EDITAR PRODUCTOS ---------------------*/
 updateProducts(datosEditados: IProducto){
-  console.log(datosEditados);
+
   this.productoService.editProduct(datosEditados).subscribe((data: any) =>{
     this.producto = {
       id: 0,
@@ -222,7 +228,7 @@ pushACarrito(datoEmitido: IProducto){
   let existe: boolean = false;
   for (let i = 0; i < this.productosCarrito.length; i++) {
     if(this.productosCarrito[i].id == datoEmitido.id) {
-      console.log("el producto ya ha sido añadido");
+
       existe = true;
       break;
     }
@@ -241,7 +247,7 @@ pushACarrito(datoEmitido: IProducto){
 /*----------------------- FILTRAR CATEGORIA --------------------*/
 filtrarCategoria(filtro: string){
   if(this.filtrocategoria == filtro) {
-    console.log("si entra");
+
     window.location.reload();
     this.filtrocategoria == null;
   } else {

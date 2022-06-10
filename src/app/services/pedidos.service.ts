@@ -15,5 +15,8 @@ export class PedidosService {
   addPedido(Pedido: IPedido){
     return this.http.post(`${this.baseUrl}/pedido/crear_pedido.php`, Pedido);
   }
-
+  //Ver pedidos
+  obtenerPedidosID(id : number){
+    return this.http.get(`${this.baseUrl}/pedido/ver_pedido.php?id_usuario=${id}`);
+  }
 }

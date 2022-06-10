@@ -39,5 +39,8 @@ export class UsuarioService {
     return this.http.get(`${this.baseUrl}/usuario/ver_usuarios.php`);
   }
 
-
+ //Eliminar usuarios
+ deleteUsuario(id: number){
+  return this.http.delete(`${this.baseUrl}/usuario/borrar_usuario.php?id=${id}`);
+}
 }

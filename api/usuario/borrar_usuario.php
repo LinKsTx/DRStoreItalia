@@ -5,27 +5,24 @@
   header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
   header("Allow: GET, POST, OPTIONS, PUT, DELETE");
 
-
   //Conexión
   require("../conexion.php");
+
         $conexion= new Conexion();
         $pdoObject = $conexion->getConexion();
 
-
-
-        $id_usuario = $_GET["id_usuario"];
-        $idNumber = intval($id_usuario);
+        $idString= $_GET["id"];
+        $idNumber = intval($idString);
 
         //Consulta
-        $sql = "SELECT * FROM pedidos WHERE id_usuario = '$idNumber'";
+        $sql = "DELETE FROM usuarios WHERE id=?";
         //Preparas
         $sentencia = $pdoObject->prepare($sql);
-        $sentencia->execute();
-        $result = $sentencia->fetchAll(PDO::FETCH_ASSOC);
-        //Resultado
-        if ($result) {
-          echo json_encode($result);
+        $sentencia->bindParam(1, $idNumber);
+
+        if ($sentencia->execute()) {
+          echo json_encode(["success"=>1]);
         } else {
-          echo "No funciona";
+          echo json_encode(["success"=>2]);
         }
 ?>

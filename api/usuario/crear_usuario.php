@@ -22,6 +22,7 @@
   $nick = $jsonUsuarios->nick;
   $nombre =  $jsonUsuarios->nombre;
   $correo =  $jsonUsuarios->correo;
+  $domicilio =  $jsonUsuarios->domicilio;
   $contrasenya = $jsonUsuarios->contrasenya;
   $tipodeusuario = 1;
   $encriptado = md5($contrasenya);
@@ -60,13 +61,14 @@
 
 if ($boolean1 == false && $boolean2 == false) {
   //Meter en la base de datos el registro
-  $sql = "INSERT INTO usuarios (nombre, nick, correo, contrasenya ,tipo) VALUES (?, ?, ?, ?, ?)";
+  $sql = "INSERT INTO usuarios (nombre, nick, correo, domicilio, contrasenya ,tipo) VALUES (?, ?, ?, ?, ?, ?)";
   $sentencia = $pdoObject->prepare($sql);
   $sentencia->bindParam(1, $nombre);
   $sentencia->bindParam(2, $nick);
   $sentencia->bindParam(3, $correo);
-  $sentencia->bindParam(4, $encriptado);
-  $sentencia->bindParam(5, $tipodeusuario);
+  $sentencia->bindParam(4, $domicilio);
+  $sentencia->bindParam(5, $encriptado);
+  $sentencia->bindParam(6, $tipodeusuario);
   //La ejecutamos
   if ($sentencia->execute()) {
     echo json_encode(["success"=>1]);

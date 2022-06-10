@@ -20,13 +20,16 @@
 
   $pedido = $jsonPedidos->pedido;
   $id_usuario = $jsonPedidos->id_usuario;
+  $fecha_pedido = $jsonPedidos->fecha_pedido;
 
 
   //Meter en la base de datos el blog
-  $sql = "INSERT INTO pedidos (pedido, id_usuario) VALUES (?, ?)";
+  $sql = "INSERT INTO pedidos (pedido, fecha_pedido, id_usuario) VALUES (?, ?, ?)";
         $sentencia = $pdoObject->prepare($sql);
         $sentencia->bindParam(1, $pedido);
-        $sentencia->bindParam(2, $id_usuario);
+        $sentencia->bindParam(2, $fecha_pedido);
+        $sentencia->bindParam(3, $id_usuario);
+
 
         if ($sentencia->execute()) {
           $last_id = $pdoObject->lastInsertId();

@@ -42,6 +42,13 @@ export class ProductosDetailComponent implements OnInit {
     error => console.error(error)
     );
     this.stock();
+      //comprobar tema
+  if(sessionStorage.getItem('theme') == "modooscuro") {
+
+    $("app-productos-detail").addClass("darkmode");
+  } else if (sessionStorage.getItem('theme') == "modoclaro"){
+    $('app-productos-detail').removeClass("darkmode");
+}
     }
 
     stock() {

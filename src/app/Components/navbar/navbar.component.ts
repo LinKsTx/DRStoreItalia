@@ -30,6 +30,7 @@ export class NavbarComponent implements OnInit {
   @ViewChild('cerrarmodalis') cerrarmodalis: ElementRef;
   @ViewChild('cerrarmodalcu') cerrarmodalcu: ElementRef;
   @ViewChild('cerrarmodalco') cerrarmodalco: ElementRef;
+  @ViewChild('cerrarmodalvp') cerrarmodalvp: ElementRef;
 
   //Boolean para sacar código de correo ya existente
   boolean1: boolean = false;
@@ -48,6 +49,7 @@ export class NavbarComponent implements OnInit {
     nick: "",
     nombre: "",
     correo: "",
+    domicilio: "",
     contrasenya: "",
     contrasenya2: ""
   }
@@ -59,6 +61,7 @@ export class NavbarComponent implements OnInit {
     nick: "",
     nombre: "",
     correo: "",
+    domicilio: "",
     contrasenya: "",
     contrasenya2: "",
     pic : ""
@@ -78,7 +81,10 @@ export class NavbarComponent implements OnInit {
 
   pedido: IPedido = {
     pedido: "",
+    fecha_pedido: new Date(Date.now()),
   }
+
+  transaccion: IPedido[] = [];
 
 /*--------------------------------------------------------------*/
 
@@ -116,7 +122,6 @@ export class NavbarComponent implements OnInit {
     if(valor) {
       this.usuarioactivo = JSON.parse(valor);
     } else{
-      console.log ("No hay usuario activo");
     }
     //--------------------------------
     //obtenemos el pic del usuario activo y lo igualamos a this.usuarioactivo.
@@ -125,8 +130,7 @@ export class NavbarComponent implements OnInit {
     //push a carrito mediante servicio
     this.productosService.productoEmitido.subscribe(respuesta =>{
       this.carrito = JSON.parse(sessionStorage.getItem('carrito'));
-      this.ne = true;
-      console.log(this.carrito); })
+      this.ne = true; })
 
       if(sessionStorage.getItem('carrito')) {
         if(sessionStorage.getItem('carrito').length > 0) {
@@ -154,14 +158,51 @@ export class NavbarComponent implements OnInit {
     $("#alertacreacionusuario").hide();
     $("#carritovacio").hide();
     //-------------------------------
+    if(this.usuarioactivo.tipo == 1) {
+      this.obtenerPedidos();
+    }
+
+    if(sessionStorage.getItem('theme') == "modooscuro") {
+      //color fondo
+      $("#navxs").removeClass("bg-light");
+      $("#navxs").addClass("bg-dark");
+      $("#navxl").removeClass("bg-light");
+      $("#navxl").addClass("bg-dark");
+      //letra
+      $("#navegadorxs").removeClass("navbar-light");
+      $("#navegadorxs").addClass("navbar-dark");
+      $("#navegadorxl").removeClass("navbar-light");
+      $("#navegadorxl").addClass("navbar-dark");
+      //imagen
+      $("#logoxs").attr("src",'../../../assets/images/logo-claro.png');
+      $("#logoxl").attr("src",'../../../assets/images/logo-claro.png');
+      $("ul#dropdown-confoto").removeClass("bg-light");
+      $("ul#dropdown-confoto").addClass("bg-dark");
+
+    } else if (sessionStorage.getItem('theme') == "modoclaro"){
+      //color fondo
+      $("#navxs").removeClass("bg-dark");
+      $("#navxs").addClass("bg-light");
+      $("#navxl").removeClass("bg-dark");
+      $("#navxl").addClass("bg-light");
+      //letra
+      $("#navegadorxs").removeClass("navbar-dark");
+      $("#navegadorxs").addClass("navbar-light");
+      $("#navegadorxl").removeClass("navbar-dark");
+      $("#navegadorxl").addClass("navbar-light");
+      //imagen
+      $("#logoxs").attr("src",'../../../assets/images/logo-oscuro.png');
+      $("#logoxl").attr("src",'../../../assets/images/logo-oscuro.png');
+      //dropdowns & modal
+
+
+    }
   }
 
 /*----------------------- CREAR USUARIO ------------------------*/
   crearUsuario(form: NgForm){
     //hacemos el insert
-    console.log(this.usuario);
     this.usuarioService.addUsuario(this.usuario).subscribe((respuesta)=>{
-      console.log(respuesta);
 
       this.boolean1 = false;
       this.boolean2 = false;
@@ -195,6 +236,7 @@ export class NavbarComponent implements OnInit {
           nick: "",
           nombre: "",
           correo: "",
+          domicilio: "",
           contrasenya: "",
           contrasenya2: ""
         }
@@ -216,10 +258,10 @@ export class NavbarComponent implements OnInit {
     //-- Forma sessionStorage --------
     // sessionStorage.setItem('user',JSON.stringify(resp[0]));
     // this.usuarioactivo = resp[0];
-    // console.log(this.usuarioactivo);
+
     //--------------------------------
     //-- Forma Cookies ---------------
-    console.log(resp);
+
     this.boolean3 = false;
     if (resp != "X") {
       let expires = (new Date(Date.now()+ 86400*30000)).toUTCString();
@@ -253,8 +295,11 @@ export class NavbarComponent implements OnInit {
     }
     //--------------------------------
     this.getPic();
+    if(this.usuarioactivo.tipo == 1) {
+      this.obtenerPedidos();
+    }
     });
-    console.log(this.usuarioactivo);
+
   }
 /*--------------------------------------------------------------*/
 /*----------------------- LOG OUT ------------------------------*/
@@ -271,6 +316,7 @@ export class NavbarComponent implements OnInit {
       nick: "",
       nombre: "",
       correo: "",
+      domicilio: "",
       contrasenya: "",
       contrasenya2: ""
     }
@@ -286,8 +332,8 @@ export class NavbarComponent implements OnInit {
   toogleAlertFadeOut(alerta: string) {
     $(alerta).fadeOut();
   }
-/*------------------------------------------------------------*/
-/*--------------------- UPDATE PIC ---------------------------*/
+/*--------------------------------------------------------------*/
+/*--------------------- UPDATE PIC -----------------------------*/
   updatePic() {
     //igualar el creado con el activo
     this.usuarioperfil.nick = this.usuarioactivo.nick;
@@ -300,8 +346,9 @@ export class NavbarComponent implements OnInit {
       this.usuarioperfil.pic = "";
       this.getPic();
     });
-    console.log(this.usuarioperfil.pic);
+
   }
+/*--------------------------------------------------------------*/
 /*----------------------- CHANGE IMAGE -------------------------*/
   changeImage(fileInput: HTMLInputElement) {
     if (!fileInput.files || fileInput.files.length === 0) {
@@ -322,7 +369,7 @@ export class NavbarComponent implements OnInit {
 /*----------------------- GET PIC ------------------------------*/
   getPic() {
       this.usuarioService.getPic(this.usuarioactivo).subscribe((respuesta: any)=>{
-        console.log(respuesta[0].pic);
+
         this.usuarioactivo.pic = respuesta[0].pic;
       });
   }
@@ -330,7 +377,7 @@ export class NavbarComponent implements OnInit {
 /*----------------------- OBTENER USUARIOS ---------------------*/
   obtenerUsuarios(){
       this.usuarioService.readUsuarios().subscribe((data: any) =>{
-      console.log(data);
+
       this.usuarioslist = data;
     });
   }
@@ -362,11 +409,11 @@ export class NavbarComponent implements OnInit {
 /*--------------------------------------------------------------*/
 /*----------------------- BORRAR PRODUCTO DE CARRITO -----------*/
   borrarProducto(id: number){
-    console.log(this.carrito);
+
     this.carrito = this.carrito.filter(element=>element.id !== id);
     sessionStorage.removeItem('carrito');
     sessionStorage.setItem('carrito', JSON.stringify(this.carrito));
-    console.log(this.carrito);
+
     if(this.carrito.length == 0) {
       this.ne = false;
     }
@@ -377,7 +424,7 @@ export class NavbarComponent implements OnInit {
   crearPedido(){
   this.pedido.pedido = JSON.stringify(this.carrito);
   this.pedido.id_usuario = this.usuarioactivo.id;
-  console.log(this.carrito);
+
   if(this.carrito) {
     if(this.carrito.length == 0) {
       //mostramos y hacemos hide con fade el error
@@ -387,7 +434,7 @@ export class NavbarComponent implements OnInit {
       }, 3000);
     } else {
       this.pedidosService.addPedido(this.pedido).subscribe((respuesta)=>{
-        console.log(this.usuarioactivo);
+
         this.vaciarCarrito();
         this.pedido.pedido = "";
         // $("#alertacomprarealizada").fadeIn();
@@ -411,6 +458,7 @@ export class NavbarComponent implements OnInit {
         })
         this.cerrarmodalco.nativeElement.click();
         // window.location.reload();
+        this.obtenerPedidos();
       });
   }
     } else {
@@ -425,7 +473,7 @@ export class NavbarComponent implements OnInit {
 
   }
 /*--------------------------------------------------------------*/
-/*----------------------- SUMAR CANTIDAD ------------------------*/
+/*----------------------- SUMAR CANTIDAD -----------------------*/
   sumarCantidad(producto: IProducto){
   //se hacen los cambios
   if(producto.cantidad == 10) {
@@ -443,7 +491,7 @@ export class NavbarComponent implements OnInit {
 }
   }
 /*--------------------------------------------------------------*/
-/*----------------------- RESTAR CANTIDAD ------------------------*/
+/*----------------------- RESTAR CANTIDAD ----------------------*/
   restarCantidad(producto: IProducto){
   //se hacen los cambios
   if(producto.cantidad == 1) {
@@ -460,5 +508,114 @@ export class NavbarComponent implements OnInit {
   //se actualiza ss
   sessionStorage.setItem('carrito', JSON.stringify(this.carrito));
   }
-  /*--------------------------------------------------------------*/
+/*--------------------------------------------------------------*/
+/*----------------------- OBTENER PEDIDOS ----------------------*/
+  obtenerPedidos() {
+    this.pedidosService.obtenerPedidosID(this.usuarioactivo.id).subscribe((data: any) =>{
+      this.transaccion = data;
+      for(let i=0; i < this.transaccion.length; i++) {
+        this.transaccion[i].pedidoarray = JSON.parse(this.transaccion[i].pedido);
+      }
+    });
+  }
+/*--------------------------------------------------------------*/
+/*----------------------- OBTENER PEDIDOS ----------------------*/
+  obtenerPedidosPorId(id: number) {
+    this.transaccion = [];
+    this.pedidosService.obtenerPedidosID(id).subscribe((data: any) =>{
+      this.transaccion = data;
+      for(let i=0; i < this.transaccion.length; i++) {
+        this.transaccion[i].pedidoarray = JSON.parse(this.transaccion[i].pedido);
+      }
+    }, error => {
+    //   Swal.fire({
+    //   icon: 'error',
+    //   title: 'Ha ocurrido un error',
+    //   text: '¡El usuario seleccionado, no tiene pedidos!',
+    //   footer: '<a href="">Why do I have this issue?</a>'
+    // })
+    // this.cerrarmodalvp.nativeElement.click();
+  });
+  }
+/*--------------------------------------------------------------*/
+/*----------------------- ELIMINAR USUARIO ---------------------*/
+  eliminarUsuario(id: number) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.usuarioService.deleteUsuario(id).subscribe((data: any) =>{
+          this.usuarioslist = this.usuarioslist.filter(element=>element.id !== id);
+      });
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+      }
+    })
+  }
+/*--------------------------------------------------------------*/
+/*----------------------- ELIMINAR USUARIO ---------------------*/
+comprobarTema() {
+  if(sessionStorage.getItem('theme') == "modooscuro") {
+    $("#dropdown-sinfotoxs").removeClass("bg-light");
+    $("#dropdown-sinfotoxs").addClass("bg-dark");
+
+    $("#dropdown-confotoxs").removeClass("bg-light");
+    $("#dropdown-confotoxs").addClass("bg-dark");
+
+    $("#dropdown-confotoxsxs").removeClass("bg-light");
+    $("#dropdown-confotoxsxs").addClass("bg-dark");
+
+    $("#dropdown-sinfoto").removeClass("bg-light");
+    $("#dropdown-sinfoto").addClass("bg-dark");
+
+    $("#dropdown-confoto").removeClass("bg-light");
+    $("#dropdown-confoto").addClass("bg-dark");
+
+    $("#dropdown-carrito").removeClass("bg-light");
+    $("#dropdown-carrito").addClass("bg-dark");
+
+    $("#c-iniciar-sesion").addClass("darkmode");
+    $("#c-crear-usuario").addClass("darkmode");
+    $("#c-perfil").addClass("darkmode");
+    $("#c-carritocompra").addClass("darkmode");
+    $("#c-ver_pedidos").addClass("darkmode");
+
+  } else if (sessionStorage.getItem('theme') == "modoclaro"){
+
+    $("#dropdown-sinfotoxs").addClass("bg-light");
+    $("#dropdown-sinfotoxs").removeClass("bg-dark");
+
+    $("#dropdown-confotoxs").addClass("bg-light");
+    $("#dropdown-confotoxs").removeClass("bg-dark");
+
+    $("#dropdown-confotoxsxs").addClass("bg-light");
+    $("#dropdown-confotoxsxs").removeClass("bg-dark");
+
+    $("#dropdown-sinfoto").addClass("bg-light");
+    $("#dropdown-sinfoto").removeClass("bg-dark");
+
+    $("#dropdown-confoto").addClass("bg-light");
+    $("#dropdown-confoto").removeClass("bg-dark");
+
+    $("#dropdown-carrito").addClass("bg-light");
+    $("#dropdown-carrito").removeClass("bg-dark");
+
+    $("#c-iniciar-sesion").removeClass("darkmode");
+    $("#c-crear-usuario").removeClass("darkmode");
+    $("#c-perfil").removeClass("darkmode");
+    $("#c-carritocompra").removeClass("darkmode");
+    $("#c-ver_pedidos").removeClass("darkmode");
+  }
+}
+
+/*--------------------------------------------------------------*/
 }

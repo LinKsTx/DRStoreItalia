@@ -89,6 +89,7 @@
       </label>
     </div>
   </div>
+  <script src="i18n/angular-locale_de-de.js"></script>
   <!-- Productos -->
   <div class="container-fluid">
     <div id="contenedorproductos" class="container-fluid">
@@ -101,7 +102,7 @@
         <div class="card-body p-0 d-flex align-items-center flex-column justify-content-center">
             <a id="titulo-producto" class="card-title text-decoration-none fs-3 text-center text-dark pointer titulo m-0" [routerLink]="['/productos-detail', producto.id]">{{producto.nombre}}</a>
             <span id="categoria-producto" class="p-0 m-0 float-start">{{producto.marca}}</span>
-            <span id="fecha-producto" class="card-text m-2 float-end">{{producto.precio}} € </span>
+            <span id="fecha-producto" class="card-text m-2 float-end">{{ producto.precio | number : '1.2-2' }} € </span>
           </div>
           <div class="d-flex justify-content-center" *ngIf="usuarioactivo.tipo == 1">
             <button type="submit" class="btn btn-info m-2" (click)="pushACarrito(producto)">Añadir al carrito de la compra</button>

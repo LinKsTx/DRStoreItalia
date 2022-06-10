@@ -12,6 +12,14 @@ export class FooterComponent implements OnInit {
 
   //SE INICIA AUTOMÁTICAMENTE
   ngOnInit(): void {
+     //comprobar tema
+ if(sessionStorage.getItem('theme') == "modooscuro") {
+  $("#div-footer").removeClass("bg-dark");
+  $("#div-footer").addClass("oscurito")
+} else if (sessionStorage.getItem('theme') == "modoclaro"){
+  $("#div-footer").addClass("bg-dark");
+  $("#div-footer").removeClass("oscurito")
+}
   }
 
 }

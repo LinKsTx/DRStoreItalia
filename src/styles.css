@@ -4,6 +4,10 @@
   src: url(assets/fonts/Monolisk-Black.ttf);
 }
 
+.nowrap {
+  white-space: nowrap;
+}
+
 .maven {
   font-family: "Maven Pro", sans-serif;
 }
@@ -63,8 +67,38 @@ app-productos-detail {
   font-family: 'Libre Franklin', sans-serif;
 }
 
+app-perfil {
+  min-height: 83vh;
+  font-family: 'Libre Franklin', sans-serif;
+}
+
 html {
   padding: 0;
   margin: 0;
+}
+
+app-home.darkmode {
+  background-color: #202020;
+  color: white;
+}
+
+app-productos.darkmode {
+  background-color: #202020;
+  color: white;
+}
+
+app-blog.darkmode {
+  background-color: #202020;
+  color: white;
+}
+
+app-blog-detail.darkmode {
+  background-color: #202020;
+  color: white;
+}
+
+#buenas.darkmode {
+  background-color: #202020;
+  color: white;
 }
 /*# sourceMappingURL=styles.css.map */

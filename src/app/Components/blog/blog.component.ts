@@ -72,18 +72,22 @@ export class BlogComponent implements OnInit {
     if(valor) {
       this.usuarioactivo = JSON.parse(valor);
     } else{
-      console.log ("No hay usuario activo");
     }
     //------------------------------------------
     //-- leer Blog -----------------------------
     this.obtenerBlogs();
     //------------------------------------------
+    //comprobar tema
+    if(sessionStorage.getItem('theme') == "modooscuro") {
+      $("app-blog").addClass("darkmode");
+    } else if (sessionStorage.getItem('theme') == "modoclaro"){
+      $('app-blog').removeClass("darkmode");
+    }
      }
 
 /*----------------------- CREAR BLOG ---------------------------*/
 crearBlog() {
     this.blogService.addBlog(this.blog).subscribe(()=>{
-      console.log(this.blog);
       this.blog = {
         titulo: "",
         contenido: "",
@@ -97,7 +101,6 @@ crearBlog() {
 /*----------------------- OBTENER BLOGS ------------------------*/
 obtenerBlogs(){
       this.blogService.readBlog().subscribe((data: any) =>{
-      console.log(data);
       this.blogs = data;
     });
 }
@@ -112,7 +115,6 @@ eliminarBlogs(id: number, posicion: number){
 /*--------------------------------------------------------------*/
 /*----------------------- EDITAR BLOGS -------------------------*/
 updateBlogs(datosEditados: IBlog){
-  console.log(datosEditados);
   this.blogService.editBlog(datosEditados).subscribe((data: any) =>{
     this.blogeditado = {
       id: 0,

@@ -33,6 +33,12 @@ export class BlogDetailComponent implements OnInit {
     (p : any)=> this.blog = p[0],
     error => console.error(error)
     );
+    if(sessionStorage.getItem('theme') == "modooscuro") {
+      //Comprobar tema
+      $("app-blog-detail").toggleClass("darkmode");
+    } else if (sessionStorage.getItem('theme') == "modoclaro"){
+      $('app-blog-detail').removeClass("darkmode");
+    }
     }
 
 }

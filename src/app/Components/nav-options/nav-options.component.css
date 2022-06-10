@@ -28,4 +28,14 @@ a.dropdown-item {
 .animate__animated.animate__fadeIn {
   --animate-duration: 0.75s;
 }
+
+#darkdark {
+  background-color: white;
+  color: black;
+}
+
+.darkmode {
+  background-color: #202020 !important;
+  color: white !important;
+}
 /*# sourceMappingURL=nav-options.component.css.map */

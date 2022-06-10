@@ -1,13 +1,13 @@
 <!--------------------------- /NAVBARS/ --------------------------->
 <!-- /NAVBAR/ -->
 <!-- xs sm, luego se expande. (versión encogido) -->
-<div class="container-fluid d-block d-lg-none bg-light">
-    <nav id="navegador" class="navbar navbar-expand-md navbar-light monolisk m-0 fs-6">
+<div id="navxs" class="container-fluid d-block d-lg-none bg-light">
+    <nav id="navegadorxs" class="navbar navbar-expand-md navbar-dark monolisk m-0 fs-6">
       <!-- contenedor (logo + botón (forma colapsada) + navbar -->
       <div id="contenedor-navegador" class="container-fluid">
           <!-- logo -->
           <a class="navbar-brand" href="#" style="width: 100px">
-              <img src="../../../assets/images/logo-oscuro.png" style="width: 100px;" alt="logo-drstoreitalia">
+              <img id="logoxs" src="../../../assets/images/logo-oscuro.png" style="width: 100px;" alt="logo-drstoreitalia">
           </a>
           <!-- botón para navbar colapsado -->
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navexpandible">
@@ -20,19 +20,19 @@
                   <ul class="navbar-nav">
                       <!-- #home -->
                       <li class="nav-item m-2">
-                          <a class="nav-link" [routerLink]="['home']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">HOME</a>
+                          <a class="nav-link" [routerLink]="['home']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">Home</a>
                       </li>
                        <!-- #productos -->
                        <li class="nav-item m-2">
-                        <a class="nav-link" [routerLink]="['productos']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">PRODUCTOS</a>
+                        <a class="nav-link" [routerLink]="['productos']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">Productos</a>
                       </li>
                       <!-- #blog -->
                       <li class="nav-item m-2">
-                          <a class="nav-link" [routerLink]="['blog']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">BLOG</a>
+                          <a class="nav-link" [routerLink]="['blog']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">Blog</a>
                       </li>
                       <!-- #contacto -->
                       <li class="nav-item m-2">
-                          <a class="nav-link" [routerLink]="['contacto']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">CONTACTO</a>
+                          <a class="nav-link" [routerLink]="['contacto']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">Contacto</a>
                       </li>
                   </ul>
               </div>
@@ -41,25 +41,32 @@
                   <ul class="navbar-nav">
                       <li class="nav-item">
                           <!-- enlace hacia modal #iniciar-sesión/logout -->
-                          <a class="nav-link pointer-cursor nowrap" href="#" data-bs-toggle="modal" data-bs-target="#iniciar-sesion" *ngIf="usuarioactivo.nombre.length === 0">INICIAR SESIÓN</a>
+                          <a class="nav-link pointer-cursor nowrap" (click)="comprobarTema();" href="#" data-bs-toggle="modal" data-bs-target="#iniciar-sesion" *ngIf="usuarioactivo.nombre.length === 0">Iniciar sesión</a>
                       </li>
                       <!-- sesion iniciada -->
                       <!--sin foto-->
                       <li class="nav-item dropdown m-2 estilo-hover escritorio-hover" *ngIf="usuarioactivo.nombre.length > 0 && !usuarioactivo.pic">
-                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><span id="sin-foto"><i class="bi bi-person"></i>&nbsp;{{usuarioactivo.nick}}</span></a>
-                        <ul class="dropdown-menu text-center bg-light animate__animated animate__fadeIn border border-2">
-                          <li><a class="nav-link pointer-cursor fs-6 animate__animated animate__fadeInDown" href="#" data-bs-toggle="modal" data-bs-target="#cuenta">Cuenta</a></li>
-                          <li><a class="nav-link pointer-cursor fs-6 animate__animated animate__fadeInDown" *ngIf="usuarioactivo.tipo == 1" href="#">Pedidos</a></li>
+                        <a class="nav-link dropdown-toggle" (click)="comprobarTema();" role="button" data-bs-toggle="dropdown"><span id="sin-foto"><i class="bi bi-person"></i>&nbsp;{{usuarioactivo.nick}}</span></a>
+                        <ul id="dropdown-sinfotoxs" class="dropdown-menu text-center bg-light animate__animated animate__fadeIn border border-2">
+                          <li><a class="nav-link pointer-cursor fs-6 animate__animated animate__fadeInDown" href="#" data-bs-toggle="modal" data-bs-target="#perfil" type="button">Perfil</a></li>
                           <li><a class="nav-link pointer-cursor fs-6 animate__animated animate__fadeInDown pointer" (click)="logOut()">Cerrar sesión</a></li>
                         </ul>
                       </li>
-                      <!--con foto-->
-                      <li class="nav-item dropdown m-1 estilo-hover escritorio-hover d-flex flex-column align-items-center justify-content-center" *ngIf="usuarioactivo.nombre.length > 0 && usuarioactivo.pic">
-                        <img class="rounded-circle contener dropdown-toggle" role="button" data-bs-toggle="dropdown" [src]="usuarioactivo.pic" alt="" style="width:50px;">
-                        <a class="nav-link dropdown-toggle text-center" role="button" data-bs-toggle="dropdown"><span class="text-center" id="con-foto">{{usuarioactivo.nick}}</span></a>
-                        <ul class="dropdown-menu text-center bg-light animate__animated animate__fadeIn border border-2">
-                          <li><a class="nav-link pointer-cursor fs-6 animate__animated animate__fadeInDown" href="#" data-bs-toggle="modal" data-bs-target="#cuenta">Cuenta</a></li>
-                          <li><a class="nav-link pointer-cursor fs-6 animate__animated animate__fadeInDown" *ngIf="usuarioactivo.tipo == 1" href="#">Pedidos</a></li>
+                      <!--con foto md-->
+                      <li class="nav-item dropdown m-1 estilo-hover escritorio-hover d-none d-md-flex flex-row align-items-center justify-content-center" *ngIf="usuarioactivo.nombre.length > 0 && usuarioactivo.pic">
+                        <img class="rounded-circle contener dropdown-toggle bg-dark" (click)="comprobarTema();" role="button" data-bs-toggle="dropdown" [src]="usuarioactivo.pic" alt="" style="width:50px; max-width: 50px; max-height: 50px;">
+                        <a class="nav-link dropdown-toggle text-center" (click)="comprobarTema();" role="button" data-bs-toggle="dropdown"><span class="text-center" id="con-foto">{{usuarioactivo.nick}}</span></a>
+                        <ul id="dropdown-confotoxs" class="dropdown-menu text-center bg-light animate__animated animate__fadeIn border border-2">
+                          <li><a class="nav-link pointer-cursor fs-6 animate__animated animate__fadeInDown" href="#"  data-bs-toggle="modal" data-bs-target="#perfil" type="button">Perfil</a></li>
+                          <li><a class="nav-link pointer-cursor fs-6 animate__animated animate__fadeInDown pointer" (click)="logOut()">Cerrar sesión</a></li>
+                        </ul>
+                      </li>
+                      <!--con foto xs-->
+                      <li class="nav-item dropdown m-1 estilo-hover escritorio-hover d-md-none flex-column align-items-center justify-content-center" *ngIf="usuarioactivo.nombre.length > 0 && usuarioactivo.pic">
+                        <img class="rounded-circle contener dropdown-toggle bg-dark" role="button" data-bs-toggle="dropdown" [src]="usuarioactivo.pic" alt="" style="width:50px;max-width: 50px; max-height: 50px;">
+                        <a class="nav-link dropdown-toggle text-center" role="button" (click)="comprobarTema();" data-bs-toggle="dropdown"><span class="text-center" id="con-foto">{{usuarioactivo.nick}}</span></a>
+                        <ul id="dropdown-confotoxsxs" class="dropdown-menu text-center bg-light animate__animated animate__fadeIn border border-2">
+                          <li><a class="nav-link pointer-cursor fs-6 animate__animated animate__fadeInDown" href="#"  data-bs-toggle="modal" data-bs-target="#perfil" type="button">Perfil</a></li>
                           <li><a class="nav-link pointer-cursor fs-6 animate__animated animate__fadeInDown pointer" (click)="logOut()">Cerrar sesión</a></li>
                         </ul>
                       </li>
@@ -80,13 +87,13 @@
 </div>
 <!-- /NAVBAR/ -->
 <!-- desde lg, luego se expande. (versión normal) -->
-<div class="container-fluid d-none d-lg-flex justify-content-center bg-light">
-    <nav id="navegador" class="navbar navbar-expand-sm navbar-light monolisk m-0 fs-5 w-50">
+<div id="navxl" class="container-fluid d-none d-lg-flex justify-content-center bg-light">
+    <nav id="navegadorxl" class="navbar navbar-expand-sm navbar-light monolisk m-0 fs-5 w-50">
       <!-- contenedor (logo + botón (forma colapsada) + navbar -->
       <div id="contenedor-navegador" class="container-fluid">
           <!-- logo -->
           <a class="navbar-brand" href="#" style="width: 100px">
-              <img src="../../../assets/images/logo-oscuro.png" style="width: 100px;" alt="logo-drstoreitalia">
+              <img id="logoxl" src="../../../assets/images/logo-oscuro.png" style="width: 100px;" alt="logo-drstoreitalia">
           </a>
           <!-- botón para navbar colapsado -->
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navexpandible">
@@ -121,32 +128,30 @@
                     <!-- sesión sin iniciar -->
                       <li class="nav-item m-2" >
                           <!-- modal inicio de sesión / creación de usuario -->
-                          <a class="nav-link pointer-cursor nowrap" href="#" data-bs-toggle="modal" data-bs-target="#iniciar-sesion" *ngIf="usuarioactivo.nombre.length === 0">Iniciar sesión</a>
+                          <a class="nav-link pointer-cursor nowrap" href="#" (click)="comprobarTema();" data-bs-toggle="modal" data-bs-target="#iniciar-sesion" *ngIf="usuarioactivo.nombre.length === 0">Iniciar sesión</a>
                       </li>
                       <!-- sesion iniciada -->
                       <!--sin foto-->
-                         <li class="nav-item dropdown m-2 estilo-hover escritorio-hover" *ngIf="usuarioactivo.nombre.length > 0 && !usuarioactivo.pic">
-                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><span id="sin-foto"><i class="bi bi-person"></i>&nbsp;{{usuarioactivo.nick}}</span></a>
-                        <ul class="dropdown-menu text-center bg-light border border-2 animate__animated animate__fadeIn">
-                          <li><a class="nav-link pointer-cursor fs-6 animate__animated animate__fadeInDown" href="#" data-bs-toggle="modal" data-bs-target="#cuenta">Cuenta</a></li>
-                          <li><a class="nav-link pointer-cursor fs-6 animate__animated animate__fadeInDown" *ngIf="usuarioactivo.tipo == 1" href="#">Pedidos</a></li>
+                         <li class="nav-item dropdown m-2 estilo-hover escritorio-hover d-flex align-items-center" *ngIf="usuarioactivo.nombre.length > 0 && !usuarioactivo.pic">
+                        <a class="nav-link dropdown-toggle" (click)="comprobarTema();" role="button" data-bs-toggle="dropdown"><span id="sin-foto"><i class="bi bi-person"></i>&nbsp;{{usuarioactivo.nick}}</span></a>
+                        <ul id="dropdown-sinfoto"   class="dropdown-menu text-center bg-light border border-2 animate__animated animate__fadeIn">
+                          <li><a class="nav-link pointer-cursor fs-6 animate__animated animate__fadeInDown" href="#" data-bs-toggle="modal" data-bs-target="#perfil" type="button">Perfil</a></li>
                           <li><a class="nav-link pointer-cursor fs-6 animate__animated animate__fadeInDown pointer" (click)="logOut()">Cerrar sesión</a></li>
                         </ul>
                       </li>
                       <!--con foto-->
                       <li class="nav-item m-2 dropdown estilo-hover escritorio-hover d-flex flex-row align-items-center" *ngIf="usuarioactivo.nombre.length > 0 && usuarioactivo.pic">
-                        <img class="rounded-circle contener dropdown-toggle" role="button" data-bs-toggle="dropdown" [src]="usuarioactivo.pic" alt="" style="width:50px;">
-                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><span id="con-foto">&nbsp;&nbsp;{{usuarioactivo.nick}}</span></a>
-                        <ul class="dropdown-menu text-center bg-light border border-2 animate__animated animate__fadeIn">
-                          <li><a class="nav-link pointer-cursor fs-6 animate__animated animate__fadeInDown" href="#" data-bs-toggle="modal" data-bs-target="#cuenta">Cuenta</a></li>
-                          <li><a class="nav-link pointer-cursor fs-6 animate__animated animate__fadeInDown" *ngIf="usuarioactivo.tipo == 1" href="#">Pedidos</a></li>
+                        <img class="rounded-circle contener dropdown-toggle bg-dark" role="button" data-bs-toggle="dropdown" [src]="usuarioactivo.pic" alt="" style="width:50px; max-width: 50px; max-height: 50px;">
+                        <a class="nav-link dropdown-toggle" (click)="comprobarTema();" role="button" data-bs-toggle="dropdown"><span id="con-foto">&nbsp;&nbsp;{{usuarioactivo.nick}}</span></a>
+                        <ul id="dropdown-confoto" class="dropdown-menu text-center bg-light border border-2 animate__animated animate__fadeIn">
+                          <li><a class="nav-link pointer-cursor fs-6 animate__animated animate__fadeInDown" href="#"  data-bs-toggle="modal" data-bs-target="#perfil" type="button">Perfil</a></li>
                           <li><a class="nav-link pointer-cursor fs-6 animate__animated animate__fadeInDown pointer" (click)="logOut()">Cerrar sesión</a></li>
                         </ul>
                       </li>
                       <!-- carrito de compra -->
                         <li class="nav-item dropdown m-2 estilo-hover escritorio-hover" *ngIf="usuarioactivo.nombre.length > 0 && usuarioactivo.tipo == 1">
-                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><span><i class="bi bi-cart"></i></span></a>
-                        <ul class="dropdown-menu text-center bg-light border border-2 animate__animated animate__fadeIn carrito">
+                        <a class="nav-link dropdown-toggle animate__animated animate__fadeIn" (click)="comprobarTema();" role="button" data-bs-toggle="dropdown"><span><i class="bi bi-cart"></i></span></a>
+                        <ul id="dropdown-carrito" class="dropdown-menu text-center bg-light border border-2 animate__animated animate__fadeIn carrito">
                             <li><a class="nav-link fs-6 animate__animated animate__fadeInDown pointer" href="#" data-bs-toggle="modal" data-bs-target="#carritocompra">Ir al carrito</a></li>
                             <li><span class="nav-link estilo-navlink fs-6 animate__animated animate__fadeInDown " *ngIf="!ne">El carrito está vacío</span></li>
                             <!-- elementos de carrito -->
@@ -176,10 +181,11 @@
 <!----------------------------------------------------------------->
 <!--------------------------- /MODALES/ --------------------------->
  <!-- /MODAL INICIO DE SESIÓN/ -->
-<div class="modal fade" id="iniciar-sesion" >
+<div class="modal fade" id="iniciar-sesion" style="overflow-y: scroll;">
   <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
       <div id="modal-completo" class="modal-content">
-          <!-- Modal header -->
+        <div id="c-iniciar-sesion" class="border border-2 rounded">
+           <!-- Modal header -->
           <div id="modal-head" class="modal-header">
               <h4 id="titulo-modal" class="modal-title">Iniciar sesión</h4>
               <h4><i id="close-modal" class="bi bi-x-circle-fill" data-bs-dismiss="modal" #cerrarmodalis></i></h4>
@@ -221,14 +227,17 @@
                 </div>
               </form>
           </div>
+        </div>
+
       </div>
   </div>
 </div>
 
 <!-- /MODAL CREACIÓN DE USUARIO/ -->
-<div class="modal fade" id="crear-usuario">
+<div class="modal fade" id="crear-usuario" style="overflow-y: scroll;">
   <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
       <div id="modal-completo" class="modal-content">
+        <div id="c-crear-usuario" class="border border-2 rounded">
           <!-- Modal header -->
           <div id="modal-head" class="modal-header">
               <h4 id="titulo-modal" class="modal-title">Crear usuario</h4>
@@ -282,6 +291,22 @@
                 </div>
                 <p id="errorcorreoexistente" class="val-error">El correo ya existe.</p>
               </div>
+              <!-- Domicilio -->
+              <div class="mb-3">
+                <input type="text" class="form-control" placeholder="Domicilio" name="domicilio" [(ngModel)]="usuario.domicilio" required minlength="4" maxlength="50" #domicilio="ngModel" [ngClass]="{'is-valid': !domicilio.invalid, 'is-invalid': domicilio.dirty && domicilio.invalid}">
+                <!-- Validación domicilio-->
+                <div *ngIf="domicilio.invalid && (domicilio.dirty)" class="alert p-0 m-0 val-error">
+                  <div *ngIf="domicilio.errors?.['required']">
+                    Introduce un domicilio.
+                  </div>
+                  <div *ngIf="domicilio.errors?.['minlength']">
+                    El domicilio debe tener 4 carácteres o más.
+                  </div>
+                  <div *ngIf="domicilio.errors?.['maxlength']">
+                    El domicilio no puede tener más de 50 carácteres.
+                  </div>
+                </div>
+              </div>
               <!-- Contraseña -->
               <div class="mb-3 mt-3">
                 <input type="password" class="form-control" placeholder="Contraseña" name="pass1" [(ngModel)]="usuario.contrasenya" required pattern="^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$" #pass1="ngModel" [ngClass]="{'is-valid': !pass1.invalid, 'is-invalid': pass1.dirty && pass1.invalid}">
@@ -315,81 +340,62 @@
 
               <!-- Submit-->
               <div class="d-grid">
-                  <button type="submit" class="btn btn-success" [disabled]="(pass2.value != pass1.value) || nick.invalid || nombre.invalid || email.invalid || pass1.invalid" >Crear usuario</button>
+                  <button type="submit" class="btn btn-success" [disabled]="(pass2.value != pass1.value) || nick.invalid || nombre.invalid || email.invalid || domicilio.invalid || pass1.invalid" >Crear usuario</button>
               </div>
             </form>
           </div>
+        </div>
       </div>
   </div>
 </div>
 
-<!-- /MODAL INSERCIÓN DE DOMICILIO/ -->
-<div class="modal hide fade" id="insertar-domicilio">
-  <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
-      <div id="modal-completo" class="modal-content">
-          <!-- Modal header -->
-          <div id="modal-head" class="modal-header">
-              <h4 id="titulo-modal" class="modal-title">Crear usuario</h4>
-              <h4><i id="close-modal" class="bi bi-x-circle-fill" data-bs-dismiss="modal" #cerrarmodalcu></i></h4>
+<!-- /MODAL PERFIL/ -->
+<div class="modal fade" id="perfil" style="overflow-y: scroll;">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-fullscreen-sm-down">
+      <div id="modal-completo d-flex justify-content-center " class="modal-content">
+        <div id="c-perfil" class="container-fluid d-flex flex-column border border-2 rounded m-0 p-0">
+          <div class="d-flex flex-row jusify-content-center align-items-center">
+            <span class="fs-3 ms-3">&nbsp;Perfil</span>
+            <h5 class="ms-auto m-3"><i class="bi bi-x-lg pointer" data-bs-dismiss="modal"></i></h5>
           </div>
-          <!-- Modal body -->
-          <div id="body-modal" class="modal-body">
-            <!-- Formulario -->
-            <form (ngSubmit)="crearUsuario(creacionUsuario);" class="" #creacionUsuario="ngForm">
-              <!-- Domicilio -->
-              <div class="mb-3">
-                <input type="text" class="form-control" placeholder="Domicilio" name="Domicilio" [(ngModel)]="usuario.domicilio" required minlength="4" #domicilio="ngModel" [ngClass]="{'is-valid': !domicilio.invalid, 'is-invalid': domicilio.dirty && domicilio.invalid}">
-                <!-- Validación nick-->
-                <div *ngIf="domicilio.invalid && (domicilio.dirty)" class="alert p-0 m-0 val-error">
-                  <div *ngIf="domicilio.errors?.['required']">
-                    Introduce un domicilio.
-                  </div>
-                  <div *ngIf="nick.errors?.['minlength']">
-                    El domicilio debe tener 4 carácteres o más.
-                  </div>
-                </div>
-                <p id="errornickexistente" class="val-error">El nick ya existe.</p>
-              </div>
-              <!-- Submit-->
-              <div class="d-grid">
-                  <button type="submit" class="btn btn-success" [disabled]="(pass2.value != pass1.value) || nick.invalid || nombre.invalid || email.invalid || pass1.invalid" >Crear usuario</button>
-              </div>
-            </form>
+          <div id="banner" class="container-fluid"><img id="pic" class="img-fluid bg-dark updateimg rounded-circle contener border border-2" [src]="usuarioactivo.pic" alt="" style="width:133.5px; height:133.5px;"></div>
+          <div id="usuario-profile" class="text-center d-flex flex-row justify-content-center align-items-end">
+            <h2 class="mt-3">{{usuarioactivo.nick}}</h2>
+        </div>
+        <div class="d-flex">
+        {{usuarioactivo.nick}}
+        {{usuarioactivo.nombre}}
+        {{usuarioactivo.correo}}
+        {{usuarioactivo.domicilio}}
+        </div>
+        <!-- <div *ngFor="let pedidos of historial">
+          {{pedidos.nombre}}
+          {{pedidos.fecha}}
+          {{pedidos.id_pedido}}
+        </div> -->
+        <div *ngFor="let pedidos of transaccion">
+          {{pedidos.fecha_pedido}}
+          <div *ngFor="let productopedido of pedidos.pedidoarray">
+            {{productopedido.nombre}}
+            <img [src]="productopedido.imagen" alt="" style="width: 50px;">
           </div>
-      </div>
-  </div>
-</div>
+        </div>
+        <div>
+          <form (ngSubmit)="updatePic();">
+            <!-- IMAGEN -->
+            <div class="mb-3">
+              <input type="file" name="myImage" accept="image/png, image/gif, image/jpeg" (change)="onFileSelected($event)"/>
+              <div class="text-center"><img class="contener" [src]="usuarioperfil.pic" class="p-3 img-fluid"></div>
 
-<!-- /MODAL CUENTA/ -->
-<div class="modal fade" id="cuenta">
-  <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
-      <div id="modal-completo" class="modal-content">
-          <!-- Modal header -->
-          <div id="modal-head" class="modal-header">
-              <h4 id="titulo-modal" class="modal-title">Cuenta</h4>
-              <h4><i id="close-modal" class="bi bi-x-circle-fill" data-bs-dismiss="modal"></i></h4>
-          </div>
-          <!-- Modal body -->
-          <div id="body-modal" class="modal-body">
-            <div id="pic-usuario-profile" class="text-center"><img class="img-fluid updateimg rounded-circle contener" [src]="usuarioactivo.pic" alt=""></div>
-            <p>{{usuarioactivo.nick}}</p>
-            <p>{{usuarioactivo.correo}}</p>
-          </div>
-          <div>
-            <form (ngSubmit)="updatePic();">
-              <!-- IMAGEN -->
-              <div class="mb-3">
-                <input type="file" name="myImage" accept="image/png, image/gif, image/jpeg" (change)="onFileSelected($event)"/>
-                <div class="text-center"><img class="contener" [src]="usuarioperfil.pic" class="p-3 img-fluid"></div>
-
-              </div>
-              <!-- SUBMIT BUTTON -->
-              <div class="d-grid">
-                <button id="modal-button" class="btn btn-success">Actualizar imagen</button>
             </div>
-            </form>
+            <!-- SUBMIT BUTTON -->
+            <div class="d-grid">
+              <button id="modal-button" class="btn btn-success">Actualizar imagen</button>
           </div>
-      </div>
+          </form>
+        </div>
+    </div>
+   </div>
   </div>
 </div>
 
@@ -397,7 +403,8 @@
 <div class="modal fade" id="carritocompra">
   <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
       <div id="modal-completo" class="modal-content">
-          <!-- Modal header -->
+        <div id="c-carritocompra" class="border border-2 rounded">
+                    <!-- Modal header -->
           <div id="modal-head" class="modal-header">
               <h4 id="titulo-modal" class="modal-title">Carrito</h4>
               <h4><i id="close-modal" class="bi bi-x-circle-fill" data-bs-dismiss="modal" #cerrarmodalco></i></h4>
@@ -430,6 +437,7 @@
             </div>
             <p id="carritovacio" class="val-error">El carrito está vacío.</p>
           </div>
+        </div>
       </div>
   </div>
 </div>
@@ -438,7 +446,8 @@
 <div class="modal fade" id="admin">
   <div class="modal-lg modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
       <div id="modal-completo" class="modal-content">
-          <!-- Modal header -->
+        <div id="c-admin" class="border border-2 rounded">
+           <!-- Modal header -->
           <div id="modal-head" class="modal-header">
               <h4 id="titulo-modal" class="modal-title">Configuración de administrador</h4>
               <h4><i id="close-modal" class="bi bi-x-circle-fill" data-bs-dismiss="modal"></i></h4>
@@ -452,8 +461,9 @@
                   <thead>
                     <tr>
                       <th scope="col">Nick</th>
-                      <th scope="col">Nombre y apellidos</th>
+                      <th scope="col" class="nowrap">Nombre y apellidos</th>
                       <th scope="col">Correo</th>
+                      <th scope="col" colspan="2" class="text-center">Opciones</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -461,31 +471,43 @@
                       <td [width]="100">{{usuarios.nick}}</td>
                       <td [width]="1000">{{usuarios.nombre}}</td>
                       <td [width]="1000">{{usuarios.correo}}</td>
+                      <td *ngIf="usuarios.tipo != 2" [width]="100"><button class="btn btn-success nowrap"  (click)="obtenerPedidosPorId(usuarios.id)" data-bs-toggle="modal" data-bs-target="#ver_pedidos">Ver pedidos</button></td>
+                      <td *ngIf="usuarios.tipo != 2" [width]="100"><button class="btn btn-danger nowrap"  (click)="eliminarUsuario(usuarios.id)">Borrar usuario</button></td>
                     </tr>
                   </tbody>
                 </table>
               </li>
             </ul>
           </div>
+        </div>
       </div>
   </div>
 </div>
-<!----------------------------------------------------------------->
-<!--------------------------- /OTROS/ ----------------------------->
-<!-- /ALERTA CREACIÓN USUARIO/ -->
-<div id="alertacreacionusuario">
-  <div class="alert alert-success d-flex align-content-center" role="alert">
-   <span><i class="bi bi-person-plus fs-5"></i>&nbsp;&nbsp;Has creado un usuario correctamente. &nbsp;</span>
-   <button type="button" class="btn-close mt-1" (click)="toogleAlertFadeOut('#alertacreacionusuario');" aria-label="Close"></button>
+
+<!-- /VER PEDIDOS (ADMIN)/ -->
+<div class="modal fade" id="ver_pedidos">
+  <div class="modal-lg modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+      <div id="modal-completo" class="modal-content">
+        <div id="c-ver_pedidos" class="border border-2 rounded">
+                  <!-- Modal header -->
+        <div id="modal-head" class="modal-header">
+          <h4 id="titulo-modal" class="modal-title">Pedidos</h4>
+          <h4><i id="close-modal" class="bi bi-x-circle-fill" data-bs-dismiss="modal" #cerrarmodalvp></i></h4>
+        </div>
+        <div *ngFor="let pedidos of transaccion">
+          {{pedidos.fecha_pedido}}
+          <div *ngFor="let productopedido of pedidos.pedidoarray">
+            {{productopedido.nombre}}
+            <img [src]="productopedido.imagen" alt="" style="width: 50px;">
+          </div>
+        </div>
+        <div *ngIf="transaccion.length == 0">
+          Este usuario no tiene pedidos.
+        </div>
+        </div>
+      </div>
+  </div>
 </div>
-</div>
-<!----------------------------------------------------------------->
-<!-- /ALERTA COMPRA REALIZADA/ -->
-<div id="alertacomprarealizada">
-  <div class="alert alert-success d-flex align-content-center" role="alert">
-   <span><i class="bi bi-person-plus fs-5"></i>&nbsp;&nbsp;Has comprado correctamente. &nbsp;</span>
-   <button type="button" class="btn-close mt-1" (click)="toogleAlertFadeOut('#alertacomprarealizada');" aria-label="Close"></button>
-</div>
-</div>
+
 <!----------------------------------------------------------------->
 

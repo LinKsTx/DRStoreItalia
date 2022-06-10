@@ -120,25 +120,21 @@
   }
 }
 
-::-webkit-scrollbar {
-  width: 12px;
-  background-color: #cececf;
+#pic {
+  position: relative;
+  top: 60%;
+  left: 10%;
 }
 
-::-webkit-scrollbar {
-  width: 16px;
+#pic-s {
+  position: relative;
+  top: 10%;
+  left: 10%;
 }
 
-::-webkit-scrollbar-track {
-  border-radius: 100px;
-  background-color: #f0f0f1;
-}
-
-::-webkit-scrollbar-thumb {
-  border-radius: 80px;
-  border: 6px solid #cececf;
-  border-left: 0;
-  border-right: 0;
-  background-color: #cececf;
+#banner {
+  background-image: url(../../../assets/images/slider3.jpg);
+  background-size: cover;
+  height: 200px;
 }
 /*# sourceMappingURL=navbar.component.css.map */

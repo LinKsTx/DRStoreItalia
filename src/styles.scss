@@ -60,7 +60,40 @@ app-productos-detail {
   min-height: 83vh;
   font-family: 'Libre Franklin', sans-serif;
 }
+app-perfil {
+  min-height: 83vh;
+  font-family: 'Libre Franklin', sans-serif;
+}
 html{
   padding: 0;
   margin: 0;
 }
+.oscurito {
+  background-color: #333537;
+}
+//darkmode
+.darkmode {
+  background-color: #212529 !important;
+  color: white !important;
+}
+  app-home.darkmode {
+    background-color: #212529 !important;
+    color: white;
+    }
+  app-productos.darkmode {
+    background-color: #212529 !important;
+    color: white;
+    }
+  app-blog.darkmode {
+      background-color: #212529 !important;
+      color: white;
+      }
+
+  app-blog-detail.darkmode {
+      background-color: #212529 !important;
+      color: white;
+      }
+  #buenas.darkmode {
+    background-color: #212529 !important;
+    color: white;
+  }

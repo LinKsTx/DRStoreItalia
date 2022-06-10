@@ -41,26 +41,40 @@ export class HomeComponent implements OnInit {
   //SE INICIA AUTOMÁTICAMENTE
   ngOnInit(): void {
     this.obtenerProductos();
+    $
     //spinner
+    $(".ocultar").hide();
     this.spinner.show();
-    $('html, body').css({
-      overflow: 'hidden',
-      height: '100%'
-  });
+  //   $('html, body').css({
+  //     overflow: 'hidden',
+  //     height: '100%'
+  // });
     setTimeout(() => {
       this.spinner.hide();
-      $('html, body').css({
-        overflow: 'auto',
-        height: 'auto'
-    });
+      $(".ocultar").show();
+
+    //   $('html, body').css({
+    //     overflow: 'auto',
+    //     height: 'auto'
+    // });
     }, 1500);
+    $(document).scroll(function(){
+      $("#uno").addClass("animate__fadeInLeft");
+      $("#uno").addClass("animate__fadeInLeft");
+  });
     //-------
+ //comprobar tema
+ if(sessionStorage.getItem('theme') == "modooscuro") {
+  $("app-home").addClass("darkmode");
+} else if (sessionStorage.getItem('theme') == "modoclaro"){
+  $('app-home').removeClass("darkmode");
+}
+
   }
 
 /*----------------------- OBTENER PRODUCTOS --------------------*/
 obtenerProductos(){
   this.productoService.readProduct().subscribe((data: any) =>{
-  console.log(data);
   this.productos = data;
 });
 }

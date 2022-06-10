@@ -1,3 +1,4 @@
+//animaciones
 //carousel
 //captions
 .onimage {
@@ -17,6 +18,7 @@ $yellow: #f1c40f;
 $purple: #8e44ad;
 $turquoise: #1abc9c;
 // Basic Button Style
+.btn:focus {outline:0 !important;}
 .btnxs {
   box-sizing: border-box;
   appearance: none;
@@ -67,11 +69,11 @@ $turquoise: #1abc9c;
 // BUTTON 4
 .fourth {
   // background: $yellow;
-  border-color: $green;
+  border-color: $red;
   border-radius: 0;
-  color: $green;
+  color: $red;
   background: {
-    image: linear-gradient(45deg,$green 50%, transparent 50%);
+    image: linear-gradient(45deg,$red 50%, transparent 50%);
     position: 100%;
     size: 400%;
   }
@@ -84,10 +86,10 @@ $turquoise: #1abc9c;
 
 //BUTTON 5
 .fifth {
-  border-color: $red;
+  border-color: $green;
   // border: 0;
   border-radius: 0;
-  color: $red;
+  color: $green;
   position: relative;
   overflow: hidden;
   z-index: 2;
@@ -102,8 +104,8 @@ $turquoise: #1abc9c;
     transform: translateX(-50%);
     width: 0;
     height: 100%;
-    background: $red;
-    z-index: 2;
+    background: $green;
+    z-index:-1;
     transition: width 800ms ease-in-out;
   }
 

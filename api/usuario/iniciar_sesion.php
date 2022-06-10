@@ -24,7 +24,7 @@
   $encriptado = md5($contrasenya);
 
   //Comprobar en la base de datos el login
-  $sql = "SELECT id, nombre, nick, correo, tipo  FROM usuarios WHERE correo=? AND contrasenya=?";
+  $sql = "SELECT id, nombre, nick, correo, domicilio, tipo  FROM usuarios WHERE correo=? AND contrasenya=?";
 
         //Le pasamos la linea 26 como consulta
         $sentencia = $pdoObject->prepare($sql);
