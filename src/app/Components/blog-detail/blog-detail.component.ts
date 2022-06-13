@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { IBlog } from 'src/app/interfaces/i-blog';
 import { BlogService } from 'src/app/services/blog.service';
 
@@ -24,9 +25,25 @@ export class BlogDetailComponent implements OnInit {
   constructor(private blogService: BlogService,
     private router: Router,
     private route: ActivatedRoute,
+    private spinner: NgxSpinnerService
     ) { }
   //SE INICIA AUTOMÁTICAMENTE
-  ngOnInit() {
+    ngOnInit() {
+      window.onscroll = function() {myFunction()};
+
+    function myFunction() {
+      var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      var scrolled = (winScroll / height) * 100;
+      document.getElementById("myBar").style.width = scrolled + "%";
+    }
+     //spinner
+    //  this.spinner.show();
+
+    //  setTimeout(() => {
+    //    this.spinner.hide();
+
+    //  }, 1500);
     const id = +this.route.snapshot.params["id"]; // Recibimos parámetro
     this.blogService.readBlogId(id)
     .subscribe(

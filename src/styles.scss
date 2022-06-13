@@ -28,12 +28,22 @@
 .contener {
   object-fit: contain;
 }
+.bcg {
+  border: 2px solid #333537 !important;
+}
+
 //color hover
 .text-azulito {
   color: #0dcaf0;
 }
 .text-azulito:hover {
   color: #0dcaf0;
+}
+.txtdark {
+  color: #212529;
+}
+.txtlight {
+  color: white;
 }
 //alturas
 app-home {
@@ -69,7 +79,7 @@ html{
   margin: 0;
 }
 .oscurito {
-  background-color: #333537;
+  background-color: #333537 !important;
 }
 //darkmode
 .darkmode {
@@ -93,7 +103,4 @@ html{
       background-color: #212529 !important;
       color: white;
       }
-  #buenas.darkmode {
-    background-color: #212529 !important;
-    color: white;
-  }
+

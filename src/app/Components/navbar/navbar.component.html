@@ -2,7 +2,7 @@
 <!-- /NAVBAR/ -->
 <!-- xs sm, luego se expande. (versión encogido) -->
 <div id="navxs" class="container-fluid d-block d-lg-none bg-light">
-    <nav id="navegadorxs" class="navbar navbar-expand-md navbar-dark monolisk m-0 fs-6">
+    <nav id="navegadorxs" class="navbar navbar-expand-md navbar-light monolisk m-0 fs-6">
       <!-- contenedor (logo + botón (forma colapsada) + navbar -->
       <div id="contenedor-navegador" class="container-fluid">
           <!-- logo -->
@@ -20,19 +20,19 @@
                   <ul class="navbar-nav">
                       <!-- #home -->
                       <li class="nav-item m-2">
-                          <a class="nav-link" [routerLink]="['home']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">Home</a>
+                          <a class="nav-link" [routerLink]="['home']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">{{'Home' | translate}}</a>
                       </li>
                        <!-- #productos -->
                        <li class="nav-item m-2">
-                        <a class="nav-link" [routerLink]="['productos']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">Productos</a>
+                        <a class="nav-link" [routerLink]="['productos']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">{{'Productos' | translate}}</a>
                       </li>
                       <!-- #blog -->
                       <li class="nav-item m-2">
-                          <a class="nav-link" [routerLink]="['blog']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">Blog</a>
+                          <a class="nav-link" [routerLink]="['blog']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">{{'Blog' | translate}}</a>
                       </li>
                       <!-- #contacto -->
                       <li class="nav-item m-2">
-                          <a class="nav-link" [routerLink]="['contacto']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">Contacto</a>
+                          <a class="nav-link" [routerLink]="['contacto']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">{{'Contacto' | translate}}</a>
                       </li>
                   </ul>
               </div>
@@ -41,33 +41,33 @@
                   <ul class="navbar-nav">
                       <li class="nav-item">
                           <!-- enlace hacia modal #iniciar-sesión/logout -->
-                          <a class="nav-link pointer-cursor nowrap" (click)="comprobarTema();" href="#" data-bs-toggle="modal" data-bs-target="#iniciar-sesion" *ngIf="usuarioactivo.nombre.length === 0">Iniciar sesión</a>
+                          <a class="nav-link pointer-cursor nowrap" (click)="comprobarTema();" href="#" data-bs-toggle="modal" data-bs-target="#iniciar-sesion" *ngIf="usuarioactivo.nombre.length === 0">{{'Iniciar sesion' | translate}}</a>
                       </li>
                       <!-- sesion iniciada -->
                       <!--sin foto-->
                       <li class="nav-item dropdown m-2 estilo-hover escritorio-hover" *ngIf="usuarioactivo.nombre.length > 0 && !usuarioactivo.pic">
                         <a class="nav-link dropdown-toggle" (click)="comprobarTema();" role="button" data-bs-toggle="dropdown"><span id="sin-foto"><i class="bi bi-person"></i>&nbsp;{{usuarioactivo.nick}}</span></a>
                         <ul id="dropdown-sinfotoxs" class="dropdown-menu text-center bg-light animate__animated animate__fadeIn border border-2">
-                          <li><a class="nav-link pointer-cursor fs-6 animate__animated animate__fadeInDown" href="#" data-bs-toggle="modal" data-bs-target="#perfil" type="button">Perfil</a></li>
-                          <li><a class="nav-link pointer-cursor fs-6 animate__animated animate__fadeInDown pointer" (click)="logOut()">Cerrar sesión</a></li>
+                          <li><a class="nav-link pointer-cursor fs-6 animate__animated animate__fadeInDown" href="#" data-bs-toggle="modal" data-bs-target="#perfilxs" type="button">{{'Perfil' | translate}}</a></li>
+                          <li><a class="nav-link pointer-cursor fs-6 animate__animated animate__fadeInDown pointer" (click)="logOut()">{{'Cerrar sesion' | translate}}</a></li>
                         </ul>
                       </li>
                       <!--con foto md-->
                       <li class="nav-item dropdown m-1 estilo-hover escritorio-hover d-none d-md-flex flex-row align-items-center justify-content-center" *ngIf="usuarioactivo.nombre.length > 0 && usuarioactivo.pic">
-                        <img class="rounded-circle contener dropdown-toggle bg-dark" (click)="comprobarTema();" role="button" data-bs-toggle="dropdown" [src]="usuarioactivo.pic" alt="" style="width:50px; max-width: 50px; max-height: 50px;">
+                        <img class="rounded-circle contener dropdown-toggle" (click)="comprobarTema();" role="button" data-bs-toggle="dropdown" [src]="usuarioactivo.pic" alt="" style="width:50px; max-width: 50px; max-height: 50px; background: transparent;">
                         <a class="nav-link dropdown-toggle text-center" (click)="comprobarTema();" role="button" data-bs-toggle="dropdown"><span class="text-center" id="con-foto">{{usuarioactivo.nick}}</span></a>
                         <ul id="dropdown-confotoxs" class="dropdown-menu text-center bg-light animate__animated animate__fadeIn border border-2">
-                          <li><a class="nav-link pointer-cursor fs-6 animate__animated animate__fadeInDown" href="#"  data-bs-toggle="modal" data-bs-target="#perfil" type="button">Perfil</a></li>
-                          <li><a class="nav-link pointer-cursor fs-6 animate__animated animate__fadeInDown pointer" (click)="logOut()">Cerrar sesión</a></li>
+                          <li><a class="nav-link pointer-cursor fs-6 animate__animated animate__fadeInDown" href="#"  data-bs-toggle="modal" data-bs-target="#perfilxs" type="button">{{'Perfil' | translate}}</a></li>
+                          <li><a class="nav-link pointer-cursor fs-6 animate__animated animate__fadeInDown pointer" (click)="logOut()">{{'Cerrar sesion' | translate}}</a></li>
                         </ul>
                       </li>
                       <!--con foto xs-->
                       <li class="nav-item dropdown m-1 estilo-hover escritorio-hover d-md-none flex-column align-items-center justify-content-center" *ngIf="usuarioactivo.nombre.length > 0 && usuarioactivo.pic">
-                        <img class="rounded-circle contener dropdown-toggle bg-dark" role="button" data-bs-toggle="dropdown" [src]="usuarioactivo.pic" alt="" style="width:50px;max-width: 50px; max-height: 50px;">
+                        <img class="rounded-circle contener dropdown-toggle bg-dark" (click)="comprobarTema();" role="button" data-bs-toggle="dropdown" [src]="usuarioactivo.pic" alt="" style="width:50px;max-width: 50px; max-height: 50px;">
                         <a class="nav-link dropdown-toggle text-center" role="button" (click)="comprobarTema();" data-bs-toggle="dropdown"><span class="text-center" id="con-foto">{{usuarioactivo.nick}}</span></a>
                         <ul id="dropdown-confotoxsxs" class="dropdown-menu text-center bg-light animate__animated animate__fadeIn border border-2">
-                          <li><a class="nav-link pointer-cursor fs-6 animate__animated animate__fadeInDown" href="#"  data-bs-toggle="modal" data-bs-target="#perfil" type="button">Perfil</a></li>
-                          <li><a class="nav-link pointer-cursor fs-6 animate__animated animate__fadeInDown pointer" (click)="logOut()">Cerrar sesión</a></li>
+                          <li><a class="nav-link pointer-cursor fs-6 animate__animated animate__fadeInDown" href="#"  data-bs-toggle="modal" data-bs-target="#perfilxs" type="button">{{'Perfil' | translate}}</a></li>
+                          <li><a class="nav-link pointer-cursor fs-6 animate__animated animate__fadeInDown pointer" (click)="logOut()">{{'Cerrar sesion' | translate}}</a></li>
                         </ul>
                       </li>
                       <!-- carrito de compra (manda a productos o click para verlos ¿? arreglar)-->
@@ -76,8 +76,8 @@
                       </li>
                       <!-- configuración admin -->
                       <li class="nav-item" *ngIf="usuarioactivo.tipo == 2">
-                          <!-- modal inicio de sesión / creación de usuario -->
-                        <a class="nav-link m-2" href="#"><i class="bi bi-gear"></i></a>
+
+                        <a class="nav-link m-2"(click)="comprobarTema();" href="#"><i class="bi bi-gear"></i></a>
                     </li>
                   </ul>
               </div>
@@ -106,19 +106,19 @@
                   <ul class="navbar-nav">
                       <!-- #home -->
                       <li class="nav-item m-2">
-                          <a class="nav-link" [routerLink]="['home']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">Home</a>
+                          <a class="nav-link" [routerLink]="['home']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">{{'Home' | translate}}</a>
                       </li>
                       <!-- #productos -->
                       <li class="nav-item m-2">
-                          <a class="nav-link" [routerLink]="['productos']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">Productos</a>
+                          <a class="nav-link" [routerLink]="['productos']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">{{'Productos' | translate}}</a>
                       </li>
                       <!-- #blog -->
                       <li class="nav-item m-2">
-                          <a class="nav-link" [routerLink]="['blog']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">Blog</a>
+                          <a class="nav-link" [routerLink]="['blog']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">{{'Blog' | translate}}</a>
                       </li>
                       <!-- #contacto -->
                       <li class="nav-item m-2">
-                          <a class="nav-link" [routerLink]="['contacto']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">Contacto</a>
+                          <a class="nav-link" [routerLink]="['contacto']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">{{'Contacto' | translate}}</a>
                       </li>
                   </ul>
               </div>
@@ -128,32 +128,32 @@
                     <!-- sesión sin iniciar -->
                       <li class="nav-item m-2" >
                           <!-- modal inicio de sesión / creación de usuario -->
-                          <a class="nav-link pointer-cursor nowrap" href="#" (click)="comprobarTema();" data-bs-toggle="modal" data-bs-target="#iniciar-sesion" *ngIf="usuarioactivo.nombre.length === 0">Iniciar sesión</a>
+                          <a class="nav-link pointer-cursor nowrap" href="#" (click)="comprobarTema();" data-bs-toggle="modal" data-bs-target="#iniciar-sesion" *ngIf="usuarioactivo.nombre.length === 0">{{'Iniciar sesion' | translate }}</a>
                       </li>
                       <!-- sesion iniciada -->
                       <!--sin foto-->
                          <li class="nav-item dropdown m-2 estilo-hover escritorio-hover d-flex align-items-center" *ngIf="usuarioactivo.nombre.length > 0 && !usuarioactivo.pic">
                         <a class="nav-link dropdown-toggle" (click)="comprobarTema();" role="button" data-bs-toggle="dropdown"><span id="sin-foto"><i class="bi bi-person"></i>&nbsp;{{usuarioactivo.nick}}</span></a>
                         <ul id="dropdown-sinfoto"   class="dropdown-menu text-center bg-light border border-2 animate__animated animate__fadeIn">
-                          <li><a class="nav-link pointer-cursor fs-6 animate__animated animate__fadeInDown" href="#" data-bs-toggle="modal" data-bs-target="#perfil" type="button">Perfil</a></li>
-                          <li><a class="nav-link pointer-cursor fs-6 animate__animated animate__fadeInDown pointer" (click)="logOut()">Cerrar sesión</a></li>
+                          <li><a class="nav-link pointer-cursor fs-6 animate__animated animate__fadeInDown" href="#" data-bs-toggle="modal" data-bs-target="#perfil" type="button">{{'Perfil' | translate}}</a></li>
+                          <li><a class="nav-link pointer-cursor fs-6 animate__animated animate__fadeInDown pointer" (click)="logOut()">{{'Cerrar sesion' | translate}}</a></li>
                         </ul>
                       </li>
                       <!--con foto-->
                       <li class="nav-item m-2 dropdown estilo-hover escritorio-hover d-flex flex-row align-items-center" *ngIf="usuarioactivo.nombre.length > 0 && usuarioactivo.pic">
-                        <img class="rounded-circle contener dropdown-toggle bg-dark" role="button" data-bs-toggle="dropdown" [src]="usuarioactivo.pic" alt="" style="width:50px; max-width: 50px; max-height: 50px;">
+                        <img class="rounded-circle contener dropdown-toggle" role="button" data-bs-toggle="dropdown" [src]="usuarioactivo.pic" alt="" style="width:50px; max-width: 50px; max-height: 50px; background: transparent;">
                         <a class="nav-link dropdown-toggle" (click)="comprobarTema();" role="button" data-bs-toggle="dropdown"><span id="con-foto">&nbsp;&nbsp;{{usuarioactivo.nick}}</span></a>
                         <ul id="dropdown-confoto" class="dropdown-menu text-center bg-light border border-2 animate__animated animate__fadeIn">
-                          <li><a class="nav-link pointer-cursor fs-6 animate__animated animate__fadeInDown" href="#"  data-bs-toggle="modal" data-bs-target="#perfil" type="button">Perfil</a></li>
-                          <li><a class="nav-link pointer-cursor fs-6 animate__animated animate__fadeInDown pointer" (click)="logOut()">Cerrar sesión</a></li>
+                          <li><a class="nav-link pointer-cursor fs-6 animate__animated animate__fadeInDown" href="#"  data-bs-toggle="modal" data-bs-target="#perfil" type="button">{{'Perfil' | translate}}</a></li>
+                          <li><a class="nav-link pointer-cursor fs-6 animate__animated animate__fadeInDown pointer" (click)="logOut()">{{'Cerrar sesion' | translate}}</a></li>
                         </ul>
                       </li>
                       <!-- carrito de compra -->
                         <li class="nav-item dropdown m-2 estilo-hover escritorio-hover" *ngIf="usuarioactivo.nombre.length > 0 && usuarioactivo.tipo == 1">
                         <a class="nav-link dropdown-toggle animate__animated animate__fadeIn" (click)="comprobarTema();" role="button" data-bs-toggle="dropdown"><span><i class="bi bi-cart"></i></span></a>
                         <ul id="dropdown-carrito" class="dropdown-menu text-center bg-light border border-2 animate__animated animate__fadeIn carrito">
-                            <li><a class="nav-link fs-6 animate__animated animate__fadeInDown pointer" href="#" data-bs-toggle="modal" data-bs-target="#carritocompra">Ir al carrito</a></li>
-                            <li><span class="nav-link estilo-navlink fs-6 animate__animated animate__fadeInDown " *ngIf="!ne">El carrito está vacío</span></li>
+                            <li><a class="nav-link fs-6 animate__animated animate__fadeInDown pointer" href="#" data-bs-toggle="modal" data-bs-target="#carritocompra">{{'Ir al carrito' | translate}}</a></li>
+                            <li><span class="nav-link estilo-navlink fs-6 animate__animated animate__fadeInDown " *ngIf="!ne">{{'El carrito esta vacio' | translate}}</span></li>
                             <!-- elementos de carrito -->
                             <li id="carrito" class="p-3 ms-3 estilo-hover animate__animated animate__fadeInLeft" *ngFor="let producto of carrito" style="width:240px;">
                               <div class="p-0 d-flex flex-row align-items-center jus p-2 border border-2">
@@ -161,7 +161,7 @@
                                   <img id="img-productos-carrito" class="contener" [src]="producto.imagen" alt="img-productos" [routerLink]="['/productos-detail', producto.id]">
                                 </div>
                                 <div class="d-flex flex-column justify-content-center w-100">
-                                  <a class="fs-5 text-decoration-none text-dark text-center fw-bold" >{{producto.nombre}}</a>
+                                  <span class="fs-5 text-decoration-none text-center fw-bold" >{{producto.nombre}}</span>
                                   <span class="text-center">{{producto.precio | currency:'EUR':true}}</span>
                                 </div>
                               </div>
@@ -170,7 +170,7 @@
                       </li>
                       <!-- configuración admin -->
                       <li class="nav-item m-2" *ngIf="usuarioactivo.tipo == 2">
-                        <a id="gear" class="nav-link m-2" href="#" data-bs-toggle="modal" data-bs-target="#admin"><i class="bi bi-gear"></i></a>
+                        <a id="gear" class="nav-link m-2" href="#" data-bs-toggle="modal" (click)="comprobarTema();" data-bs-target="#admin"><i class="bi bi-gear"></i></a>
                     </li>
                   </ul>
               </div>
@@ -187,7 +187,7 @@
         <div id="c-iniciar-sesion" class="border border-2 rounded">
            <!-- Modal header -->
           <div id="modal-head" class="modal-header">
-              <h4 id="titulo-modal" class="modal-title">Iniciar sesión</h4>
+              <h4 id="titulo-modal" class="modal-title">{{'Iniciar sesion' | translate}}</h4>
               <h4><i id="close-modal" class="bi bi-x-circle-fill" data-bs-dismiss="modal" #cerrarmodalis></i></h4>
           </div>
           <!-- Modal body -->
@@ -195,35 +195,35 @@
               <form (ngSubmit)="logIn(iniciarSesion)" #iniciarSesion="ngForm">
                 <!-- Correo -->
                 <div class="mb-3">
-                  <input type="email" class="form-control" placeholder="Email" name="email" [(ngModel)]="usuario.correo" required pattern="[a-zA-Z0-9!#$%&'*_+-]([\.]?[a-zA-Z0-9!#$%&'*_+-])+@[a-zA-Z0-9]([^@&%$\/()=?¿!.,:;]|\d)+[a-zA-Z0-9][\.][a-zA-Z]{2,4}([\.][a-zA-Z]{2})?" #correo="ngModel" [ngClass]="{'is-valid': !correo.invalid, 'is-invalid': correo.dirty && correo.invalid}">
+                  <input type="email" class="form-control" placeholder="{{'Email' | translate}}" name="email" [(ngModel)]="usuario.correo" required pattern="[a-zA-Z0-9!#$%&'*_+-]([\.]?[a-zA-Z0-9!#$%&'*_+-])+@[a-zA-Z0-9]([^@&%$\/()=?¿!.,:;]|\d)+[a-zA-Z0-9][\.][a-zA-Z]{2,4}([\.][a-zA-Z]{2})?" #correo="ngModel" [ngClass]="{'is-valid': !correo.invalid, 'is-invalid': correo.dirty && correo.invalid}">
                   <!-- Validación correo -->
                   <div *ngIf="correo.invalid && (correo.dirty)" class="alert p-0 m-0 val-error">
                     <div *ngIf="correo.errors?.['required']">
-                      Introduce un correo.
+                      {{'Introduce un correo' | translate}}.
                     </div>
                     <div *ngIf="correo.errors?.['pattern']">
-                      El correo introducido no es válido.
+                      {{'El correo introducido no es valido' | translate}}.
                     </div>
                   </div>
                 </div>
                 <!-- Contraseña +  crear cuenta ¿? -->
                 <div class="mb-3 mt-3">
-                  <input type="password" class="form-control" placeholder="Contraseña" name="contrasenya" [(ngModel)]="usuario.contrasenya" required pattern="^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$" #contrasenya="ngModel" [ngClass]="{'is-valid': !contrasenya.invalid, 'is-invalid': contrasenya.dirty && contrasenya.invalid}">
+                  <input type="password" class="form-control" placeholder="{{'Contrasena' | translate}}" name="contrasenya" [(ngModel)]="usuario.contrasenya" required pattern="^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$" #contrasenya="ngModel" [ngClass]="{'is-valid': !contrasenya.invalid, 'is-invalid': contrasenya.dirty && contrasenya.invalid}">
                   <!-- Validación contraseña -->
                 <div *ngIf="contrasenya.invalid && (contrasenya.dirty)" class="alert p-0 m-0 val-error">
                   <div *ngIf="contrasenya.errors?.['required']">
-                    Introduce una contraseña.
+                    {{'Introduce una contrasena' | translate}}
                   </div>
                   <div *ngIf="contrasenya.errors?.['pattern']">
-                    Contraseña no válida.
+                    {{'Contrasena no valida' | translate}}
                   </div>
                 </div>
-                  <p id="errorcorreocontra" class="val-error m-1">El correo y la contraseña no coinciden.</p>
-                  <p class="d-flex flex-row-reverse m-2"><a href="" (click)="resetForm(iniciarSesion)" data-bs-toggle="modal" data-bs-target="#crear-usuario">Crear cuenta</a>¿Necesitas una cuenta? ‏‏‎‎</p>
+                  <p id="errorcorreocontra" class="val-error m-1">{{'El correo y la contrasena no coinciden' | translate }}.</p>
+                  <p class="d-flex flex-row-reverse m-2"><a href="" (click)="resetForm(iniciarSesion)" data-bs-toggle="modal" data-bs-target="#crear-usuario">{{'Crear cuenta' | translate}}</a>{{'¿No tienes cuenta?' | translate}} ‏‏‎‎</p>
                 </div>
                 <!-- Submit -->
                 <div class="d-grid">
-                    <button type="submit" class="btn btn-success" [disabled]="!iniciarSesion.form.valid">Iniciar sesión</button>
+                    <button type="submit" class="btn btn-success" [disabled]="!iniciarSesion.form.valid">{{'Iniciar sesion' | translate}}</button>
                 </div>
               </form>
           </div>
@@ -240,7 +240,7 @@
         <div id="c-crear-usuario" class="border border-2 rounded">
           <!-- Modal header -->
           <div id="modal-head" class="modal-header">
-              <h4 id="titulo-modal" class="modal-title">Crear usuario</h4>
+              <h4 id="titulo-modal" class="modal-title">{{'Crear cuenta' | translate}}</h4>
               <h4><i id="close-modal" class="bi bi-x-circle-fill" data-bs-dismiss="modal" #cerrarmodalcu></i></h4>
           </div>
           <!-- Modal body -->
@@ -249,98 +249,98 @@
             <form (ngSubmit)="crearUsuario(creacionUsuario);" class="" #creacionUsuario="ngForm">
               <!-- Nick -->
               <div class="mb-3">
-                <input type="text" class="form-control" placeholder="Nick" name="Nick" [(ngModel)]="usuario.nick" required minlength="4" #nick="ngModel" [ngClass]="{'is-valid': !nick.invalid, 'is-invalid': nick.dirty && nick.invalid}">
+                <input type="text" class="form-control" placeholder="{{'Nick' | translate}}" name="Nick" [(ngModel)]="usuario.nick" required minlength="4" #nick="ngModel" [ngClass]="{'is-valid': !nick.invalid, 'is-invalid': nick.dirty && nick.invalid}">
                 <!-- Validación nick-->
                 <div *ngIf="nick.invalid && (nick.dirty)" class="alert p-0 m-0 val-error">
                   <div *ngIf="nick.errors?.['required']">
-                    Introduce un nick.
+                    {{'Introduce un nick' | translate }}.
                   </div>
                   <div *ngIf="nick.errors?.['minlength']">
-                    El nick debe tener 4 carácteres o más.
+                    {{'El nick debe tener 4 caracteres o mas' | translate }}.
                   </div>
                 </div>
-                <p id="errornickexistente" class="val-error">El nick ya existe.</p>
+                <p id="errornickexistente" class="val-error">{{'El nick ya existe' | translate }}.</p>
               </div>
               <!-- Nombre -->
               <div class="mb-3">
-                <input type="text" class="form-control" placeholder="Nombre y apellidos" name="Nombre" [(ngModel)]="usuario.nombre" required minlength="5" pattern="^([a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{2,}\s[a-zA-zàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{1,}'?-?[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{2,}\s?([a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{1,})?)"  #nombre="ngModel" [ngClass]="{'is-valid': !nombre.invalid, 'is-invalid': nombre.dirty && nombre.invalid}">
+                <input type="text" class="form-control" placeholder="{{'Nombre y apellidos' | translate}}" name="Nombre" [(ngModel)]="usuario.nombre" required minlength="5" pattern="^([a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{2,}\s[a-zA-zàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{1,}'?-?[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{2,}\s?([a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{1,})?)"  #nombre="ngModel" [ngClass]="{'is-valid': !nombre.invalid, 'is-invalid': nombre.dirty && nombre.invalid}">
                 <!-- Validación nombre-->
                 <div *ngIf="nombre.invalid && (nombre.dirty)" class="alert p-0 m-0 val-error">
                   <div *ngIf="nombre.errors?.['required']">
-                    Introduce un nombre.
+                    {{'Introduce un nombre' | translate }}.
                   </div>
                   <div *ngIf="nombre.errors?.['minlength']">
-                    El nombre debe tener 5 carácteres o más.
+                    {{'El nombre debe tener 5 caracteres o mas' | translate }}.
                   </div>
                   <div *ngIf="nombre.errors?.['pattern']">
-                    Recuerda introducir los apellidos.
+                    {{'Recuerda introducir los apellidos' | translate }}.
                   </div>
                 </div>
               </div>
               <!-- Correo -->
               <div class="mb-3">
-                <input type="email" class="form-control" placeholder="Email" name="email" [(ngModel)]="usuario.correo" required pattern="[a-zA-Z0-9!#$%&'*_+-]([\.]?[a-zA-Z0-9!#$%&'*_+-])+@[a-zA-Z0-9]([^@&%$\/()=?¿!.,:;]|\d)+[a-zA-Z0-9][\.][a-zA-Z]{2,4}([\.][a-zA-Z]{2})?" #email="ngModel" [ngClass]="{'is-valid': !email.invalid, 'is-invalid': email.dirty && email.invalid}">
+                <input type="email" class="form-control" placeholder="{{'Email' | translate}}" name="email" [(ngModel)]="usuario.correo" required pattern="[a-zA-Z0-9!#$%&'*_+-]([\.]?[a-zA-Z0-9!#$%&'*_+-])+@[a-zA-Z0-9]([^@&%$\/()=?¿!.,:;]|\d)+[a-zA-Z0-9][\.][a-zA-Z]{2,4}([\.][a-zA-Z]{2})?" #email="ngModel" [ngClass]="{'is-valid': !email.invalid, 'is-invalid': email.dirty && email.invalid}">
                 <!-- Validación correo -->
                 <div *ngIf="email.invalid && (email.dirty)" class="alert p-0 m-0 val-error">
                   <div *ngIf="email.errors?.['required']">
-                    Introduce un correo.
+                    {{'Introduce un correo' | translate }}.
                   </div>
                   <div *ngIf="email.errors?.['pattern']">
-                    El correo introducido no es válido.
+                    {{'El correo introducido no es valido' | translate }}.
                   </div>
                 </div>
-                <p id="errorcorreoexistente" class="val-error">El correo ya existe.</p>
+                <p id="errorcorreoexistente" class="val-error">{{'El correo ya existe' | translate }}.</p>
               </div>
               <!-- Domicilio -->
               <div class="mb-3">
-                <input type="text" class="form-control" placeholder="Domicilio" name="domicilio" [(ngModel)]="usuario.domicilio" required minlength="4" maxlength="50" #domicilio="ngModel" [ngClass]="{'is-valid': !domicilio.invalid, 'is-invalid': domicilio.dirty && domicilio.invalid}">
+                <input type="text" class="form-control" placeholder="{{'Domicilio' | translate}}" name="domicilio" [(ngModel)]="usuario.domicilio" required minlength="4" maxlength="50" #domicilio="ngModel" [ngClass]="{'is-valid': !domicilio.invalid, 'is-invalid': domicilio.dirty && domicilio.invalid}">
                 <!-- Validación domicilio-->
                 <div *ngIf="domicilio.invalid && (domicilio.dirty)" class="alert p-0 m-0 val-error">
                   <div *ngIf="domicilio.errors?.['required']">
-                    Introduce un domicilio.
+                    {{'Introduce un domicilio' | translate }}.
                   </div>
                   <div *ngIf="domicilio.errors?.['minlength']">
-                    El domicilio debe tener 4 carácteres o más.
+                    {{'El domicilio debe tener 4 caracteres o mas' | translate }}.
                   </div>
                   <div *ngIf="domicilio.errors?.['maxlength']">
-                    El domicilio no puede tener más de 50 carácteres.
+                    {{'El domicilio no puede tener más de 50 caracteres' | translate }}.
                   </div>
                 </div>
               </div>
               <!-- Contraseña -->
               <div class="mb-3 mt-3">
-                <input type="password" class="form-control" placeholder="Contraseña" name="pass1" [(ngModel)]="usuario.contrasenya" required pattern="^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$" #pass1="ngModel" [ngClass]="{'is-valid': !pass1.invalid, 'is-invalid': pass1.dirty && pass1.invalid}">
+                <input type="password" class="form-control" placeholder="{{'Contrasena' | translate}}" name="pass1" [(ngModel)]="usuario.contrasenya" required pattern="^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$" #pass1="ngModel" [ngClass]="{'is-valid': !pass1.invalid, 'is-invalid': pass1.dirty && pass1.invalid}">
                 <!-- Validación contraseña -->
                 <div *ngIf="pass1.invalid && (pass1.dirty)" class="alert p-0 m-0 val-error">
                   <div *ngIf="pass1.errors?.['required']">
-                    Introduce una contraseña.
+                    {{'Introduce una contrasena' | translate }}.
                   </div>
                   <div *ngIf="pass1.errors?.['pattern']">
-                    La contraseña debe tener entre 8 y 16 caracteres y almenos una mayúscula, una minúscula y un número.
+                    {{'La contrasena debe tener entre...' | translate }}.
                   </div>
                 </div>
               </div>
               <!-- Contraseña 2 + Iniciar sesión ¿? -->
               <div class="mb-3 mt-3">
-                <input type="password" id="password2" class="form-control" placeholder="Repite la contraseña" name="pass2" [(ngModel)]="usuario.contrasenya2" required pattern="^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$" #pass2="ngModel" [ngClass]="{'is-valid': pass2.value == pass1.value, 'is-invalid': pass2.dirty && pass2.value != pass1.value || pass2.errors?.['pattern']}">
+                <input type="password" id="password2" class="form-control" placeholder="{{'Repite la contrasena' | translate}}" name="pass2" [(ngModel)]="usuario.contrasenya2" required pattern="^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$" #pass2="ngModel" [ngClass]="{'is-valid': pass2.value == pass1.value, 'is-invalid': pass2.dirty && pass2.value != pass1.value || pass2.errors?.['pattern']}">
                 <!-- Validación contraseña2 -->
                 <div *ngIf="pass2.invalid && (pass2.dirty)" class="alert p-0 m-0 val-error">
                   <div *ngIf="pass2.errors?.['required']">
-                    Vuelve a introducir la contraseña.
+                    {{'Vuelve a introducir la contrasena' | translate }}.
                   </div>
                   <div *ngIf="pass2.errors?.['pattern']">
-                    Contraseña inválida.
+                    {{'Contrasena invalida' | translate }}.
                   </div>
                 </div>
                 <div class="val-error" *ngIf="pass2.value != pass1.value && pass2.dirty">
-                  Las contraseñas no coinciden.
+                  {{'Las contrasenas no coinciden' | translate }}.
                 </div>
-                <p class="d-flex flex-row-reverse m-2"><a href="" (click)="resetForm(creacionUsuario)" data-bs-toggle="modal" data-bs-target="#iniciar-sesion">Inicia sesión</a>¿Ya tienes una cuenta?&nbsp;</p>
+                <p class="d-flex flex-row-reverse m-2"><a href="" (click)="resetForm(creacionUsuario)" data-bs-toggle="modal" data-bs-target="#iniciar-sesion">{{'Inicia sesion' | translate}}</a>{{'¿Ya tienes cuenta?' | translate}}&nbsp;</p>
               </div>
 
               <!-- Submit-->
               <div class="d-grid">
-                  <button type="submit" class="btn btn-success" [disabled]="(pass2.value != pass1.value) || nick.invalid || nombre.invalid || email.invalid || domicilio.invalid || pass1.invalid" >Crear usuario</button>
+                  <button type="submit" class="btn btn-success" [disabled]="(pass2.value != pass1.value) || nick.invalid || nombre.invalid || email.invalid || domicilio.invalid || pass1.invalid" >{{'Crear cuenta' | translate }}.</button>
               </div>
             </form>
           </div>
@@ -350,49 +350,173 @@
 </div>
 
 <!-- /MODAL PERFIL/ -->
-<div class="modal fade" id="perfil" style="overflow-y: scroll;">
-  <div class="modal-dialog modal-lg modal-dialog-centered modal-fullscreen-sm-down">
+<div class="modal fade " id="perfil" style="overflow-y: scroll;">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-fullscreen-sm-down d-none d-sm-flex">
       <div id="modal-completo d-flex justify-content-center " class="modal-content">
         <div id="c-perfil" class="container-fluid d-flex flex-column border border-2 rounded m-0 p-0">
           <div class="d-flex flex-row jusify-content-center align-items-center">
-            <span class="fs-3 ms-3">&nbsp;Perfil</span>
+            <span class="fs-3 ms-3">&nbsp;{{'Perfil' | translate}}</span>
             <h5 class="ms-auto m-3"><i class="bi bi-x-lg pointer" data-bs-dismiss="modal"></i></h5>
           </div>
           <div id="banner" class="container-fluid"><img id="pic" class="img-fluid bg-dark updateimg rounded-circle contener border border-2" [src]="usuarioactivo.pic" alt="" style="width:133.5px; height:133.5px;"></div>
           <div id="usuario-profile" class="text-center d-flex flex-row justify-content-center align-items-end">
-            <h2 class="mt-3">{{usuarioactivo.nick}}</h2>
+            <h2 class="mt-3 text-center">{{usuarioactivo.nick}}</h2>
         </div>
-        <div class="d-flex">
-        {{usuarioactivo.nick}}
-        {{usuarioactivo.nombre}}
-        {{usuarioactivo.correo}}
-        {{usuarioactivo.domicilio}}
-        </div>
-        <!-- <div *ngFor="let pedidos of historial">
-          {{pedidos.nombre}}
-          {{pedidos.fecha}}
-          {{pedidos.id_pedido}}
-        </div> -->
-        <div *ngFor="let pedidos of transaccion">
-          {{pedidos.fecha_pedido}}
-          <div *ngFor="let productopedido of pedidos.pedidoarray">
-            {{productopedido.nombre}}
-            <img [src]="productopedido.imagen" alt="" style="width: 50px;">
-          </div>
-        </div>
-        <div>
-          <form (ngSubmit)="updatePic();">
-            <!-- IMAGEN -->
-            <div class="mb-3">
-              <input type="file" name="myImage" accept="image/png, image/gif, image/jpeg" (change)="onFileSelected($event)"/>
-              <div class="text-center"><img class="contener" [src]="usuarioperfil.pic" class="p-3 img-fluid"></div>
-
+        <div class="row d-flex flex-row justify-content-center mt-2 p-0 m-0" >
+          <div class="d-flex flex-column justify-content-center align-items-center mt-4 border border-2 rounded w-75 p-3">
+            <form (ngSubmit)="updatePic();">
+              <div class="mb-3">
+                <h3>{{'Actualizar imagen' | translate}}</h3>
+                <label for="editarfoto" class="bg-primary rounded p-2 text-light"><i class="bi bi-upload"></i>&nbsp; {{'Subir archivo' | translate}}</label>
+                <input style='display: none;' class="mt-4" value="hola" id="editarfoto" type="file" name="myImage" accept="image/png, image/gif, image/jpeg" (change)="onFileSelected($event)"/>
+                <div class="text-center"><img class="contener" [src]="usuarioperfil.pic" class="p-3 img-fluid" style="max-width:466px ; max-height: 266px;"></div>
+              </div>
+              <div>
+                <button id="act" class="btn btn-success">{{'Actualizar imagen' | translate}}</button>
+                <p id="nofotoselected" class="val-error">{{'No has elegido imagen' | translate}}</p>
+              </div>
+            </form>
             </div>
-            <!-- SUBMIT BUTTON -->
-            <div class="d-grid">
-              <button id="modal-button" class="btn btn-success">Actualizar imagen</button>
+          <div id="info" class="d-flex flex-column justify-content-center align-items-center w-75 border border-2 rounded m-4 mt-4">
+            <h3>{{'Informacion' | translate}}</h3>
+            <p class="fw-bold">{{'Nick' | translate }}:</p>
+            <p>{{usuarioactivo.nick}}</p>
+            <p class="fw-bold">{{'Nombre' | translate }}:</p>
+            <p>{{usuarioactivo.nombre}}</p>
+            <p class="fw-bold">{{'Email' | translate }}:</p>
+            <p>{{usuarioactivo.correo}}</p>
+            <p class="fw-bold">{{'Domicilio' | translate }}:</p>
+            <p>{{usuarioactivo.domicilio}}</p>
           </div>
-          </form>
+          <div *ngIf="usuarioactivo.tipo == 1" id="pedidos" class="d-flex flex-column w-75 border border-2 rounded m-4">
+            <h3>{{'Pedidos realizados' | translate}}</h3>
+            <div class="d-flex align-items-center flex-column border rounded m-1" *ngFor="let pedidos of transaccion">
+              <p><span class="fw-bold">id: </span>{{pedidos.id}} /
+                 <span class="fw-bold">{{'Fecha' | translate}}: </span>{{pedidos.fecha_pedido}}
+              </p>
+              <div class="d-flex align-items-center flex-wrap justify-content-center ">
+                <!-- <div class="border border-2 rounded d-flex flex-row m-2 p-0" *ngFor="let productopedido of pedidos.pedidoarray">
+                  <div class="d-flex flex-column m-3">
+                    <p>{{productopedido.nombre}}</p>
+                  <p>{{productopedido.precio}}</p>
+                  <p>{{productopedido.cantidad}}</p>
+                  </div>
+                  <div class="d-flex justify-content-center align-items-center m-1">
+                    <img [src]="productopedido.imagen" alt="" style="max-width: 50px;max-height: 60px;">
+                  </div>
+                </div> -->
+
+                  <table id="vpt" class="table table-bordered bg-secondary">
+                    <thead>
+                      <tr>
+                        <th>{{'Producto' | translate}}</th>
+                        <th>{{'Precio' | translate}}</th>
+                        <th>{{'Cantidad' | translate}}</th>
+                        <th>{{'Total' | translate}}</th>
+                      </tr>
+                    </thead>
+                    <tbody >
+                      <tr *ngFor="let productopedido of pedidos.pedidoarray">
+                        <td>{{productopedido.nombre}}</td>
+                        <td>{{productopedido.precioporunidad}} €</td>
+                        <td>{{productopedido.cantidad}}</td>
+                        <td>{{productopedido.precio}} €</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+              </div>
+            </div>
+
+            <div>
+          </div>
+        </div>
+
+        </div>
+    </div>
+   </div>
+  </div>
+
+<!-- /MODAL PERFIL XS/ -->
+<div class="modal fade " id="perfilxs" style="overflow-y: scroll;">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-fullscreen-sm-down d-flex d-sm-none">
+      <div id="modal-completo d-flex justify-content-center " class="modal-content" style="overflow-y: scroll;">
+        <div id="c-perfil-xs" class="container-fluid d-flex flex-column border border-2 rounded m-0 p-0">
+          <div class="d-flex flex-row jusify-content-center align-items-center">
+            <span class="fs-3 ms-3">&nbsp;{{'Perfil' | translate}}</span>
+            <h5 class="ms-auto m-3"><i class="bi bi-x-lg pointer" data-bs-dismiss="modal"></i></h5>
+          </div>
+          <div id="banner" class="container-fluid"><img id="pic" class="img-fluid bg-dark updateimg rounded-circle contener border border-2" [src]="usuarioactivo.pic" alt="" style="width:133.5px; height:133.5px;"></div>
+          <div id="usuario-profile" class="text-center d-flex flex-row justify-content-center align-items-end">
+            <h2 class="mt-3 text-center">{{usuarioactivo.nick}}</h2>
+        </div>
+        <div class="row d-flex flex-row justify-content-center mt-2 p-0 m-0" >
+          <div class="d-flex flex-column justify-content-center align-items-center mt-4 border border-2 rounded w-75 p-3">
+            <form (ngSubmit)="updatePic();">
+              <div class="mb-3">
+                <h4>{{'Actualizar imagen' | translate}}</h4>
+                <label for="editarfoto" class="bg-primary rounded p-2 text-light"><i class="bi bi-upload"></i>&nbsp; {{'Subir archivo' | translate}}</label>
+                <input style='display: none;' class="mt-4" value="hola" id="editarfoto" type="file" name="myImage" accept="image/png, image/gif, image/jpeg" (change)="onFileSelected($event)"/>
+                <div class="text-center"><img class="contener" [src]="usuarioperfil.pic" class="p-3 img-fluid" style="max-width:466px ; max-height: 266px;"></div>
+              </div>
+              <div>
+                <button id="act" class="btn btn-success">{{'Actualizar imagen' | translate}}</button>
+                <!-- <p id="nofotoselected" class="val-error">{{'No has elegido imagen' | translate}}</p> -->
+              </div>
+            </form>
+            </div>
+          <div id="info" class="d-flex flex-column justify-content-center align-items-center w-75 border border-2 rounded mt-4">
+            <h4>Información</h4>
+            <p class="fw-bold">{{'Nick' | translate}}:</p>
+            <p>{{usuarioactivo.nick}}</p>
+            <p class="fw-bold">{{'Nombre' | translate}}:</p>
+            <p>{{usuarioactivo.nombre}}</p>
+            <p class="fw-bold">{{'Email' | translate}}:</p>
+            <p>{{usuarioactivo.correo}}</p>
+            <p class="fw-bold">{{'Domicilio' | translate}}:</p>
+            <p>{{usuarioactivo.domicilio}}</p>
+          </div>
+          <div id="pedidos" class="d-flex flex-column w-75 border border-2 rounded mt-4">
+            <h4>{{'Pedidos realizados' | translate}}</h4>
+            <div class="d-flex align-items-center flex-column border rounded m-1" *ngFor="let pedidos of transaccion">
+              <p><span class="fw-bold">id: </span>{{pedidos.id}} /
+                 <span class="fw-bold">{{'Fecha' | translate}}: </span>{{pedidos.fecha_pedido}}
+              </p>
+              <div class="d-flex align-items-center flex-wrap justify-content-center">
+                <!-- <div class="border border-2 rounded d-flex flex-row m-2 p-0" *ngFor="let productopedido of pedidos.pedidoarray">
+                  <div class="d-flex flex-column m-3">
+                    <p>{{productopedido.nombre}}</p>
+                  <p>{{productopedido.precio}}</p>
+                  <p>{{productopedido.cantidad}}</p>
+                  </div>
+                  <div class="d-flex justify-content-center align-items-center m-1">
+                    <img [src]="productopedido.imagen" alt="" style="max-width: 50px;max-height: 60px;">
+                  </div>
+                </div> -->
+                <table id="ver-pedidos-table" class="table table-bordered bg-secondary">
+                  <thead>
+                    <tr>
+                      <th>{{'Producto' | translate}}</th>
+                      <th>{{'Precio' | translate}}</th>
+                      <th>{{'Cantidad' | translate}}</th>
+                    </tr>
+                  </thead>
+                  <tbody >
+                    <tr *ngFor="let productopedido of pedidos.pedidoarray">
+                      <td>{{productopedido.nombre}}</td>
+                      <td>{{productopedido.precioporunidad}} €</td>
+                      <td>{{productopedido.cantidad}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div>
+          </div>
+        </div>
+
         </div>
     </div>
    </div>
@@ -400,25 +524,25 @@
 </div>
 
 <!-- /MODAL CARRITO/ -->
-<div class="modal fade" id="carritocompra">
+<div class="modal fade" id="carritocompra" style="overflow-y: scroll;">
   <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
       <div id="modal-completo" class="modal-content">
         <div id="c-carritocompra" class="border border-2 rounded">
                     <!-- Modal header -->
           <div id="modal-head" class="modal-header">
-              <h4 id="titulo-modal" class="modal-title">Carrito</h4>
+              <h4 id="titulo-modal" class="modal-title">{{'Carrito' | translate}}</h4>
               <h4><i id="close-modal" class="bi bi-x-circle-fill" data-bs-dismiss="modal" #cerrarmodalco></i></h4>
           </div>
           <!-- Modal body -->
           <div id="body-modal" class="modal-body d-flex flex-column align-items-center">
-            <div class="fs-6 m-5 fw-bold" *ngIf="!ne"><span>EL CARRITO ESTÁ VACÍO</span></div>
+            <div class="fs-6 m-5 fw-bold" *ngIf="!ne"><span>{{'El carrito esta vacio' | translate}}</span></div>
             <div id="carrito" class="p-2 m-2 border border-2 d-flex flex-row justify-content-center" *ngFor="let producto of carrito" style="width:340px;">
               <div class="p-0 d-flex flex-row align-items-center p-2 ">
                 <div class="d-flex justify-content-center align-items-center p-2 m-2">
                   <img id="img-productos-carrito" class="contener" [src]="producto.imagen" alt="img-productos" [routerLink]="['/productos-detail', producto.id]">
                 </div>
                 <div class="d-flex flex-column justify-content-center">
-                  <a class="fs-5 text-decoration-none text-dark text-center fw-bold" >{{producto.nombre}}</a>
+                  <span class="fs-5 text-decoration-none text-center fw-bold" >{{producto.nombre}}</span>
                   <span class="text-center">{{producto.precio | currency:'EUR':true}}</span>
                 </div>
               </div>
@@ -427,15 +551,15 @@
                   <button class="btn btn-light border m-2" (click)="restarCantidad(producto)">-</button>
                   <button class="btn btn-light border m-2" (click)="sumarCantidad(producto)">+</button>
                 </div>
-                <span class="text-center fst-italic">cantidad: {{producto.cantidad}}</span>
+                <span class="text-center fst-italic">{{'Cantidad' | translate}}: {{producto.cantidad}}</span>
               </div>
               <i (click)="borrarProducto(producto.id)" class="bi bi-x-lg float-end mb-4 pointer"></i>
             </div>
             <div class="d-flex flex-row">
-              <button class="btn btn-warning m-2" (click)="vaciarCarrito()">Vaciar carrito</button>
-              <button class="btn btn-success m-2" (click)="crearPedido()">Comprar</button>
+              <button class="btn btn-warning m-2" (click)="vaciarCarrito()">{{'Vaciar carrito' | translate}}</button>
+              <button class="btn btn-success m-2" (click)="crearPedido()">{{'Comprar' | translate}}</button>
             </div>
-            <p id="carritovacio" class="val-error">El carrito está vacío.</p>
+            <p id="carritovacio" class="val-error">{{'El carrito esta vacio' | translate}}.</p>
           </div>
         </div>
       </div>
@@ -443,27 +567,27 @@
 </div>
 
 <!-- /MODAL ADMIN CONFIGURACION/ -->
-<div class="modal fade" id="admin">
+<div class="modal fade" id="admin" style="overflow-y: scroll;">
   <div class="modal-lg modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
       <div id="modal-completo" class="modal-content">
         <div id="c-admin" class="border border-2 rounded">
            <!-- Modal header -->
           <div id="modal-head" class="modal-header">
-              <h4 id="titulo-modal" class="modal-title">Configuración de administrador</h4>
+              <h4 id="titulo-modal" class="modal-title">{{'Configuracion de administrador' | translate}}</h4>
               <h4><i id="close-modal" class="bi bi-x-circle-fill" data-bs-dismiss="modal"></i></h4>
           </div>
           <!-- Modal body -->
           <div id="body-modal" class="modal-body">
-            <h5>Listado de usuarios registrados</h5>
+            <h5>{{'Listado de usuarios registrados' | translate}}</h5>
             <ul class="navbar-nav">
               <li >
-                <table class="table table-bordered">
+                <table id="ver-pedidos-table" class="table table-bordered bg-secondary">
                   <thead>
                     <tr>
-                      <th scope="col">Nick</th>
-                      <th scope="col" class="nowrap">Nombre y apellidos</th>
-                      <th scope="col">Correo</th>
-                      <th scope="col" colspan="2" class="text-center">Opciones</th>
+                      <th scope="col">{{'Nick' | translate}}</th>
+                      <th scope="col" class="nowrap">{{'Nombre y apellidos' | translate}}</th>
+                      <th scope="col">{{'Email' | translate}}</th>
+                      <th scope="col" colspan="2" class="text-center">{{'Opciones' | translate}}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -471,8 +595,8 @@
                       <td [width]="100">{{usuarios.nick}}</td>
                       <td [width]="1000">{{usuarios.nombre}}</td>
                       <td [width]="1000">{{usuarios.correo}}</td>
-                      <td *ngIf="usuarios.tipo != 2" [width]="100"><button class="btn btn-success nowrap"  (click)="obtenerPedidosPorId(usuarios.id)" data-bs-toggle="modal" data-bs-target="#ver_pedidos">Ver pedidos</button></td>
-                      <td *ngIf="usuarios.tipo != 2" [width]="100"><button class="btn btn-danger nowrap"  (click)="eliminarUsuario(usuarios.id)">Borrar usuario</button></td>
+                      <td *ngIf="usuarios.tipo != 2" [width]="100"><button class="btn btn-success nowrap" (click)="obtenerPedidosPorId(usuarios.id); xd()" data-bs-toggle="modal" data-bs-target="#ver_pedidos">{{'Ver pedidos' | translate}}</button></td>
+                      <td *ngIf="usuarios.tipo != 2" [width]="100"><button class="btn btn-danger nowrap"  (click)="eliminarUsuario(usuarios.id)">{{'Borrar usuario' | translate}}</button></td>
                     </tr>
                   </tbody>
                 </table>
@@ -485,24 +609,43 @@
 </div>
 
 <!-- /VER PEDIDOS (ADMIN)/ -->
-<div class="modal fade" id="ver_pedidos">
+<div class="modal fade" id="ver_pedidos" style="overflow-y: scroll;">
   <div class="modal-lg modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
       <div id="modal-completo" class="modal-content">
-        <div id="c-ver_pedidos" class="border border-2 rounded">
+        <div id="c-ver_pedidos" class="border border-2 rounded p-2">
                   <!-- Modal header -->
         <div id="modal-head" class="modal-header">
-          <h4 id="titulo-modal" class="modal-title">Pedidos</h4>
+          <h4 id="titulo-modal" class="modal-title">{{'Pedidos realizados' | translate}}</h4>
           <h4><i id="close-modal" class="bi bi-x-circle-fill" data-bs-dismiss="modal" #cerrarmodalvp></i></h4>
         </div>
         <div *ngFor="let pedidos of transaccion">
-          {{pedidos.fecha_pedido}}
-          <div *ngFor="let productopedido of pedidos.pedidoarray">
-            {{productopedido.nombre}}
-            <img [src]="productopedido.imagen" alt="" style="width: 50px;">
-          </div>
+          <p><span class="fw-bold">id: </span>{{pedidos.id}} /
+            <span class="fw-bold">{{'Fecha' | translate}}: </span>{{pedidos.fecha_pedido}}
+         </p>
+         <div class="">
+          <table id="vptt" class="table table-bordered bg-secondary">
+            <thead>
+              <tr>
+                <th>{{'Producto' | translate}}</th>
+                <th>{{'Precio' | translate}}</th>
+                <th>{{'Cantidad' | translate}}</th>
+                <th>{{'Total' | translate}}</th>
+              </tr>
+            </thead>
+            <tbody >
+              <tr *ngFor="let productopedido of pedidos.pedidoarray">
+                <td>{{productopedido.nombre}}</td>
+                <td>{{productopedido.precioporunidad}} €</td>
+                <td>{{productopedido.cantidad}}</td>
+                <td>{{productopedido.precio}} €</td>
+              </tr>
+            </tbody>
+          </table>
+         </div>
+
         </div>
         <div *ngIf="transaccion.length == 0">
-          Este usuario no tiene pedidos.
+          {{'Este usuario no tiene' | translate}}.
         </div>
         </div>
       </div>

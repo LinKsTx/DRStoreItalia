@@ -5,5 +5,6 @@ export interface IPedido {
   pedido?: string;
   pedidoarray?: IProducto[];
   fecha_pedido?: Date;
+  preciofinal?: number;
   id_usuario?: number;
 }

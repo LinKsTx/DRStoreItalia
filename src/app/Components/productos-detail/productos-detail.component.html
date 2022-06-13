@@ -1,8 +1,32 @@
-<p>{{producto.nombre}}</p>
-<img [src]="producto.imagen" alt="">
-<p>{{producto.descripcion}}</p>
-<p>{{producto.categoria}}</p>
-<p>{{producto.marca}}</p>
-<p>{{producto.stock}} {{xd}}</p>
-<button type="submit" class="btn btn-info m-2">Añadir al carrito de la compra</button>
-<button type="submit" class="btn btn-success m-2">Comprar ya</button>
+
+
+
+<!-- /SPINNER/ -->
+<!-- <ngx-spinner bdColor = "rgba(20,20,20,0.8)" size = "medium" color = "#b3b0b0" type = "ball-clip-rotate" [fullScreen] = "true"><p style="color: white" (scroll)="false"></p></ngx-spinner> -->
+<div class="container-fluid d-flex flex-column justify-content-center align-items-center">
+  <div class="row d-flex align-items-center justify-content-center m-4 p-4 border border-2 rounded">
+    <div class="col-4 d-flex justify-content-center align-items-center">
+        <img [src]="producto.imagen" alt="" class="img-fluid" style="max-width:500px; max-height: 500px">
+    </div>
+    <div class="col-12 col-lg-7 d-flex flex-column justify-content-center align-items-center">
+      <div class="border p-3 m-2 rounded"><h2>{{producto.nombre}} </h2></div>
+      <div class="border p-2 m-2 rounded"><h5>{{ producto.precio | number:  '1.2-2' }} €</h5></div>
+      <div class="d-flex flex-row">
+     <p class="text-center" style="font-size:13px;">({{'Puedes' | translate}})</p>
+      </div>
+    </div>
+    <div class="col-12 d-flex flex-column justify-content-center align-items-center mt-3 border-top rounded">
+      <div class="p-3 text-center">
+        <p class="fw-bold">{{'Descripcion' | translate}}: </p>
+        <p>{{producto.descripcion}}</p>
+        <p class="fw-bold">{{'Categoria' | translate}}: </p>
+        <p>{{producto.categoria}}</p>
+        <p class="fw-bold">{{'Marca' | translate}}: </p>
+        <p>{{producto.marca}}</p>
+        <p class="fw-bold">{{'Stock' | translate}}: </p>
+        <p *ngIf="producto.stock == 0">{{'Disponible' | translate}}</p>
+        <p *ngIf="producto.stock == 1">{{'Agotado' | translate}}</p>
+      </div>
+    </div>
+  </div>
+</div>

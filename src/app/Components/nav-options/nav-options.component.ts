@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-nav-options',
@@ -7,11 +8,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavOptionsComponent implements OnInit {
 
+  xd: string;
+
   //CONSTRUCTOR
-  constructor() { }
+  constructor(
+    public translate: TranslateService
+  ) {
+    translate.addLangs(['es', 'en', 'it']);
+    const lang = translate.getBrowserLang();
+  }
+
+   switchLang(lang: string) {
+    this.translate.use(lang);
+    sessionStorage.setItem('language', lang);
+    this.xd = sessionStorage.getItem('language');
+  }
 
   //SE INICIA AUTOMÁTICAMENTE
   ngOnInit(): void {
+    if(!sessionStorage.getItem('language')) {
+      sessionStorage.setItem('language', 'es');
+    } else {
+      this.translate.setDefaultLang(sessionStorage.getItem('language'));
+    }
+  this.xd = sessionStorage.getItem('language');
+
 //------------------
 // if(sessionStorage.getItem('theme') == "modoclaro") {
 //   $("#darkthemebutton").click(function(){
@@ -31,9 +52,13 @@ export class NavOptionsComponent implements OnInit {
  if(sessionStorage.getItem('theme') == "modooscuro") {
   $("#nav-options").removeClass("bg-dark");
   $("#nav-options").addClass("oscurito")
+  $("#select-idioma").removeClass("bg-dark");
+    $("#select-idioma").addClass("oscurito");
 } else if (sessionStorage.getItem('theme') == "modoclaro"){
   $("#nav-options").addClass("bg-dark");
   $("#nav-options").removeClass("oscurito")
+  $("#select-idioma").addClass("bg-dark");
+  $("#select-idioma").removeClass("oscurito");
 }
   }
 
@@ -51,6 +76,8 @@ if(sessionStorage.getItem('theme') == "modoclaro") {
     //nav-options
     $("#nav-options").removeClass("bg-dark");
     $("#nav-options").addClass("oscurito")
+    $("#select-idioma").removeClass("bg-dark");
+    $("#select-idioma").addClass("oscurito");
      //footer
      $("#div-footer").removeClass("bg-dark");
      $("#div-footer").addClass("oscurito")
@@ -87,6 +114,41 @@ if(sessionStorage.getItem('theme') == "modoclaro") {
     $("#dropdown-carrito").removeClass("bg-light");
     $("#dropdown-carrito").addClass("bg-dark");
 
+    $("#nav-prod1").removeClass("bg-light");
+        $("#nav-prod1").addClass("bg-dark");
+        $("#nav-prod2").removeClass("bg-light");
+        $("#nav-prod2").addClass("bg-dark");
+        $("a").removeClass("txtdark");
+        $("a").addClass("txtlight");
+
+        $("#nav-blog1").removeClass("bg-light");
+        $("#nav-blog1").addClass("bg-dark");
+        $("#nav-blog2").removeClass("bg-light");
+        $("#nav-blog2").addClass("bg-dark");
+        $("a").removeClass("txtdark");
+        $("a").addClass("txtlight");
+
+        $("#botoncolaps").removeClass("txtdark");
+        $("#botoncolaps").addClass("txtlight");
+
+        $("#c-editar-producto").addClass("darkmode");
+        $("#c-crear-producto").addClass("darkmode");
+
+        $("#c-editar-blog").addClass("darkmode");
+    $("#c-crear-blog").addClass("darkmode");
+
+    $("#c-iniciar-sesion").addClass("darkmode");
+    $("#c-crear-usuario").addClass("darkmode");
+    $("#c-perfil").addClass("darkmode");
+    $("#c-perfil-xs").addClass("darkmode");
+    $("#c-carritocompra").addClass("darkmode");
+    $("#c-admin").addClass("darkmode");
+    $("#c-ver_pedidos").addClass("darkmode");
+    $("#carrito").addClass("darkmode");
+    $("#ver-pedidos-table").addClass("darkmode");
+
+    $("table").attr("style", "color: white");
+
 } else if (sessionStorage.getItem('theme') == "modooscuro" ) {
     sessionStorage.setItem('theme', "modoclaro");
     //componentes
@@ -99,6 +161,8 @@ if(sessionStorage.getItem('theme') == "modoclaro") {
     //navoptions
     $("#nav-options").addClass("bg-dark");
     $("#nav-options").removeClass("oscurito")
+    $("#select-idioma").addClass("bg-dark");
+    $("#select-idioma").removeClass("oscurito");
      //footer
      $("#div-footer").addClass("bg-dark");
      $("#div-footer").removeClass("oscurito")
@@ -135,6 +199,39 @@ if(sessionStorage.getItem('theme') == "modoclaro") {
     $("#dropdown-carrito").addClass("bg-light");
     $("#dropdown-carrito").removeClass("bg-dark");
 
+    $("#nav-prod1 > a").addClass("bg-light");
+    $("#nav-prod1").removeClass("bg-dark");
+    $("#nav-prod2").addClass("bg-light");
+    $("#nav-prod2").removeClass("bg-dark");
+    $("a").addClass("txtdark");
+    $("a").removeClass("txtlight");
+
+    $("#nav-blog1").addClass("bg-light");
+    $("#nav-blog1").removeClass("bg-dark");
+    $("#nav-prod2").addClass("bg-light");
+    $("#nav-blog2").removeClass("bg-dark");
+    $("a").addClass("txtdark");
+    $("a").removeClass("txtlight");
+
+    $("#botoncolaps").addClass("txtdark");
+    $("#botoncolaps").removeClass("txtlight");
+
+    $("#c-editar-producto").removeClass("darkmode");
+    $("#c-crear-producto").removeClass("darkmode");
+
+    $("#c-editar-blog").removeClass("darkmode");
+    $("#c-crear-blog").removeClass("darkmode");
+
+    $("#c-iniciar-sesion").removeClass("darkmode");
+    $("#c-crear-usuario").removeClass("darkmode");
+    $("#c-perfil").removeClass("darkmode");
+    $("#c-perfilxs").removeClass("darkmode");
+    $("#c-carritocompra").removeClass("darkmode");
+    $("#c-admin").removeClass("darkmode");
+    $("#c-ver_pedidos").removeClass("darkmode");
+    $("#carrito").removeClass("darkmode");
+    $("#ver-pedidos-table").removeClass("darkmode");
+    $("table").attr("style", "color: black");
 
 } else {
     sessionStorage.setItem('theme', "modooscuro");
@@ -148,6 +245,8 @@ if(sessionStorage.getItem('theme') == "modoclaro") {
     //navoptions
     $("#nav-options").removeClass("bg-dark");
     $("#nav-options").addClass("oscurito")
+    $("#select-idioma").removeClass("bg-dark");
+    $("#select-idioma").addClass("oscurito");
     //footer
     $("#div-footer").removeClass("bg-dark");
     $("#div-footer").addClass("oscurito")
@@ -184,8 +283,43 @@ if(sessionStorage.getItem('theme') == "modoclaro") {
     $("#dropdown-carrito").removeClass("bg-light");
     $("#dropdown-carrito").addClass("bg-dark");
 
+    $("#nav-prod1").removeClass("bg-light");
+        $("#nav-prod1").addClass("bg-dark");
+        $("#nav-prod2").removeClass("bg-light");
+        $("#nav-prod2").addClass("bg-dark");
+        $("a").removeClass("txtdark");
+        $("a").addClass("txtlight");
+
+        $("#nav-blog1").removeClass("bg-light");
+        $("#nav-blog1").addClass("bg-dark");
+        $("#nav-blog2").removeClass("bg-light");
+        $("#nav-blog2").addClass("bg-dark");
+        $("a").removeClass("txtdark");
+        $("a").addClass("txtlight");
+
+        $("#botoncolaps").removeClass("txtdark");
+        $("#botoncolaps").addClass("txtlight");
+
+        $("#c-editar-producto").addClass("darkmode");
+        $("#c-crear-producto").addClass("darkmode");
+
+        $("#c-editar-blog").addClass("darkmode");
+    $("#c-crear-blog").addClass("darkmode");
+
+    $("#c-iniciar-sesion").addClass("darkmode");
+    $("#c-crear-usuario").addClass("darkmode");
+    $("#c-perfil").addClass("darkmode");
+    $("#c-perfil-xs").addClass("darkmode");
+    $("#c-carritocompra").addClass("darkmode");
+    $("#c-admin").addClass("darkmode");
+    $("#c-ver_pedidos").addClass("darkmode");
+    $("#carrito").addClass("darkmode");
+    $("#ver-pedidos-table").addClass("darkmode");
+    $("table").attr("style", "color: white");
+
 
 }
+// window.location.reload();
 //------------------
   }
 

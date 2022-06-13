@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUrl: "http://localhost/DRStoreItalia/api"
+  baseUrl: "http://localhost/DRStoreItalia/api",
+  mapBoxToken: 'pk.eyJ1IjoibGlua3N0eCIsImEiOiJja3dreW8zZ2wwbzhhMndwZDFtYnIyZ2doIn0.ykfP3eB4kudEW5kfTQ2Q_Q'
 };
 
 /*

@@ -95,11 +95,13 @@ display: none;
 //----------------------------------------------
 //------Animaciones-----------------------------
 #gear:hover{
+  animation-iteration-count: 1s;
   animation-name: ckw;
   animation-duration: 1s;
   transform-origin: 50% 50%;
   display: inline-block;
   animation-timing-function: linear;
+
 }
 @keyframes ckw {
   0% {

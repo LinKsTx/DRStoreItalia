@@ -1,1 +1,73 @@
-<p>contacto works!</p>
+<agm-map class="mapa p-0 m-0 container-fluid" [latitude]="38.50549577377707" [longitude]="-0.2359320890993105" [zoom]="19">
+  <agm-marker [latitude]="38.50549577377707" [longitude]="-0.2359320890993105" [label]='labelOptions'></agm-marker>
+</agm-map>
+<!--/ROW CONTACTO/-->
+  <div class=" container-fluid row m-0 d-flex justify-content-center">
+    <div id="contenedor-ubicacion" class="container-fluid d-flex flex-column justify-content-center col-12">
+      <h2 id="titulo-ubicacion" class="text-center fira m-4"><span class="border rounded p-2 d-none d-md-inline-block"><i class="bi bi-map"></i><i class="bi bi-arrow-up"></i></span>&nbsp;<span class="border-bottom border-2 ">{{'Ubicacion' | translate}}</span>&nbsp;<span class="border rounded p-2 d-none d-md-inline-block"><i class="bi bi-arrow-down"></i><i class="bi bi-link"></i></span></h2>
+
+
+      <a class="nav-link text-center" target="blank" href="https://www.google.com/maps/place/D.R.Store+italia/@38.505004,-0.235882,18.5z/data=!4m5!3m4!1s0x0:0xb98fe2119c28751d!8m2!3d38.5054469!4d-0.2359308">Carrer Cervantes, 24, 03570 La Vila Joiosa, Alicante</a>
+  </div>
+      <!-- <div class="col-md-2 container ita-verde  text-center">
+      </div> -->
+      <div id="contenedor-contacto" class="col-md-8 container">
+          <div id="contenedor-sobre-nosotros" class="container justify-content-center">
+              <h2 id="sobre-nosotros" class="text-center fira m-4"><span class="border-bottom border-2 ">{{'Sobre nosotros' | translate}}</span></h2>
+              <p>{{'Sobre nosotros parrafo' | translate}}
+              </p>
+          </div>
+          <div id="contenedor-c" class="container justify-content-center">
+              <h2 id="contacto" class="text-center fira m-4"><span class="border-bottom border-2 ">{{'Contacto' | translate}}</span></h2>
+              <p>{{'Contacto parrafo' | translate}}:</p>
+              <span class="nav-link pointer" target="blank" href="https://www.facebook.com/drstoreitalia">- Facebook</span>
+              <span class="nav-link pointer" target="blank" href="https://www.instagram.com/d.r.store_italia/">- Instagram</span>
+              <span class="nav-link pointer" target="blank" href="tel:+34 617 53 16 77">- Teléfono</span>
+              <span class="nav-link pointer" target="blank" href="https://api.whatsapp.com/send?phone=+34 617 53 16 77">- Whatsapp</span>
+              <br>
+              <p>{{'Contacto parrafo2' | translate}}
+              </p>
+              <p><a class="text-decoration-none" target="blank" href="https://tawk.to/chat/620d121fa34c245641269800/1fs1gtjao">{{'Atencion al cliente' | translate}}</a></p>
+          </div>
+          <div id="contenedor-horario" class="container justify-content-center">
+           <h2 id="horario" class="text-center fira m-4"><span class="border-bottom border-2 ">{{'Horario' | translate}}</span></h2>
+           <table class="table table-bordered table-secondary">
+              <tbody>
+                <tr>
+                  <th class="col-2">{{'Lunes' | translate}}</th>
+                  <td class="col-3 text-success">9:00-13:30 / 16:30-20:00 </td>
+                </tr>
+                <tr>
+                  <th class="col-2">{{'Martes' | translate}}</th>
+                  <td class="col-3 text-success">9:00-13:30 / 16:30-20:00</td>
+                </tr>
+                <tr>
+                  <th class="col-2">{{'Miercoles' | translate}}</th>
+                  <td class="col-3 text-success">9:00-13:30 / 16:30-20:00</td>
+                </tr>
+                <tr>
+                  <th class="col-2">{{'Jueves' | translate}}</th>
+                  <td class="col-3 text-success">9:00-13:30 / 16:30-20:00</td>
+                </tr>
+                <tr>
+                  <th class="col-2">{{'Viernes' | translate}}</th>
+                  <td class="col-3 text-success">9:00-13:30 / 16:30-20:00</td>
+                </tr>
+                <tr>
+                  <th class="col-2">{{'Sabado' | translate}}</th>
+                  <td class="col-3 text-success">9:00-13:30 / 16:30-20:00</td>
+                </tr>
+                <tr>
+                  <th class="col-2">{{'Domingo' | translate}}</th>
+                  <td class="col-3 fira text-warning">{{'Cerrado' | translate}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+      </div>
+      <!-- <div class="col-md-2 container ita-rojo d-flex align-items-start justify-content-center">
+      </div> -->
+  </div>
+<!-- /SPINNER/ -->
+<ngx-spinner bdColor = "rgba(20,20,20,0.8)" size = "medium" color = "#b3b0b0" type = "ball-clip-rotate" [fullScreen] = "true"><p style="color: white" (scroll)="false"></p></ngx-spinner>

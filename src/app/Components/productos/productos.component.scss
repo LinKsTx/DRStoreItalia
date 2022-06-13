@@ -5,7 +5,14 @@
 }
 #tarjeta-producto {
   width: 300px;
+  background: transparent;
+  transition: 1s;
 }
+#tarjeta-producto:hover {
+  transition: 1s;
+  transform: scale(1.04);
+}
+
 #imagen-producto {
   height: 250px;
   object-fit:contain;
@@ -13,7 +20,7 @@
 }
 #imagen-producto:hover {
   transition: 1s;
-  transform: scale(1.2);
+
 }
 #titulo-producto {
   transition: 0.5s;

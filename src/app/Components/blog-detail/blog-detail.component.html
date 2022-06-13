@@ -1,3 +1,21 @@
-<span>{{blog.titulo}}</span>
-<img [src]="blog.imagen" alt="">
-<p>{{blog.contenido}}</p>
+<div class="progress-containe fixed-top">
+  <div class="progress-bar" id="myBar"></div>
+</div>
+<div class="container-fluid d-flex flex-column justify-content-center align-items-center">
+  <div class="container-fluid border border-2 rounded p-4 justify-content-cente m-3" style="width:60%">
+    <div class="d-flex justify-content-center">
+      <img [src]="blog.imagen" alt="" class="img-fluid rounded" style="max-width: 800px; max-height:600px">
+    </div>
+    <h1 class="mt-4 text-center"><span>{{blog.titulo}}</span></h1>
+    <div class="m-4">
+    <p style="text-align: justify; line-height: 1.6">{{blog.contenido}}</p>
+    <p class="fw-bold text-center">{{blog.categoria}}</p>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- /SPINNER/ -->
+<ngx-spinner bdColor = "rgba(20,20,20,0.8)" size = "medium" color = "#b3b0b0" type = "ball-clip-rotate" [fullScreen] = "true"><p style="color: white" (scroll)="false"></p></ngx-spinner>

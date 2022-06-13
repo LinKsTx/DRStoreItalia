@@ -22,17 +22,37 @@
       <ul class="nav ms-auto">
         <!--Tema oscuro/claro-->
           <li class="nav-item">
-            <a id="darkthemebutton" (click)="darkMode()" class="nav-link text-light pointer" ><i class="bi bi-circle-half"></i><span class="d-none d-lg-inline-block">&nbsp; Tema</span></a>
+            <a id="darkthemebutton" (click)="darkMode()" class="nav-link text-light pointer" ><i class="bi bi-circle-half"></i><span class="d-none d-lg-inline-block">&nbsp; {{'Tema' | translate}}</span></a>
         </li>
         <!--Idioma-->
-          <li class="nav-item dropdown">
+          <!-- <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown"><i class="bi bi-translate"></i><span class="d-none d-lg-inline-block">&nbsp; Español</span></a>
-              <ul class="dropdown-menu dropdown-menu-end bg-dark estilo-hover animate__animated animate__fadeIn text-center">
+              <ul class="dropdown-menu dropdown-menu-end bg-dark estilo-hover animate__animated animate__fadeIn text-center" ng>
                 <li><a class="dropdown-item text-light animate__animated animate__fadeInDown" href="#">Español</a></li>
                 <li><a class="dropdown-item text-light animate__animated animate__fadeInDown" href="#">Inglés</a></li>
                 <li><a class="dropdown-item text-light animate__animated animate__fadeInDown" href="#">Italiano</a></li>
              </ul>
-          </li>
+          </li> -->
+
+            <span class="d-flex justify-content-center align-items-center text-light" style="width:60px ;">
+              <i class="bi bi-translate d-none d-lg-inline-block"></i>
+              <select
+                  id="select-idioma"
+                  class="form-control bg-dark text-light border-0 p-0 text-center"
+                  #selectedLang
+                  (change)="switchLang(selectedLang.value)">
+                <option *ngFor="let language of translate.getLangs()"
+                  [value]="language"
+                  [selected]="language === translate.currentLang">
+                  {{ language }}
+                </option>
+              </select>
+
+            </span>
+            <li class="nav-link text-light p-0 align-items-center me-3 d-none d-lg-flex">
+              <span class="text-primary"><i class="bi bi-arrow-right text-light"></i> &nbsp;{{xd}}</span>
+            </li>
+
       </ul>
     </nav>
 

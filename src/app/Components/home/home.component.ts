@@ -43,21 +43,13 @@ export class HomeComponent implements OnInit {
     this.obtenerProductos();
     $
     //spinner
-    $(".ocultar").hide();
-    this.spinner.show();
-  //   $('html, body').css({
-  //     overflow: 'hidden',
-  //     height: '100%'
-  // });
-    setTimeout(() => {
-      this.spinner.hide();
-      $(".ocultar").show();
+    // $(".ocultar").hide();
+    // this.spinner.show();
+    // setTimeout(() => {
+    //   this.spinner.hide();
+    //   $(".ocultar").show();
+    // }, 1500);
 
-    //   $('html, body').css({
-    //     overflow: 'auto',
-    //     height: 'auto'
-    // });
-    }, 1500);
     $(document).scroll(function(){
       $("#uno").addClass("animate__fadeInLeft");
       $("#uno").addClass("animate__fadeInLeft");
@@ -69,7 +61,13 @@ export class HomeComponent implements OnInit {
 } else if (sessionStorage.getItem('theme') == "modoclaro"){
   $('app-home').removeClass("darkmode");
 }
+//spinner
+this.spinner.show();
 
+setTimeout(() => {
+  this.spinner.hide();
+
+}, 1500);
   }
 
 /*----------------------- OBTENER PRODUCTOS --------------------*/

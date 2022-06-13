@@ -11,6 +11,7 @@ import { ProductosService } from 'src/app/services/productos.service';
 import { PedidosService } from 'src/app/services/pedidos.service';
 import { IPedido } from 'src/app/interfaces/i-pedido';
 import Swal from 'sweetalert2';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -21,6 +22,7 @@ import Swal from 'sweetalert2';
 export class NavbarComponent implements OnInit {
 
 /*----------------------- DECLARAR VARIABLES -------------------*/
+
 
   preciofinal: number;
 
@@ -95,7 +97,10 @@ export class NavbarComponent implements OnInit {
     private pedidosService: PedidosService,
     private router: Router,
     private cookieService: CookieService,
-  ) { }
+
+  ) {
+
+  }
 
   //SE INICIA AUTOMÁTICAMENTE
   ngOnInit(): void {
@@ -146,7 +151,6 @@ export class NavbarComponent implements OnInit {
       this.ne = false;
       }
     }
-
     //------------------
     //obtenemos usuarios
     this.obtenerUsuarios();
@@ -157,7 +161,9 @@ export class NavbarComponent implements OnInit {
     $("#errorcorreocontra").hide();
     $("#alertacreacionusuario").hide();
     $("#carritovacio").hide();
+    $("#nofotoselected").hide();
     //-------------------------------
+
     if(this.usuarioactivo.tipo == 1) {
       this.obtenerPedidos();
     }
@@ -193,11 +199,11 @@ export class NavbarComponent implements OnInit {
       //imagen
       $("#logoxs").attr("src",'../../../assets/images/logo-oscuro.png');
       $("#logoxl").attr("src",'../../../assets/images/logo-oscuro.png');
-      //dropdowns & modal
 
 
     }
-  }
+
+}
 
 /*----------------------- CREAR USUARIO ------------------------*/
   crearUsuario(form: NgForm){
@@ -244,10 +250,21 @@ export class NavbarComponent implements OnInit {
         //literalmente es como hacer un click al boton de cerrar del modal
         this.cerrarmodalcu.nativeElement.click();
         this.router.navigate(['/home']);
-        $("#alertacreacionusuario").fadeIn();
-        setTimeout(() => {
-          $("#alertacreacionusuario").fadeOut();
-        }, 4000);
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          text: 'La cuenta se ha creado correctamente',
+          width: "300px",
+          heightAuto: false,
+          showClass: {
+            popup: 'animate__animated animate__fadeIn'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOut'
+          },
+          showConfirmButton: false,
+          timer: 1500
+        })
       }
     });
   }
@@ -309,7 +326,9 @@ export class NavbarComponent implements OnInit {
     //--------------------------------
     //-- Forma Cookies ---------------
     //vacias la cookie hasta volver a iniciar sesión
+    //borramos cookies de las 2 formas por que hay errores en ciertos navegadores
     document.cookie = "user" + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    this.cookieService.delete("user");
     //--------------------------------
     //vacias usuarioactivo al cerrar sesión
     this.usuarioactivo = {
@@ -341,11 +360,24 @@ export class NavbarComponent implements OnInit {
     this.usuarioperfil.correo = this.usuarioactivo.correo;
     this.usuarioperfil.contrasenya = this.usuarioactivo.contrasenya;
 
-    //servicio
-    this.usuarioService.updatePic(this.usuarioperfil).subscribe((respuesta)=>{
-      this.usuarioperfil.pic = "";
-      this.getPic();
-    });
+
+    if($("#editarfoto").val() == "") {
+      //mostramos y hacemos hide con fade el error
+      $("#nofotoselected").fadeIn();
+      setTimeout(() => {
+        $("#nofotoselected").fadeOut();
+      }, 3000);
+    } else {
+      //servicio
+      this.usuarioService.updatePic(this.usuarioperfil).subscribe((respuesta)=>{
+        this.usuarioperfil.pic = "";
+        this.getPic();
+        $("#editarfoto").val("");
+      });
+    }
+
+
+
 
   }
 /*--------------------------------------------------------------*/
@@ -433,8 +465,7 @@ export class NavbarComponent implements OnInit {
         $("#carritovacio").fadeOut();
       }, 3000);
     } else {
-      this.pedidosService.addPedido(this.pedido).subscribe((respuesta)=>{
-
+      this.pedidosService.addPedido(this.pedido).subscribe((respuesta: any)=>{
         this.vaciarCarrito();
         this.pedido.pedido = "";
         // $("#alertacomprarealizada").fadeIn();
@@ -442,16 +473,16 @@ export class NavbarComponent implements OnInit {
         //   $("#alertacomprarealizada").fadeOut();
         // }, 4000);
         Swal.fire({
-          position: 'top-end',
+          position: 'center',
           icon: 'success',
           text: 'La compra se ha realizado correctamente',
           width: "300px",
           heightAuto: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInRight'
+            popup: 'animate__animated animate__fadeIn'
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutRight'
+            popup: 'animate__animated animate__fadeOut'
           },
           showConfirmButton: false,
           timer: 1500
@@ -562,60 +593,82 @@ export class NavbarComponent implements OnInit {
     })
   }
 /*--------------------------------------------------------------*/
-/*----------------------- ELIMINAR USUARIO ---------------------*/
-comprobarTema() {
-  if(sessionStorage.getItem('theme') == "modooscuro") {
-    $("#dropdown-sinfotoxs").removeClass("bg-light");
-    $("#dropdown-sinfotoxs").addClass("bg-dark");
+/*----------------------- COMPROBAR TEMA ---------------------*/
+  comprobarTema() {
+    if(sessionStorage.getItem('theme') == "modooscuro") {
+      $("#dropdown-sinfotoxs").removeClass("bg-light");
+      $("#dropdown-sinfotoxs").addClass("bg-dark");
 
-    $("#dropdown-confotoxs").removeClass("bg-light");
-    $("#dropdown-confotoxs").addClass("bg-dark");
+      $("#dropdown-confotoxs").removeClass("bg-light");
+      $("#dropdown-confotoxs").addClass("bg-dark");
 
-    $("#dropdown-confotoxsxs").removeClass("bg-light");
-    $("#dropdown-confotoxsxs").addClass("bg-dark");
+      $("#dropdown-confotoxsxs").removeClass("bg-light");
+      $("#dropdown-confotoxsxs").addClass("bg-dark");
 
-    $("#dropdown-sinfoto").removeClass("bg-light");
-    $("#dropdown-sinfoto").addClass("bg-dark");
+      $("#dropdown-sinfoto").removeClass("bg-light");
+      $("#dropdown-sinfoto").addClass("bg-dark");
 
-    $("#dropdown-confoto").removeClass("bg-light");
-    $("#dropdown-confoto").addClass("bg-dark");
+      $("#dropdown-confoto").removeClass("bg-light");
+      $("#dropdown-confoto").addClass("bg-dark");
 
-    $("#dropdown-carrito").removeClass("bg-light");
-    $("#dropdown-carrito").addClass("bg-dark");
+      $("#dropdown-carrito").removeClass("bg-light");
+      $("#dropdown-carrito").addClass("bg-dark");
 
-    $("#c-iniciar-sesion").addClass("darkmode");
-    $("#c-crear-usuario").addClass("darkmode");
-    $("#c-perfil").addClass("darkmode");
-    $("#c-carritocompra").addClass("darkmode");
-    $("#c-ver_pedidos").addClass("darkmode");
+      $("#c-iniciar-sesion").addClass("darkmode");
+      $("#c-crear-usuario").addClass("darkmode");
+      $("#c-perfil").addClass("darkmode");
+      $("#c-perfil-xs").addClass("darkmode");
+      $("#c-carritocompra").addClass("darkmode");
+      $("#c-admin").addClass("darkmode");
+      $("#c-ver_pedidos").addClass("darkmode");
+      $("#carrito").addClass("darkmode");
 
-  } else if (sessionStorage.getItem('theme') == "modoclaro"){
+      $("#vptt").addClass("darkmode");
 
-    $("#dropdown-sinfotoxs").addClass("bg-light");
-    $("#dropdown-sinfotoxs").removeClass("bg-dark");
+    } else if (sessionStorage.getItem('theme') == "modoclaro"){
 
-    $("#dropdown-confotoxs").addClass("bg-light");
-    $("#dropdown-confotoxs").removeClass("bg-dark");
+      $("#dropdown-sinfotoxs").addClass("bg-light");
+      $("#dropdown-sinfotoxs").removeClass("bg-dark");
 
-    $("#dropdown-confotoxsxs").addClass("bg-light");
-    $("#dropdown-confotoxsxs").removeClass("bg-dark");
+      $("#dropdown-confotoxs").addClass("bg-light");
+      $("#dropdown-confotoxs").removeClass("bg-dark");
 
-    $("#dropdown-sinfoto").addClass("bg-light");
-    $("#dropdown-sinfoto").removeClass("bg-dark");
+      $("#dropdown-confotoxsxs").addClass("bg-light");
+      $("#dropdown-confotoxsxs").removeClass("bg-dark");
 
-    $("#dropdown-confoto").addClass("bg-light");
-    $("#dropdown-confoto").removeClass("bg-dark");
+      $("#dropdown-sinfoto").addClass("bg-light");
+      $("#dropdown-sinfoto").removeClass("bg-dark");
 
-    $("#dropdown-carrito").addClass("bg-light");
-    $("#dropdown-carrito").removeClass("bg-dark");
+      $("#dropdown-confoto").addClass("bg-light");
+      $("#dropdown-confoto").removeClass("bg-dark");
 
-    $("#c-iniciar-sesion").removeClass("darkmode");
-    $("#c-crear-usuario").removeClass("darkmode");
-    $("#c-perfil").removeClass("darkmode");
-    $("#c-carritocompra").removeClass("darkmode");
-    $("#c-ver_pedidos").removeClass("darkmode");
+      $("#dropdown-carrito").addClass("bg-light");
+      $("#dropdown-carrito").removeClass("bg-dark");
+
+      $("#c-iniciar-sesion").removeClass("darkmode");
+      $("#c-crear-usuario").removeClass("darkmode");
+      $("#c-perfil").removeClass("darkmode");
+      $("#c-perfilxs").removeClass("darkmode");
+      $("#c-carritocompra").removeClass("darkmode");
+      $("#c-admin").removeClass("darkmode");
+      $("#c-ver_pedidos").removeClass("darkmode");
+      $("#carrito").removeClass("darkmode");
+
+      $("#vptt").removeClass("darkmode");
+    }
   }
-}
+  xd() {
+    console.log("a");
 
+    if(sessionStorage.getItem('theme') == "modooscuro") {
+
+      $("#vptt").addClass("darkmode");
+
+    } else if (sessionStorage.getItem('theme') == "modoclaro"){
+
+
+      $("#vptt").removeClass("darkmode");
+    }
+  }
 /*--------------------------------------------------------------*/
 }

@@ -2,114 +2,96 @@
 <div class="container-fluid d-flex flex-column justify-content-center align-items-center m-0 p-0">
   <!--/NAV PRODUCTOS/-->
    <!--Mini nav con filtros (categoría) (vision dispositivos pequeños)-->
-   <nav id="nav-prod1" class="navbar w-100 d-lg-none bg-light m-0 p-1 fs-7 animate__animated animate__fadeIn border border-top-0 border-2 ">
+   <nav id="nav-prod1" class="navbar w-100 d-lg-none bg-light m-0 p-1 fs-7 animate__animated animate__fadeIn border border-2 ">
     <div class=" container-fluid p-2">
-      <button type="button" class="btn border border-2 rounded float-end" data-bs-toggle="collapse" data-bs-target="#productos-categorias"><i class="bi bi-list"></i></button>
+      <button type="button" class="btn border border-2 rounded float-end" data-bs-toggle="collapse" data-bs-target="#productos-categorias"><i id="botoncolaps" class="bi bi-list txtlight"></i></button>
     </div>
-    <div id="productos-categorias" class="collapse navbar-collapse border-top border-2">
-      <ul class="nav d-flex flex-column justify-content-center align-items-center">
+    <div id="productos-categorias" class="collapse navbar-collapse">
+      <ul class="nav d-flex flex-row justify-content-center align-items-center">
+        <li class="nav-item ">
+          <a *ngIf="usuarioactivo.tipo == 2" class="text-azulito pointer"  data-bs-toggle="modal" (click)="comprobarTema()" data-bs-target="#crear-producto"><span class="d-none d-lg-inline-block">&nbsp;{{'Crear producto' | translate}}</span></a>
+        </li>
         <li class="nav-item m-2">
-          <a *ngIf="usuarioactivo.tipo == 2" class="text-azulito" href="#" data-bs-toggle="modal" data-bs-target="#crear-producto"><span class="d-none d-lg-inline-block">&nbsp;Crear producto</span></a>
+          <a class="txtdark pointer"  (click)="filtrarCategoria('Proteina')"><span class="d-inline-block d-lg-none">&nbsp;{{'Proteina' | translate}}</span></a>
         </li>
-        <li class="nav-item m-2 border-bottom border-2">
-          <a class="text-dark" href="#"><span class="d-inline-block d-lg-none">&nbsp;Proteina</span></a>
+        <li class="nav-item m-2">
+          <a class="txtdark pointer"  (click)="filtrarCategoria('Alimentos y snacks')"><span class="d-inline-block d-lg-none">&nbsp;{{'Alimentos y snacks' | translate}}</span></a>
         </li>
-        <li class="nav-item m-2 border-bottom border-2">
-          <a class="text-dark" href="#"><span class="d-inline-block d-lg-none">&nbsp;Alimentos y snacks</span></a>
+        <li class="nav-item m-2">
+          <a class="txtdark pointer"  (click)="filtrarCategoria('Vitaminas y minerales')"><span class="d-inline-block d-lg-none">&nbsp;{{'Vitaminas y minerales' | translate}}</span></a>
         </li>
-        <li class="nav-item m-2 border-bottom border-2">
-          <a class="text-dark" href="#"><span class="d-inline-block d-lg-none">&nbsp;Vitaminas y minerales</span></a>
+        <li class="nav-item m-2">
+          <a class="txtdark pointer"  (click)="filtrarCategoria('Creatina')"><span class="d-inline-block d-lg-none">&nbsp;{{'Creatina' | translate}}</span></a>
         </li>
-        <li class="nav-item m-2 border-bottom border-2">
-          <a class="text-dark" href="#"><span class="d-inline-block d-lg-none">&nbsp;Creatina</span></a>
+        <li class="nav-item m-2">
+          <a class="txtdark pointer"  (click)="filtrarCategoria('Aminoácidos')"><span class="d-inline-block d-lg-none">&nbsp;{{'Aminoacidos' | translate}}</span></a>
         </li>
-        <li class="nav-item m-2 border-bottom border-2">
-          <a class="text-dark" href="#"><span class="d-inline-block d-lg-none">&nbsp;Aminoácidos</span></a>
-        </li>
-        <li class="nav-item m-2 border-bottom border-2">
-          <a class="text-dark" href="#"><span class="d-inline-block d-lg-none">&nbsp;Accesorios</span></a>
+        <li class="nav-item m-2">
+          <a class="txtdark pointer"  (click)="filtrarCategoria('Accesorios')"><span class="d-inline-block d-lg-none">&nbsp;{{'Accesorios' | translate}}</span></a>
         </li>
       </ul>
       <ul class="nav d-flex flex-column justify-content-center align-items-center ms-auto">
         <li class="nav-item m-2 d-flex align-items-center flex-row">
-          <input class="form-control" type="text" placeholder="Buscar por nombre">&nbsp;&nbsp;<i class="bi bi-search"></i>
+          <input class="form-control" type="text" placeholder="{{'Buscar por nombre' | translate}}" [(ngModel)]="filtrobusqueda">&nbsp;&nbsp;<i class="bi bi-search"></i>
         </li>
       </ul>
     </div>
   </nav>
   <!--Mini nav con filtros (categoría) (vision escritorio)-->
-  <nav id="nav-prod2" class="navbar d-none d-lg-flex  justify-content-center bg-light m-2 p-2 fs-7 animate__animated animate__fadeIn border border-2 rounded">
-    <ul class="nav d-flex justify-content-center align-items-center">
+  <nav id="nav-prod2" class="navbar d-none d-lg-flex flex-nowrap justify-content-center align-items-center bg-light m-2 p-2 fs-7 animate__animated animate__fadeIn border border-2 rounded">
+    <ul class="nav d-flex flex-row justify-content-center align-items-center">
       <li class="nav-item m-3">
-        <a *ngIf="usuarioactivo.tipo == 2" class="text-azulito" href="#" data-bs-toggle="modal" data-bs-target="#crear-producto"><i class="bi bi-file-earmark-plus"></i><span class="d-none d-lg-inline-block">&nbsp;Crear producto</span></a>
+        <a *ngIf="usuarioactivo.tipo == 2" class="text-azulito pointer"  data-bs-toggle="modal" data-bs-target="#crear-producto"><i class="bi bi-file-earmark-plus"></i><span class="d-none d-lg-inline-block">&nbsp;{{'Crear producto' | translate}}</span></a>
       </li>
       <li class="nav-item m-3">
-        <a class="text-dark pointer" (click)="filtrarCategoria('Proteina')"><span class="d-none d-lg-inline-block">&nbsp;Proteina</span></a>
+        <a class="txtdark pointer" (click)="filtrarCategoria('Proteina')"><span class="d-none d-lg-inline-block">&nbsp;{{'Proteina' | translate}}</span></a>
       </li>
       <li class="nav-item m-3">
-        <a class="text-dark pointer" (click)="filtrarCategoria('Alimentos y snacks')"><span class="d-none d-lg-inline-block">&nbsp;Alimentos y snacks</span></a>
+        <a class="txtdark pointer" (click)="filtrarCategoria('Alimentos y snacks')"><span class="d-none d-lg-inline-block">&nbsp;{{'Alimentos y snacks' | translate}}</span></a>
       </li>
       <li class="nav-item m-3">
-        <a class="text-dark" href="#"><span class="d-none d-lg-inline-block">&nbsp;Vitaminas y minerales</span></a>
+        <a class="txtdark pointer" (click)="filtrarCategoria('Vitaminas y minerales')" ><span class="d-none d-lg-inline-block">&nbsp;{{'Vitaminas y minerales' | translate}}</span></a>
       </li>
       <li class="nav-item m-3">
-        <a class="text-dark" href="#"><span class="d-none d-lg-inline-block">&nbsp;Creatina</span></a>
+        <a class="txtdark pointer" (click)="filtrarCategoria('Creatina')" ><span class="d-none d-lg-inline-block">&nbsp;{{'Creatina' | translate}}</span></a>
       </li>
       <li class="nav-item m-3">
-        <a class="text-dark" href="#"><span class="d-none d-lg-inline-block">&nbsp;Aminoácidos</span></a>
+        <a class="txtdark pointer" (click)="filtrarCategoria('Aminoácidos')" ><span class="d-none d-lg-inline-block">&nbsp;{{'Aminoacidos' | translate}}</span></a>
       </li>
       <li class="nav-item m-3">
-        <a class="text-dark" href="#"><span class="d-none d-lg-inline-block">&nbsp;Accesorios</span></a>
+        <a class="txtdark pointer" (click)="filtrarCategoria('Accesorios')" ><span class="d-none d-lg-inline-block">&nbsp;{{'Accesorios' | translate}}</span></a>
       </li>
     </ul>
-    <ul class="nav d-flex align-items-center flex-row ms-auto">
+    <ul class="nav d-flex align-items-center flex-row justify-content-center ms-xxl-auto">
       <li class="nav-item m-2 d-flex align-items-center flex-row">
-        <input class="form-control" type="text" name="filtrobusqueda" placeholder="Buscar por nombre" [(ngModel)]="filtrobusqueda" >&nbsp;&nbsp;<i class="bi bi-search"></i>
+        <input class="form-control" type="text" name="filtrobusqueda" placeholder="{{'Buscar por nombre' | translate}}" [(ngModel)]="filtrobusqueda" >&nbsp;&nbsp;<i class="bi bi-search"></i>
       </li>
     </ul>
   </nav>
 </div>
 <!-- FILTRO + PRODUCTOS -->
-<div class="container-fluid d-flex flex-row">
-  <!-- Filtros -->
-  <div class="d-none d-lg-flex align-content-center flex-column p-4 m-3">
-    <h3>Marcas</h3>
-    <!-- MyProtein -->
-    <div class="form-check m-1">
-      <input class="form-check-input" type="checkbox" value="" id="MyProtein">
-      <label class="form-check-label" for="MyProtein">
-        MyProtein
-      </label>
-    </div>
-    <!-- Amix -->
-    <div class="form-check m-1">
-      <input class="form-check-input" type="checkbox" value="" id="MyProtein">
-      <label class="form-check-label" for="MyProtein">
-        Amix
-      </label>
-    </div>
-  </div>
-  <script src="i18n/angular-locale_de-de.js"></script>
+<div class="container-fluid d-flex justify-content-center" style="width:80%;">
   <!-- Productos -->
   <div class="container-fluid">
-    <div id="contenedorproductos" class="container-fluid">
-      <div class="row justify-content-center">
-        <div id="tarjeta-producto" class="card m-4 p-0 col-12 col-sm-6 col-md-6 border border-2" *ngFor="let producto of productos | categoria: filtrocategoria | busquedaProducto: filtrobusqueda | paginate: { itemsPerPage: 8, currentPage: p}; let i = index">
+    <div id="contenedorproductos" class="container-fluid justify-content-center">
+      <div class="row d-inline-flex justify-content-center">
+        <div id="tarjeta-producto" class="card m-4 p-0  border border-2" *ngFor="let producto of productos | categoria: filtrocategoria | busquedaProducto: filtrobusqueda | paginate: { itemsPerPage: 8, currentPage: p}; let i = index">
         <img id="imagen-producto" class="card-img-top img-fluid pointer p-4" [src]="producto.imagen" [routerLink]="['/productos-detail', producto.id]">
         <div>
           <span id="categoria-producto" class="p-0 m-2 float-start">{{producto.categoria}}</span>
         </div>
         <div class="card-body p-0 d-flex align-items-center flex-column justify-content-center">
-            <a id="titulo-producto" class="card-title text-decoration-none fs-3 text-center text-dark pointer titulo m-0" [routerLink]="['/productos-detail', producto.id]">{{producto.nombre}}</a>
+            <span id="titulo-producto" class="card-title text-decoration-none fs-3 text-center pointer titulo m-0 fira" [routerLink]="['/productos-detail', producto.id]">{{producto.nombre}}</span>
             <span id="categoria-producto" class="p-0 m-0 float-start">{{producto.marca}}</span>
             <span id="fecha-producto" class="card-text m-2 float-end">{{ producto.precio | number : '1.2-2' }} € </span>
           </div>
           <div class="d-flex justify-content-center" *ngIf="usuarioactivo.tipo == 1">
-            <button type="submit" class="btn btn-info m-2" (click)="pushACarrito(producto)">Añadir al carrito de la compra</button>
+            <button *ngIf="producto.stock == 0" id="pushcarrito" type="submit" class="btn btn-info m-2" (click)="pushACarrito(producto)">{{ 'Anadir al carrito' | translate }}</button>
+            <div *ngIf="producto.stock == 1"><button class="btn btn-warning m-2" disabled>{{ 'Agotado' | translate }}</button></div>
           </div>
           <div class="p-0" *ngIf="usuarioactivo.tipo == 2">
-            <button class="btn btn-danger float-start m-2" (click)="eliminarProductos(producto.id, i)">Borrar</button>
-            <button type="submit" class="btn btn-success float-end m-2"data-bs-toggle="modal" data-bs-target="#editar-producto" (click)="pasarInfo(producto)">Editar producto</button>
+            <button class="btn btn-danger float-start m-2" (click)="eliminarProductos(producto.id, i)"><i class="bi bi-trash"></i> &nbsp;{{'Borrar' | translate}}</button>
+            <button type="submit" class="btn btn-success float-end m-2"data-bs-toggle="modal" data-bs-target="#editar-producto"(click)="comprobarTema()" (click)="pasarInfo(producto);"><i class="bi bi-pen"></i> &nbsp;{{'Editar' | translate}}</button>
           </div>
         </div>
       </div>
@@ -120,16 +102,17 @@
 
 <!--------------------------- /MODALES/ --------------------------->
 <!-- /MODAL CREACIÓN DE PRODUCTO/ -->
-<div class="modal fade" id="crear-producto">
+<div class="modal fade" id="crear-producto" style="overflow-y: scroll;">
   <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
       <div id="modal-completo" class="modal-content">
-          <!-- MODAL HEADER -->
-          <div id="modal-head" class="modal-header">
+        <div id="c-crear-producto">
+            <!-- MODAL HEADER -->
+            <div id="modal-head" class="modal-header">
               <h4 id="titulo-modal" class="modal-title">Crear producto</h4>
               <h4><i id="close-modal" class="bi bi-x-circle-fill" data-bs-dismiss="modal"></i></h4>
-          </div>
-          <!-- MODAL BODY -->
-          <div id="body-modal" class="modal-body">
+            </div>
+            <!-- MODAL BODY -->
+            <div id="body-modal" class="modal-body">
             <form (ngSubmit)="crearProducto()">
               <!-- NOMBRE -->
               <div class="mb-3">
@@ -154,60 +137,73 @@
               <!-- IMAGEN -->
               <div class="mb-3">
                 <input type="file" name="myImage" accept="image/png, image/gif, image/jpeg" (change)="onFileSelected($event)"/>
-                <div class="text-center"><img [src]="producto.imagen" class="p-3 img-fluid"></div>
+                <div class="text-center"><img [src]="producto.imagen" class="p-3 img-fluid" style="max-width:250px ; max-height: 320px;"></div>
               </div>
+              <!-- STOCK -->
+            <div class="mb-3">
+              <label for="stock">Stock (0 - hay stock, 1 - no hay stock)</label>
+              <input id="crear-productoimg" type="number" max="1" min="0" class="form-control" name="stock" [(ngModel)]="producto.stock">
+            </div>
               <!-- SUBMIT BUTTON -->
               <div class="d-grid">
                 <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Crear producto</button>
             </div>
             </form>
-          </div>
+            </div>
+        </div>
       </div>
   </div>
 </div>
 
 <!-- /MODAL EDITAR DE PRODUCTO/ -->
-<div class="modal fade" id="editar-producto">
+<div class="modal fade" id="editar-producto" style="overflow-y: scroll;">
   <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
       <div id="modal-completo" class="modal-content">
-          <!-- MODAL HEADER -->
+          <div id="c-editar-producto" class="">
+            <!-- MODAL HEADER -->
           <div id="modal-head" class="modal-header">
-              <h4 id="titulo-modal" class="modal-title">Editar producto</h4>
-              <h4><i id="close-modal" class="bi bi-x-circle-fill" data-bs-dismiss="modal"></i></h4>
-          </div>
-          <!-- MODAL BODY -->
-          <div id="body-modal" class="modal-body">
-            <form (ngSubmit)="updateProducts(productoeditado)">
-              <!-- NOMBRE -->
-              <div class="mb-3">
-                <input type="text" class="form-control" placeholder="Nombre" name="nombre" [(ngModel)]="productoeditado.nombre">
-              </div>
-              <!-- PRECIO -->
-              <div class="mb-3">
-                <input type="number" step="0.1" class="form-control" placeholder="Precio" name="precio" [(ngModel)]="productoeditado.precio">
-              </div>
-              <!-- DESCRIPCIÓN -->
-              <div class="mb-3">
-                <textarea class="form-control" placeholder="Descripción" name="descripcion" [(ngModel)]="productoeditado.descripcion"></textarea>
-              </div>
-              <!-- CATEGORÍA -->
-              <div class="mb-3">
-                <input type="text" class="form-control" placeholder="Categoría" name="categoría" [(ngModel)]="productoeditado.categoria">
-              </div>
-              <!-- MARCA -->
-              <div class="mb-3">
-                <input type="text" class="form-control" placeholder="Marca" name="marca" [(ngModel)]="productoeditado.marca">
-              </div>
-              <!-- IMAGEN -->
-              <div class="mb-3">
-                <input type="file" name="myImage" accept="image/png, image/gif, image/jpeg" (change)="onFileSelected2($event)"/>
-                <div class="text-center"><img [src]="productoeditado.imagen" class="p-3 img-fluid"></div>
-              </div>
-              <!-- SUBMIT BUTTON -->
-              <div class="d-grid">
-                <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Editar producto</button>
+            <h4 id="titulo-modal" class="modal-title">Editar producto</h4>
+            <h4><i id="close-modal" class="bi bi-x-circle-fill" data-bs-dismiss="modal"></i></h4>
+        </div>
+        <!-- MODAL BODY -->
+        <div id="body-modal" class="modal-body">
+          <form (ngSubmit)="updateProducts(productoeditado)">
+            <!-- NOMBRE -->
+            <div class="mb-3">
+              <input type="text" class="form-control" placeholder="Nombre" name="nombre" [(ngModel)]="productoeditado.nombre">
             </div>
-            </form>
+            <!-- PRECIO -->
+            <div class="mb-3">
+              <input type="number" step="0.1" class="form-control" placeholder="Precio" name="precio" [(ngModel)]="productoeditado.precio">
+            </div>
+            <!-- DESCRIPCIÓN -->
+            <div class="mb-3">
+              <textarea class="form-control" placeholder="Descripción" name="descripcion" [(ngModel)]="productoeditado.descripcion"></textarea>
+            </div>
+            <!-- CATEGORÍA -->
+            <div class="mb-3">
+              <input type="text" class="form-control" placeholder="Categoría" name="categoría" [(ngModel)]="productoeditado.categoria">
+            </div>
+            <!-- MARCA -->
+            <div class="mb-3">
+              <input type="text" class="form-control" placeholder="Marca" name="marca" [(ngModel)]="productoeditado.marca">
+            </div>
+            <!-- IMAGEN -->
+            <div class="mb-3">
+              <input id="editar-productoimg" type="file" name="myImage" accept="image/png, image/gif, image/jpeg" (change)="onFileSelected2($event)"/>
+              <div class="text-center"><img [src]="productoeditado.imagen" class="p-3 img-fluid" style="max-width:250px ; max-height: 320px;"></div>
+            </div>
+             <!-- STOCK -->
+            <div class="mb-3">
+              <label for="stock">Stock (0 - hay stock, 1 - no hay stock)</label>
+              <input type="number" max="1" min="0" class="form-control" name="stock" [(ngModel)]="productoeditado.stock">
+            </div>
+            <!-- SUBMIT BUTTON -->
+            <div class="d-grid">
+              <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Editar producto</button>
+          </div>
+          </form>
+        </div>
           </div>
       </div>
   </div>

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
+
+
 import { IProducto } from 'src/app/interfaces/i-producto';
 import { ProductosService } from 'src/app/services/productos.service';
 
@@ -25,23 +28,27 @@ export class ProductosDetailComponent implements OnInit {
     stock: 0
   }
 
+  productosCarrito: IProducto[] = [];
+
 /*--------------------------------------------------------------*/
 
   //CONSTRUCTOR
-  constructor(private productosService: ProductosService,
+  constructor(private productoService: ProductosService,
     private router: Router,
     private route: ActivatedRoute,
+    private spinner: NgxSpinnerService,
+
     ) { }
 
   //SE INICIA AUTOMÁTICAMENTE
   ngOnInit() {
     const id = +this.route.snapshot.params["id"]; // Recibimos parámetro
-    this.productosService.readProductId(id)
+    this.productoService.readProductId(id)
     .subscribe(
     (p : any)=> this.producto = p[0],
     error => console.error(error)
     );
-    this.stock();
+    // this.stock();
       //comprobar tema
   if(sessionStorage.getItem('theme') == "modooscuro") {
 
@@ -49,14 +56,17 @@ export class ProductosDetailComponent implements OnInit {
   } else if (sessionStorage.getItem('theme') == "modoclaro"){
     $('app-productos-detail').removeClass("darkmode");
 }
+
+//spinner
+this.spinner.show();
+
+setTimeout(() => {
+  this.spinner.hide();
+
+}, 1500);
     }
 
-    stock() {
-      if(this.producto.stock = 0) {
-        this.xd= "si hay stock";
-      } else if(this.producto.stock = 1) {
-        this.xd= "no hay stock";
-      }
-    }
+
+
 
 }

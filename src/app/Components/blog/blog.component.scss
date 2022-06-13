@@ -8,10 +8,18 @@
 }
 #contenedorblogs {
   min-height: 90vh;
+
 }
 //CSS TARJETAS
 #blog-carta {
   width: 450px;
+  background: transparent;
+  transition: 1s;
+
+}
+#blog-carta:hover {
+  transition: 1s;
+  transform: scale(1.04);
 }
 #imagen-carta {
   height: 300px;
@@ -29,5 +37,6 @@
 
 #nav-blog2 {
 width: 99% !important;
+
 }
 

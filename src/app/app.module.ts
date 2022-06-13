@@ -16,12 +16,16 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { BlogDetailComponent } from './Components/blog-detail/blog-detail.component';
 import { ProductosDetailComponent } from './Components/productos-detail/productos-detail.component';
-import {NgxPaginationModule} from 'ngx-pagination';
+import { NgxPaginationModule} from 'ngx-pagination';
 import { CookieService } from 'ngx-cookie-service';
 import { CategoriaPipe } from './pipes/categoria.pipe';
 import { BusquedaProductoPipe } from './pipes/busqueda-producto.pipe';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BusquedaBlogPipe } from './pipes/busqueda-blog.pipe';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { AgmCoreModule} from '@agm/core';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 
@@ -47,6 +51,7 @@ const APP_ROUTES: Route[] = [
 ];
 
 @NgModule({
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   declarations: [
     AppComponent,
     NavbarComponent,
@@ -58,7 +63,11 @@ const APP_ROUTES: Route[] = [
     NavOptionsComponent,
     BlogDetailComponent,
     CategoriaPipe,
-    BusquedaProductoPipe
+    BusquedaProductoPipe,
+    BusquedaBlogPipe,
+    ProductosDetailComponent,
+    BlogDetailComponent
+
 
   ],
   imports: [
@@ -70,10 +79,22 @@ const APP_ROUTES: Route[] = [
     ImageCropperModule,
     NgxPaginationModule,
     NgxSpinnerModule,
-    BrowserAnimationsModule
-
+    BrowserAnimationsModule,
+    AgmCoreModule.forRoot({apiKey: "AIzaSyBs9t1K4vjCajfswNgx9LRPBV3XzLI9xEo"}),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpTranslateLoader,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [CookieService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
 })
 export class AppModule { }
+  // AOT compilation support
+  export function httpTranslateLoader(http: HttpClient) {
+    return new TranslateHttpLoader(http);
+  }

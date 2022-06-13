@@ -8,5 +8,6 @@ export interface IProducto {
     imagen: string,
     cantidad?: number,
     precioporunidad?: number,
+    preciofinal?: number,
     stock?: number
 }

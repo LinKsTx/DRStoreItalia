@@ -4,24 +4,21 @@
 <div class="container-fluid d-flex flex-column justify-content-center align-items-center m-0 p-0">
   <!--/NAV-BLOG/-->
    <!--Mini nav con filtros (vision dispositivos pequeños)-->
-   <nav id="nav-blog1" class="navbar w-100 d-lg-none bg-light m-0 p-1 fs-7 animate__animated animate__fadeIn border border-top-0 border-2 ">
+   <nav id="nav-blog1" class="navbar w-100 d-lg-none bg-light m-0 p-1 fs-7 animate__animated animate__fadeIn border border-2 ">
     <ul class="nav d-flex align-items-center">
       <li class="nav-item m-2">
-        <a *ngIf="usuarioactivo.tipo == 2" class="text-azulito" href="#" data-bs-toggle="modal" data-bs-target="#crear-blog"><i class="bi bi-file-earmark-plus"></i><span class="d-none d-lg-inline-block">&nbsp;Crear blog</span></a>
+        <a *ngIf="usuarioactivo.tipo == 2" class="text-azulito pointer"  data-bs-toggle="modal" data-bs-target="#crear-blog"><i class="bi bi-file-earmark-plus"></i><span class="d-none d-lg-inline-block">&nbsp;{{'Crear blog' | translate}}</span></a>
       </li>
       <li class="nav-item m-2">
-        <a class="text-dark" href="#"><i class="bi bi-clock"></i><span class="d-none d-lg-inline-block">&nbsp;Novedades</span></a>
+        <a class="txtdark pointer" (click)="filtrarCategoria('Suplementos')" ><i class="bi bi-egg"></i><span class="d-none d-lg-inline-block">&nbsp;{{'Suplementos' | translate}}</span></a>
       </li>
       <li class="nav-item m-2">
-        <a class="text-dark" href="#"><i class="bi bi-egg"></i><span class="d-none d-lg-inline-block">&nbsp;Suplementos</span></a>
-      </li>
-      <li class="nav-item m-2">
-        <a class="text-dark" href="#"><i class="bi bi-person-heart"></i><span class="d-none d-lg-inline-block">&nbsp;Ejercicio</span></a>
+        <a class="txtdark pointer" (click)="filtrarCategoria('Ejercicio')" ><i class="bi bi-person-heart"></i><span class="d-none d-lg-inline-block">&nbsp;{{'Ejercicio' | translate}}</span></a>
       </li>
     </ul>
     <ul class="nav d-flex align-items-center ms-auto">
       <li class="nav-item m-2 d-flex align-items-center flex-row">
-        <input class="form-control" type="text" placeholder="Buscar por título">&nbsp;&nbsp;<i class="bi bi-search"></i>
+        <input class="form-control" type="text" placeholder="{{'Buscar por titulo' | translate}}" name="filtrobusqueda" [(ngModel)]="filtrobusqueda">&nbsp;&nbsp;<i class="bi bi-search"></i>
       </li>
     </ul>
   </nav>
@@ -29,21 +26,18 @@
   <nav id="nav-blog2" class="navbar d-none d-lg-flex bg-light m-2 p-2 fs-7 animate__animated animate__fadeIn border border-2 rounded">
     <ul class="nav d-flex align-items-center">
       <li class="nav-item m-2">
-        <a *ngIf="usuarioactivo.tipo == 2" class="text-azulito" href="#" data-bs-toggle="modal" data-bs-target="#crear-blog"><i class="bi bi-file-earmark-plus"></i><span class="d-none d-lg-inline-block">&nbsp;Crear blog</span></a>
+        <a *ngIf="usuarioactivo.tipo == 2" class="text-azulito pointer"  data-bs-toggle="modal" data-bs-target="#crear-blog"><i class="bi bi-file-earmark-plus"></i><span class="d-none d-lg-inline-block">&nbsp;{{'Crear blog' | translate}}</span></a>
       </li>
       <li class="nav-item m-2">
-        <a class="text-dark" href="#"><i class="bi bi-clock"></i><span class="d-none d-lg-inline-block">&nbsp;Novedades</span></a>
+        <a class="txtdark pointer"  (click)="filtrarCategoria('Suplementos')"><i class="bi bi-egg"></i><span class="d-none d-lg-inline-block">&nbsp;{{'Suplementos' | translate}}</span></a>
       </li>
       <li class="nav-item m-2">
-        <a class="text-dark" href="#"><i class="bi bi-egg"></i><span class="d-none d-lg-inline-block">&nbsp;Suplementos</span></a>
-      </li>
-      <li class="nav-item m-2">
-        <a class="text-dark" href="#"><i class="bi bi-person-heart"></i><span class="d-none d-lg-inline-block">&nbsp;Ejercicio</span></a>
+        <a class="txtdark pointer"  (click)="filtrarCategoria('Ejercicio')"><i class="bi bi-person-heart"></i><span class="d-none d-lg-inline-block">&nbsp;{{'Ejercicio' | translate}}</span></a>
       </li>
     </ul>
     <ul class="nav d-flex align-items-center flex-row ms-auto">
       <li class="nav-item m-2 d-flex align-items-center flex-row">
-        <input class="form-control" type="text" placeholder="Buscar por título">&nbsp;&nbsp;<i class="bi bi-search"></i>
+        <input class="form-control" type="text" placeholder="{{'Buscar por titulo' | translate}}" name="filtrobusqueda" [(ngModel)]="filtrobusqueda">&nbsp;&nbsp;<i class="bi bi-search"></i>
       </li>
     </ul>
   </nav>
@@ -51,18 +45,18 @@
   <div id="contenedorblogs" class="container-fluid">
     <div class="row container-fluid d-flex justify-content-center">
         <!-- carta del blog -->
-        <div id="blog-carta" class="card m-4 p-0 col-12 col-sm-6 border border-2" *ngFor="let blog of blogs | paginate: { itemsPerPage: 6, currentPage: p}; let i = index">
+        <div id="blog-carta" class="card m-4 p-0 col-12 col-sm-6 border border-2" *ngFor="let blog of blogs | categoria: filtrocategoria | busquedaBlog: filtrobusqueda | paginate: { itemsPerPage: 6, currentPage: p}; let i = index">
           <img id="imagen-carta" class="card-img-top img-fluid pointer" [src]="blog.imagen" [routerLink]="['/blog-detail', blog.id]">
           <div>
             <span id="categoria-carta" class="p-0 m-2 float-start">{{blog.categoria}}</span>
           </div>
           <div class="card-body p-0 d-flex align-items-center justify-content-center">
-              <a id="titulo-carta" class="card-title text-decoration-none fs-3 text-center text-dark pointer titulo" [routerLink]="['/blog-detail', blog.id]">{{blog.titulo}}</a>
+              <span id="titulo-carta" class="card-title text-decoration-none fs-3 text-center pointer titulo" [routerLink]="['/blog-detail', blog.id]">{{blog.titulo}}</span>
           </div>
           <span id="fecha-carta" class="card-text m-2 float-end">{{blog.fecha | date:"dd/MM/yyyy"}}</span>
           <div class="p-0" *ngIf="usuarioactivo.tipo == 2">
-            <button class="btn btn-danger float-start m-2" (click)="eliminarBlogs(blog.id, i)">Borrar</button>
-            <button type="submit" class="btn btn-success float-end m-2"data-bs-toggle="modal" data-bs-target="#editar-blog" (click)="pasarInfo(blog)">Editar producto</button>
+            <button class="btn btn-danger float-start m-2" (click)="eliminarBlogs(blog.id, i)"><i class="bi bi-trash"></i>&nbsp;{{'Borrar' | translate}}</button>
+            <button type="submit" class="btn btn-success float-end m-2"data-bs-toggle="modal" data-bs-target="#editar-blog" (click)="pasarInfo(blog)"><i class="bi bi-pen"></i>&nbsp;{{'Editar' | translate}}</button>
           </div>
         </div>
       </div>
@@ -74,20 +68,21 @@
 
 <!--------------------------- /MODALES/ --------------------------->
 <!-- /MODAL CREACIÓN DE BLOG/ -->
-<div class="modal fade" id="crear-blog">
+<div class="modal fade" id="crear-blog" style="overflow-y: scroll;">
   <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
       <div id="modal-completo" class="modal-content">
-          <!-- MODAL HEADER -->
-          <div id="modal-head" class="modal-header">
+        <div id="c-crear-blog">
+            <!-- MODAL HEADER -->
+            <div id="modal-head" class="modal-header">
               <h4 id="titulo-modal" class="modal-title">Crear blog</h4>
               <h4><i id="close-modal" class="bi bi-x-circle-fill" data-bs-dismiss="modal"></i></h4>
-          </div>
-          <!-- MODAL BODY -->
-          <div id="body-modal" class="modal-body">
+            </div>
+            <!-- MODAL BODY -->
+            <div id="body-modal" class="modal-body">
             <form (ngSubmit)="crearBlog()">
               <!-- TITULO -->
               <div class="mb-3">
-                <input type="text" class="form-control" placeholder="Título" name="titulo" [(ngModel)]="blog.titulo">
+                <input  type="text" class="form-control" placeholder="Título" name="titulo" [(ngModel)]="blog.titulo">
               </div>
               <!-- CONTENIDO -->
               <div class="mb-3">
@@ -99,59 +94,63 @@
               </div>
               <!-- IMAGEN -->
               <div class="mb-3">
-                <input type="file" name="myImage" accept="image/png, image/gif, image/jpeg" (change)="onFileSelected($event)"/>
-                <div class="text-center"><img [src]="blog.imagen" class="p-3 img-fluid"></div>
+                <input id="crear-blog-input" type="file" name="myImage" accept="image/png, image/gif, image/jpeg" (change)="onFileSelected($event)"/>
+                <div class="text-center"><img [src]="blog.imagen" class="p-3 img-fluid" style="max-width:466px ; max-height: 266px;"></div>
               </div>
               <!-- SUBMIT BUTTON -->
               <div class="d-grid">
                 <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Crear blog</button>
             </div>
             </form>
-          </div>
+            </div>
+        </div>
       </div>
   </div>
 </div>
 
 <!-- /MODAL EDITAR DE BLOG/ -->
-<div class="modal fade" id="editar-blog">
+<div class="modal fade" id="editar-blog" style="overflow-y: scroll;">
   <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
       <div id="modal-completo" class="modal-content">
-          <!-- MODAL HEADER -->
+          <div id="c-editar-blog">
+            <!-- MODAL HEADER -->
           <div id="modal-head" class="modal-header">
-              <h4 id="titulo-modal" class="modal-title">Editar blog</h4>
-              <h4><i id="close-modal" class="bi bi-x-circle-fill" data-bs-dismiss="modal"></i></h4>
-          </div>
-          <!-- MODAL BODY -->
-          <div id="body-modal" class="modal-body">
-            <form (ngSubmit)="updateBlogs(blogeditado)">
-              <!-- TITULO -->
-              <div class="mb-3">
-                <input type="text" class="form-control" placeholder="Título" name="titulo" [(ngModel)]="blogeditado.titulo">
-              </div>
-              <!-- CONTENIDO -->
-              <div class="mb-3">
-                <textarea class="form-control" placeholder="Contenido" name="contenido" [(ngModel)]="blogeditado.contenido"></textarea>
-              </div>
-              <!-- CATEGORÍA -->
-              <div class="mb-3">
-                <input type="text" class="form-control" placeholder="Categoría" name="categoria" [(ngModel)]="blogeditado.categoria">
-              </div>
-              <!-- IMAGEN -->
-              <div class="mb-3">
-                <input type="file" name="myImage" accept="image/png, image/gif, image/jpeg" (change)="onFileSelected2($event)"/>
-                <div class="text-center"><img [src]="blogeditado.imagen" class="p-3 img-fluid"></div>
-              </div>
-              <!-- SUBMIT BUTTON -->
-              <div class="d-grid">
-                <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Editar blog</button>
+            <h4 id="titulo-modal" class="modal-title">Editar blog</h4>
+            <h4><i id="close-modal" class="bi bi-x-circle-fill" data-bs-dismiss="modal"></i></h4>
+        </div>
+        <!-- MODAL BODY -->
+        <div id="body-modal" class="modal-body">
+          <form (ngSubmit)="updateBlogs(blogeditado)">
+            <!-- TITULO -->
+            <div class="mb-3">
+              <input type="text" class="form-control" placeholder="Título" name="titulo" [(ngModel)]="blogeditado.titulo">
             </div>
-            </form>
+            <!-- CONTENIDO -->
+            <div class="mb-3">
+              <textarea class="form-control" placeholder="Contenido" name="contenido" [(ngModel)]="blogeditado.contenido"></textarea>
+            </div>
+            <!-- CATEGORÍA -->
+            <div class="mb-3">
+              <input type="text" class="form-control" placeholder="Categoría" name="categoria" [(ngModel)]="blogeditado.categoria">
+            </div>
+            <!-- IMAGEN -->
+            <div class="mb-3">
+              <input type="file" name="myImage" accept="image/png, image/gif, image/jpeg" (change)="onFileSelected2($event)"/>
+              <div class="text-center"><img [src]="blogeditado.imagen" class="p-3 img-fluid" style="max-width:466px ; max-height: 266px;"></div>
+            </div>
+            <!-- SUBMIT BUTTON -->
+            <div class="d-grid">
+              <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Editar blog</button>
+          </div>
+          </form>
+        </div>
           </div>
       </div>
   </div>
 </div>
 <!----------------------------------------------------------------->
-
+<!-- /SPINNER/ -->
+<ngx-spinner bdColor = "rgba(20,20,20,0.8)" size = "medium" color = "#b3b0b0" type = "ball-clip-rotate" [fullScreen] = "true"><p style="color: white" (scroll)="false"></p></ngx-spinner>
 
 
 
