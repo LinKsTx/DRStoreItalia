@@ -80,7 +80,7 @@ const APP_ROUTES: Route[] = [
     NgxPaginationModule,
     NgxSpinnerModule,
     BrowserAnimationsModule,
-    AgmCoreModule.forRoot({apiKey: "AIzaSyBs9t1K4vjCajfswNgx9LRPBV3XzLI9xEo"}),
+    AgmCoreModule.forRoot({apiKey: "aquí, la clave de google cloud platform"}),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
